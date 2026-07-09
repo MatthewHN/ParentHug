@@ -140,6 +140,130 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "gentle-parenting-boundaries-that-work",
+    title: "Gentle Parenting Boundaries That Actually Work",
+    description:
+      "Clear examples of gentle parenting boundaries that stay kind without becoming permissive.",
+    date: "July 9, 2026",
+    readTime: "7 min read",
+    keywords: [
+      "gentle parenting boundaries",
+      "kind and firm parenting",
+      "parenting boundaries examples",
+      "positive discipline scripts",
+      "how to set limits with children",
+    ],
+    sections: [
+      {
+        heading: "Kindness needs a limit to hold",
+        body: [
+          "Gentle parenting is not the absence of limits. It is the practice of holding a limit without adding shame, fear, or disconnection.",
+          "A useful boundary has three parts: name the limit, validate the feeling, and say what happens next.",
+        ],
+      },
+      {
+        heading: "Use scripts that are short enough to remember",
+        body: [
+          "When a child pushes back, parents often talk more because they want to be understood. In the moment, shorter is usually calmer.",
+          "Try: I hear you. The answer is still no. I can help you choose what to do next.",
+        ],
+      },
+      {
+        heading: "Hold the line with your body, not your volume",
+        body: [
+          "A boundary becomes easier for a child to trust when your body language matches your words. Move closer, block unsafe behavior, lower your voice, and repeat the same line.",
+          "Try: I will not let you hit. I am moving this toy. You can stomp your feet here.",
+        ],
+      },
+      {
+        heading: "Offer connection after the limit",
+        body: [
+          "Connection after a boundary does not cancel the boundary. It helps a child learn that limits and love can exist in the same moment.",
+          "Try: You were really mad. I stayed with you. The rule is the same, and I love you.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is gentle parenting too permissive?",
+        answer:
+          "It can become permissive if limits disappear. Healthy gentle parenting combines warm connection with clear, consistent boundaries.",
+      },
+      {
+        question: "What is an example of a kind boundary?",
+        answer:
+          "I will not let you throw the cup. You can hand it to me or put it on the table. This gives a clear limit and a safe next step.",
+      },
+      {
+        question: "How can ParentHug help with boundaries?",
+        answer:
+          "ParentHug gives situation-specific scripts so parents can stay kind and firm without having to invent the wording under pressure.",
+      },
+    ],
+  },
+  {
+    slug: "bedtime-battles-calm-parenting-script",
+    title: "A Calm Parenting Script for Bedtime Battles",
+    description:
+      "What to say when bedtime turns into stalling, tears, negotiation, or another trip out of bed.",
+    date: "July 9, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "bedtime battles script",
+      "child will not go to bed",
+      "calm bedtime routine",
+      "parenting scripts for bedtime",
+      "toddler bedtime resistance",
+    ],
+    sections: [
+      {
+        heading: "Bedtime resistance is often separation resistance",
+        body: [
+          "Many children fight bedtime because the day is ending and connection is about to change. Treat the behavior as a signal before you treat it as defiance.",
+          "Start with one sentence that names the real feeling: You want more time with me. I get that. It is hard to stop the day.",
+        ],
+      },
+      {
+        heading: "Make the routine boring and predictable",
+        body: [
+          "A bedtime script works best when it repeats. Predictability lowers the negotiation energy because the child knows what comes next.",
+          "Try: Bathroom, pajamas, two books, one song, lights out. I will say it the same way every night.",
+        ],
+      },
+      {
+        heading: "Use one return-to-bed line",
+        body: [
+          "When a child gets out of bed repeatedly, adding new arguments can accidentally restart the interaction. Keep the return calm and brief.",
+          "Try: It is sleep time. I am walking you back. I will check on you in five minutes.",
+        ],
+      },
+      {
+        heading: "Repair the next morning if bedtime got messy",
+        body: [
+          "If bedtime ended with yelling or tears, repair in daylight when everyone has more capacity. Keep it simple and practical.",
+          "Try: Bedtime got hard last night. I am sorry I got loud. Tonight I will use my calm voice and we will follow the same steps.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What should I say when my child keeps getting out of bed?",
+        answer:
+          "Use one repeated line: It is sleep time. I am walking you back. I will check on you soon. Keep your voice low and avoid restarting negotiation.",
+      },
+      {
+        question: "How do I stop bedtime negotiation?",
+        answer:
+          "Decide the routine before bedtime, repeat it visually or verbally, and avoid adding new choices once lights-out begins.",
+      },
+      {
+        question: "Can ParentHug help with bedtime?",
+        answer:
+          "Yes. ParentHug can generate a bedtime script based on your child's age, the exact behavior, and the tone you want to use.",
+      },
+    ],
+  },
 ];
 
 export function getBlogPost(slug: string) {

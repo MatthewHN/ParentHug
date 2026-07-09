@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 import 'app_spacing.dart';
@@ -15,7 +14,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.cream,
     );
 
-    final textTheme = GoogleFonts.nunitoTextTheme(base.textTheme).apply(
+    final textTheme = base.textTheme.apply(
       bodyColor: AppColors.ink,
       displayColor: AppColors.ink,
     );
@@ -46,13 +45,13 @@ class AppTheme {
         bodyMedium: textTheme.bodyMedium?.copyWith(height: 1.45),
         labelLarge: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
       ),
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.cream,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
         foregroundColor: AppColors.ink,
-        titleTextStyle: GoogleFonts.nunito(
+        titleTextStyle: TextStyle(
           color: AppColors.ink,
           fontSize: 20,
           fontWeight: FontWeight.w800,
@@ -72,8 +71,7 @@ class AppTheme {
           foregroundColor: Colors.white,
           elevation: 0,
           minimumSize: const Size.fromHeight(56),
-          textStyle:
-              GoogleFonts.nunito(fontSize: 17, fontWeight: FontWeight.w800),
+          textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radius),
           ),
@@ -82,8 +80,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          textStyle:
-              GoogleFonts.nunito(fontSize: 15, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -91,8 +88,7 @@ class AppTheme {
           foregroundColor: AppColors.ink,
           minimumSize: const Size.fromHeight(56),
           side: const BorderSide(color: AppColors.hairline, width: 1.5),
-          textStyle:
-              GoogleFonts.nunito(fontSize: 16, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radius),
           ),
@@ -124,8 +120,10 @@ class AppTheme {
       chipTheme: base.chipTheme.copyWith(
         backgroundColor: AppColors.surface,
         side: const BorderSide(color: AppColors.hairline, width: 1.5),
-        labelStyle:
-            GoogleFonts.nunito(fontWeight: FontWeight.w700, color: AppColors.ink),
+        labelStyle: const TextStyle(
+          fontWeight: FontWeight.w700,
+          color: AppColors.ink,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
         ),
@@ -138,7 +136,7 @@ class AppTheme {
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: AppColors.ink,
-        contentTextStyle: GoogleFonts.nunito(
+        contentTextStyle: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w600,
         ),

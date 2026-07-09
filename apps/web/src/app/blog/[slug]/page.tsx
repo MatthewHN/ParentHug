@@ -75,7 +75,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="kicker">Parenting scripts</div>
         <h1>{post.title}</h1>
         <p className="updated">
-          {post.date} · {post.readTime}
+          {post.date} | {post.readTime}
         </p>
         <p>{post.description}</p>
 

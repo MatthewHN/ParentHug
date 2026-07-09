@@ -22,7 +22,7 @@ export default function BlogPage() {
           {blogPosts.map((post) => (
             <article className="blog-card" key={post.slug}>
               <div className="blog-meta">
-                {post.date} · {post.readTime}
+                {post.date} | {post.readTime}
               </div>
               <h2>
                 <Link href={`/blog/${post.slug}`}>{post.title}</Link>

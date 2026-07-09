@@ -24,7 +24,6 @@ dependencies:
   purchases_flutter: ^8.2.0
 
   # UI / assets
-  google_fonts: ^6.2.1
   cached_network_image: ^3.4.1
 
   # Utilities
