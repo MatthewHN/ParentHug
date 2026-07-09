@@ -1,0 +1,50 @@
+# ParentHug monorepo .gitignore
+
+# ---- Secrets / env ----
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+
+# ---- macOS / Windows ----
+.DS_Store
+Thumbs.db
+
+# ---- Node / Next.js (apps/web) ----
+node_modules/
+.next/
+out/
+.vercel/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+next-env.d.ts
+
+# ---- Flutter / Dart (apps/mobile) ----
+apps/mobile/.dart_tool/
+apps/mobile/.flutter-plugins
+apps/mobile/.flutter-plugins-dependencies
+apps/mobile/build/
+apps/mobile/.pub-cache/
+apps/mobile/.pub/
+apps/mobile/ios/Pods/
+apps/mobile/ios/.symlinks/
+apps/mobile/ios/Flutter/Flutter.framework
+apps/mobile/ios/Flutter/Flutter.podspec
+apps/mobile/android/.gradle/
+apps/mobile/android/local.properties
+apps/mobile/android/key.properties
+apps/mobile/**/*.g.dart.lock
+*.iml
+.idea/
+
+# ---- Supabase ----
+supabase/.branches/
+supabase/.temp/
+supabase/functions/**/.env
+
+# ---- Misc ----
+*.log
+coverage/

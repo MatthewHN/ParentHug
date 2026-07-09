@@ -1,0 +1,60 @@
+# Supabase local config. `supabase start` / `supabase db reset` read this.
+project_id = "parenthug"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+file_size_limit = "50MiB"
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = [
+  "app.parenthug://login-callback",
+  "parenthug://login-callback",
+]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+# Local dev only: skip email confirmation so seeded/test accounts log in instantly.
+enable_confirmations = false
+
+# Apple / Google sign-in are placeholder-ready. Fill in secrets and set
+# enabled = true when you configure the providers (see docs/MANUAL_SETUP.md).
+[auth.external.apple]
+enabled = false
+client_id = "env(SUPABASE_AUTH_APPLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_APPLE_SECRET)"
+
+[auth.external.google]
+enabled = false
+client_id = "env(SUPABASE_AUTH_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_GOOGLE_SECRET)"
+
+# ---- Edge Functions ---------------------------------------------------------
+# AI functions require the caller's JWT (verify_jwt = true, the default).
+# The RevenueCat webhook is called by RevenueCat (no Supabase JWT) → disable.
+[functions.revenuecat_webhook]
+verify_jwt = false
