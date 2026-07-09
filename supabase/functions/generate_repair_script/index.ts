@@ -1,4 +1,4 @@
-// generate_repair_script — "I lost my cool" Repair Mode.
+// generate_repair_script - "I lost my cool" Repair Mode.
 // Input:  { user_id, family_id, child_id, situation, parent_reaction, tone }
 // Output: { repair_script, follow_up, parent_reassurance, id }
 import { handleOptions, jsonResponse } from "../_shared/cors.ts";

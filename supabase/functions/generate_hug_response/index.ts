@@ -1,4 +1,4 @@
-// generate_hug_response — the core Hug Button.
+// generate_hug_response - the core Hug Button.
 // Input:  { user_id, family_id, child_id, situation, tone }
 // Output: { regulate, say_this, do_next, avoid, repair_later, id }
 import { handleOptions, jsonResponse } from "../_shared/cors.ts";
@@ -56,7 +56,7 @@ Deno.serve(async (req) => {
     });
     if (!isMember) return jsonResponse({ error: "forbidden" }, 403);
 
-    // Safety first — bypass AI + usage limits for concerning input.
+    // Safety first - bypass AI + usage limits for concerning input.
     if (needsSafety(situation)) {
       const safe = safetyHug();
       const id = await save(db, { familyId, childId, uid, situation, tone, out: safe });

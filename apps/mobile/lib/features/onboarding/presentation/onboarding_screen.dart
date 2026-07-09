@@ -306,7 +306,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           emoji: '💌',
           title: 'Invite your co-parent',
           subtitle:
-              'One subscription covers both parents. Share this code so you stay in sync.',
+              'One subscription covers your family. Share this code so trusted caregivers stay in sync.',
           child: InviteCodeCard(code: _invite?.code ?? '········'),
         );
       case 'finish':
@@ -314,7 +314,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           emoji: '🎉',
           title: 'You’re all set!',
           subtitle:
-              'ParentHug is ready. You can start free — upgrade any time for unlimited support.',
+              'ParentHug is ready. You can start free - upgrade any time for unlimited support.',
           child: Column(
             children: [
               AppCard(
@@ -325,7 +325,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     SizedBox(width: 14),
                     Expanded(
                       child: Text(
-                        'Try the Hug Button whenever a hard moment hits — it’s on the bottom bar.',
+                        'Try the Hug Button whenever a hard moment hits - it’s on the bottom bar.',
                         style: TextStyle(color: AppColors.ink, height: 1.4),
                       ),
                     ),

@@ -19,7 +19,7 @@ final appStatusProvider = Provider<AppStatus>((ref) {
     data: (list) =>
         (list.isEmpty || onboarding) ? AppStatus.onboarding : AppStatus.ready,
     loading: () => AppStatus.loading,
-    // If we can't load families, don't trap the user on a spinner — send them
+    // If we can't load families, don't trap the user on a spinner - send them
     // to onboarding where they can create/join a family (and retry loads).
     error: (_, __) => AppStatus.onboarding,
   );

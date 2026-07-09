@@ -28,7 +28,7 @@ export function safetyHug(): Record<string, string> {
     avoid:
       "Avoid acting on any urge to harm yourself or your child, and avoid staying alone with these feelings.",
     repair_later:
-      "When things are calmer, talk to a doctor, therapist, or a trusted person. Asking for help protects your family — this does not make you a bad parent.",
+      "When things are calmer, talk to a doctor, therapist, or a trusted person. Asking for help protects your family - this does not make you a bad parent.",
   };
 }
 

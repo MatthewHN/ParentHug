@@ -1,4 +1,4 @@
-// revenuecat_webhook — receives RevenueCat subscriber events and updates the
+// revenuecat_webhook - receives RevenueCat subscriber events and updates the
 // subscriptions table. Configure the webhook URL + Authorization value in the
 // RevenueCat dashboard (Project settings → Integrations → Webhooks).
 //

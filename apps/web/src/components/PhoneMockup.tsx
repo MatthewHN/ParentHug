@@ -1,6 +1,3 @@
-// Polished in-browser mock of the app's Today screen. If you add a real
-// screen-recording at /public/demo.mp4, you can swap the `.phone-screen`
-// contents for:  <video src="/demo.mp4" autoPlay muted loop playsInline />
 export function PhoneMockup() {
   return (
     <div className="phone-wrap">
@@ -14,7 +11,7 @@ export function PhoneMockup() {
             <div className="mock-card mock-sky">
               <div className="label">TODAY&apos;S PARENTHUG</div>
               <div className="big">
-                Find 5 minutes to follow Leo&apos;s lead — let him pick the game.
+                Find 5 minutes to follow Leo&apos;s lead. Let him pick the game.
               </div>
             </div>
 

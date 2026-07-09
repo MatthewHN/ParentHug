@@ -12,7 +12,7 @@ export default function ManageSubscriptionPage() {
     >
       <p>
         ParentHug subscriptions are billed and managed through the app store you
-        purchased from. You can upgrade, downgrade, or cancel anytime — changes
+        purchased from. You can upgrade, downgrade, or cancel anytime - changes
         take effect at the end of your current billing period.
       </p>
 
@@ -53,7 +53,7 @@ export default function ManageSubscriptionPage() {
       <h2>Refunds</h2>
       <p>
         Refunds are handled by Apple or Google under their respective policies.
-        We&apos;re happy to point you in the right direction — just reach out.
+        We&apos;re happy to point you in the right direction - just reach out.
       </p>
 
       <h2>Need a hand?</h2>

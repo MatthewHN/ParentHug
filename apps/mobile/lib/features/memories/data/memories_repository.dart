@@ -75,7 +75,7 @@ class MemoriesRepository {
     try {
       await _c.storage.from(_bucket).remove([memory.storagePath]);
     } catch (_) {
-      // Ignore storage errors — still remove the DB row.
+      // Ignore storage errors - still remove the DB row.
     }
     await _c.from('memories').delete().eq('id', memory.id);
   }

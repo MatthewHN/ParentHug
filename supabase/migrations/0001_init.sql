@@ -1,5 +1,5 @@
 -- =============================================================================
--- ParentHug — 0001_init.sql
+-- ParentHug - 0001_init.sql
 -- Extensions, enums, tables, and indexes.
 -- Row Level Security is enabled and policies are defined in 0003_rls.sql.
 -- Helper functions/triggers live in 0002_functions.sql.
@@ -247,7 +247,7 @@ create table if not exists public.subscriptions (
   created_at      timestamptz not null default now(),
   updated_at      timestamptz not null default now(),
   -- One subscription per family: an active plan covers every family member
-  -- (e.g. both parents). The RevenueCat webhook upserts on family_id.
+  -- (e.g. trusted caregivers). The RevenueCat webhook upserts on family_id.
   unique (family_id)
 );
 create index if not exists subscriptions_user_id_idx        on public.subscriptions (user_id);

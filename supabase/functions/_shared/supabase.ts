@@ -1,10 +1,10 @@
 // Supabase client factories for Edge Functions.
 //
 // SUPABASE_URL / SUPABASE_ANON_KEY / SUPABASE_SERVICE_ROLE_KEY are injected
-// automatically into the Edge runtime — you do not set them yourself.
+// automatically into the Edge runtime - you do not set them yourself.
 import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 
-/** Service-role client — bypasses RLS. Use only for trusted server writes. */
+/** Service-role client - bypasses RLS. Use only for trusted server writes. */
 export function adminClient(): SupabaseClient {
   return createClient(
     Deno.env.get("SUPABASE_URL")!,

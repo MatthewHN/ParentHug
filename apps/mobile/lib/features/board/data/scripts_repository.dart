@@ -5,7 +5,7 @@ import '../../../core/providers/supabase_providers.dart';
 import '../../../models/saved_script.dart';
 import '../../family/application/family_providers.dart';
 
-/// Saved Scripts library (the `saved_scripts` table — distinct from board notes).
+/// Saved Scripts library (the `saved_scripts` table - distinct from board notes).
 class ScriptsRepository {
   ScriptsRepository(this._c);
   final SupabaseClient _c;

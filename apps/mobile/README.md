@@ -1,4 +1,4 @@
-# ParentHug — Mobile app (`apps/mobile`)
+# ParentHug - Mobile app (`apps/mobile`)
 
 Flutter app (iOS + Android). State: **Riverpod**. Routing: **go_router**.
 Backend: **Supabase**. Payments: **RevenueCat**.
@@ -43,7 +43,7 @@ flutter analyze     # static analysis (0 issues expected)
 ## Configuration
 
 All config comes from `--dart-define-from-file=.env` (see `.env.example`). No
-secrets are committed. AI keys never live in the app — they're server-side in
+secrets are committed. AI keys never live in the app - they're server-side in
 Supabase Edge Functions.
 
 ## Build for release

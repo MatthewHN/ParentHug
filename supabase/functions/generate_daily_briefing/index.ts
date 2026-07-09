@@ -1,4 +1,4 @@
-// generate_daily_briefing — Today's ParentHug + Before You Walk In.
+// generate_daily_briefing - Today's ParentHug + Before You Walk In.
 // Input:  { user_id, family_id, child_id }
 // Output: { tiny_parenting_move, recent_context, watch_for, say_this_today,
 //           memory_of_day, before_you_walk_in, id }

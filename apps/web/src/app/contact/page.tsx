@@ -7,7 +7,7 @@ export default function ContactPage() {
   return (
     <LegalLayout kicker="We're here" title="Contact us" updated="July 9, 2026">
       <p>
-        We&apos;d love to hear from you — whether it&apos;s a question, a bug, or
+        We&apos;d love to hear from you - whether it&apos;s a question, a bug, or
         a story about a hard moment ParentHug helped with.
       </p>
 

@@ -77,7 +77,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: 8),
                 const Text(
-                  'One calm home for both parents — scripts, shared notes, and memories.',
+                  'One calm home for every caregiver - scripts, shared notes, and memories.',
                   style: TextStyle(color: AppColors.inkMuted, fontSize: 15),
                 ),
                 const SizedBox(height: 26),

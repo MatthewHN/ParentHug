@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-/// Spacing, radii, and shadows — the calm, roomy rhythm of the app.
+/// Spacing, radii, and shadows - the calm, roomy rhythm of the app.
 class AppSpacing {
   AppSpacing._();
 

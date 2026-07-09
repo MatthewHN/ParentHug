@@ -22,7 +22,7 @@ class EdgeFunctionException implements Exception {
 }
 
 /// Thin wrapper around Supabase Edge Function invocation. All AI + billing
-/// server logic lives behind these functions — the app never holds AI keys.
+/// server logic lives behind these functions - the app never holds AI keys.
 class EdgeFunctionsService {
   EdgeFunctionsService(this._client);
 

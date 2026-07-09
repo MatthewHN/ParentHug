@@ -87,7 +87,7 @@ class BoardScreen extends ConsumerWidget {
                       emoji: '🧩',
                       title: 'Your Family Board is empty',
                       message:
-                          'Keep both parents in sync — add heads-ups, rules, wins, and scripts.',
+                          'Keep your support circle in sync - add heads-up notes, rules, wins, and scripts.',
                       actionLabel: 'Add your first note',
                       onAction: () => showBoardItemEditor(context),
                     );

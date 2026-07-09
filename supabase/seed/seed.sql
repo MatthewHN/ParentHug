@@ -1,13 +1,13 @@
 -- =============================================================================
--- ParentHug — seed data (LOCAL DEVELOPMENT ONLY)
+-- ParentHug - seed data (LOCAL DEVELOPMENT ONLY)
 -- Loaded automatically by `supabase db reset`.
 --
 -- ⚠️  DO NOT run this against production. It creates demo auth users with a known
 --     password so you can log in immediately and see the app populated.
 --
 -- Demo logins (password for both):  parenthug123
---   parent.a@parenthug.dev   (Alex — family admin)
---   parent.b@parenthug.dev   (Sam  — second parent)
+--   parent.a@parenthug.dev   (Alex - family admin)
+--   parent.b@parenthug.dev   (Sam  - second parent)
 -- =============================================================================
 
 -- ---- Demo auth users --------------------------------------------------------
@@ -120,11 +120,11 @@ insert into public.daily_briefings (
   watch_for, say_this_today, memory_of_day, before_you_walk_in
 ) values (
   '33333333-3333-3333-3333-333333333333', '44444444-4444-4444-4444-444444444444', current_date,
-  'Find 5 uninterrupted minutes to follow Leo''s lead — let him pick the game.',
+  'Find 5 uninterrupted minutes to follow Leo''s lead - let him pick the game.',
   'Leo had a hard afternoon after no ice cream, but bounced back at bedtime. He''s craving a bit more connection this week.',
-  'Watch for a wobble around sudden transitions — give a 5-minute warning before screens go off.',
+  'Watch for a wobble around sudden transitions - give a 5-minute warning before screens go off.',
   '"I love being your dad. Even on hard days, I''m so glad you''re mine."',
-  'Notice one small thing Leo did today that made you smile — snap a photo for the HugBook.',
+  'Notice one small thing Leo did today that made you smile - snap a photo for the HugBook.',
   'Leo had some big feelings this afternoon. Start with connection, not correction. Try: "Hey buddy, I heard today was tough. Want a hug or some space?"'
 )
 on conflict (family_id, child_id, briefing_date) do nothing;

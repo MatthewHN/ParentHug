@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
-/// A soft, rounded white card — the app's primary surface.
+/// A soft, rounded white card - the app's primary surface.
 class AppCard extends StatelessWidget {
   const AppCard({
     super.key,

@@ -366,7 +366,7 @@ class _EmptyMemories extends StatelessWidget {
         emoji: '📸',
         title: 'Your HugBook is empty',
         message:
-            'Save the little moments — first steps, silly faces, big milestones. They’re private to your family.',
+            'Save the little moments - first steps, silly faces, big milestones. They’re private to your family.',
         actionLabel: 'Add your first memory',
         onAction: onAdd,
       ),

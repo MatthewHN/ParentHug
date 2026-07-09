@@ -75,7 +75,7 @@ class InviteCodeCard extends StatelessWidget {
                     ? () => _copy(
                           context,
                           'Join our family on ParentHug! Use invite code $code in the app.',
-                          'Invite message copied — paste it to your co-parent',
+                          'Invite message copied - paste it to your co-parent',
                         )
                     : null,
               ),

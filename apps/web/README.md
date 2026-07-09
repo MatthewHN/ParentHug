@@ -1,4 +1,4 @@
-# ParentHug — Landing page (`apps/web`)
+# ParentHug - Landing page (`apps/web`)
 
 Next.js (App Router, TypeScript) marketing site for **parenthug.app**.
 
@@ -15,11 +15,11 @@ npm run dev                    # http://localhost:3000
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Hero, features, how-it-works, CTA |
-| `/privacy` | Privacy Policy (template — lawyer review required) |
-| `/terms` | Terms of Service (template — lawyer review required) |
-| `/contact` | Support & contact info |
-| `/manage-subscription` | How to manage billing via Apple / Google |
+| `/` | Hero, features, download CTA |
+| `/download` | Simple app download page |
+| `/blog` | Parenting articles |
+| `/privacy` | Privacy Policy |
+| `/terms` | Terms of Service |
 
 ## Environment variables
 
@@ -30,13 +30,13 @@ Set these in Vercel (Project → Settings → Environment Variables) or `.env.lo
 | `NEXT_PUBLIC_APP_STORE_URL` | App Store link (use `#` until live) |
 | `NEXT_PUBLIC_GOOGLE_PLAY_URL` | Google Play link (use `#` until live) |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL, e.g. `https://parenthug.app` |
-| `NEXT_PUBLIC_SUPPORT_EMAIL` | Support email shown on the site |
+| `NEXT_PUBLIC_SUPPORT_EMAIL` | Support email shown in legal pages |
 
 ## Deploy to Vercel
 
 1. Import the repository in Vercel.
 2. **Set the project Root Directory to `apps/web`.** (This is the key step for a
-   monorepo — Vercel then builds only the landing page.)
+   monorepo - Vercel then builds only the landing page.)
 3. Framework preset: **Next.js** (auto-detected). Build command `next build`,
    output handled automatically.
 4. Add the environment variables above.
@@ -45,7 +45,7 @@ Set these in Vercel (Project → Settings → Environment Variables) or `.env.lo
 ## Notes
 
 - Fully static/SSR-ready, no external runtime services required.
-- Styling is plain CSS (`src/app/globals.css`) with brand variables — no CSS
+- Styling is plain CSS (`src/app/globals.css`) with brand variables - no CSS
   framework dependency.
 - Optional demo video: drop `public/demo.mp4` and wire it into
   `src/components/PhoneMockup.tsx` (see `public/README.md`).

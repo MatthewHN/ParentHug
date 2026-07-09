@@ -1,7 +1,7 @@
-# ParentHug — Manual Setup Checklist 🚀
+# ParentHug - Manual Setup Checklist 🚀
 
 This is your **launch checklist**. It's written for a non-technical founder. Work
-through it top to bottom. Anything a developer must do in code is already done —
+through it top to bottom. Anything a developer must do in code is already done -
 these steps are the accounts, credentials, and buttons only *you* can click.
 
 > 💡 **How to use this doc:** Check off each `[ ]` as you go. Whenever you see a
@@ -41,7 +41,7 @@ secure server functions that talk to the AI.
 - [ ] Copy the **Project URL** → save as `SUPABASE_URL`.
 - [ ] Copy the **anon public** key → save as `SUPABASE_ANON_KEY`.
 - [ ] Copy the **service_role** key → save as `SUPABASE_SERVICE_ROLE_KEY`
-      (⚠️ secret — server only, never in the app).
+      (⚠️ secret - server only, never in the app).
 
 ### 1c. Put the keys in the mobile app 📱
 - [ ] In `apps/mobile`, copy `.env.example` to `.env`.
@@ -50,7 +50,7 @@ secure server functions that talk to the AI.
 ### 1d. Apply the database (schema + security)
 This creates every table and turns on Row Level Security. Two options:
 
-**Option A — Supabase CLI (recommended)**
+**Option A - Supabase CLI (recommended)**
 - [ ] Install the CLI: <https://supabase.com/docs/guides/cli>
 - [ ] In a terminal at the project root:
   ```bash
@@ -59,7 +59,7 @@ This creates every table and turns on Row Level Security. Two options:
   supabase db push
   ```
 
-**Option B — SQL editor (no CLI)**
+**Option B - SQL editor (no CLI)**
 - [ ] Open **SQL Editor** in Supabase.
 - [ ] Open each file in `supabase/migrations/` **in order** (0001 → 0004), paste,
       and click **Run**:
@@ -93,20 +93,20 @@ The migrations create two buckets automatically. Confirm under **Storage**:
 
 ### 1h. RLS verification checklist
 Row Level Security keeps each family's data private. Verify:
-- [ ] **Database → Tables** — every table shows an **RLS enabled** badge.
+- [ ] **Database → Tables** - every table shows an **RLS enabled** badge.
 - [ ] Create two test accounts in different families → confirm neither can see the
       other's children, board notes, or memories.
 - [ ] In **Storage**, confirm you cannot open a `memories` file via a public URL
       (it should require a signed link).
 
-✅ **You can now run the app against real Supabase — even with no AI key yet**
+✅ **You can now run the app against real Supabase - even with no AI key yet**
 (it returns warm, built-in fallback guidance).
 
 ---
 
 ## 2. AI provider (the “magic” behind the Hug Button)
 
-The app never holds an AI key — only your Supabase server does.
+The app never holds an AI key - only your Supabase server does.
 
 - [ ] Choose a provider: **OpenAI** or **Anthropic** (either works).
 - [ ] Create an API key in their dashboard → save as `AI_API_KEY`.
@@ -118,7 +118,7 @@ The app never holds an AI key — only your Supabase server does.
   supabase secrets set AI_PROVIDER=anthropic AI_API_KEY=sk-ant-xxxxx
   ```
   *(Optional)* choose a model: `supabase secrets set AI_MODEL=gpt-4o-mini`
-- [ ] Confirm AI calls only happen server-side — they do; the app calls your
+- [ ] Confirm AI calls only happen server-side - they do; the app calls your
       functions, never the AI directly. (Nothing to change.)
 - [ ] Test each function from the app:
   - [ ] Hug Button returns a 5-part response.
@@ -144,13 +144,13 @@ RevenueCat handles Plus/Family subscriptions across iOS and Android.
 - [ ] Create entitlements exactly named:
   - [ ] `plus`
   - [ ] `family`
-  - (There is no paid `free` entitlement — “free” just means no active entitlement.)
+  - (There is no paid `free` entitlement - “free” just means no active entitlement.)
 
 ### 3c. Products (create in App Store Connect / Google Play, then import)
-- [ ] `parenthug_plus_monthly` — $9.99/month
-- [ ] `parenthug_plus_yearly` — $59.99/year
-- [ ] `parenthug_family_monthly` — $14.99/month
-- [ ] `parenthug_family_yearly` — $89.99/year
+- [ ] `parenthug_plus_monthly` - $9.99/month
+- [ ] `parenthug_plus_yearly` - $59.99/year
+- [ ] `parenthug_family_monthly` - $14.99/month
+- [ ] `parenthug_family_yearly` - $89.99/year
 - [ ] In RevenueCat, attach the `plus_*` products to the **plus** entitlement and
       the `family_*` products to the **family** entitlement.
 - [ ] Create an **Offering** (e.g. “default”) containing all four packages.
@@ -245,29 +245,29 @@ Template versions ship at `/privacy`, `/terms`, `/contact`, `/manage-subscriptio
 
 Test the whole thing end to end before you announce:
 
-- [ ] **Auth** — sign up, log in, log out, forgot password.
-- [ ] **Onboarding** — create a family, add a child, pick goals/struggles.
-- [ ] **Partner invite** — second account joins with the invite code.
-- [ ] **Hug Button** — returns a 5-part response; refine/save/share work.
-- [ ] **Repair Mode** — returns a script; save/share work.
-- [ ] **Family Board** — create, edit, pin, archive, delete; filters work; a
+- [ ] **Auth** - sign up, log in, log out, forgot password.
+- [ ] **Onboarding** - create a family, add a child, pick goals/struggles.
+- [ ] **Partner invite** - second account joins with the invite code.
+- [ ] **Hug Button** - returns a 5-part response; refine/save/share work.
+- [ ] **Repair Mode** - returns a script; save/share work.
+- [ ] **Family Board** - create, edit, pin, archive, delete; filters work; a
       non-creator/non-admin cannot delete someone else's note.
-- [ ] **Photo upload** — add a memory; confirm it appears only for your family.
-- [ ] **Today's ParentHug** — greeting, briefing, Before You Walk In all render.
-- [ ] **Subscription gating** — free limits enforced (with `ENFORCE_USAGE_LIMITS`
+- [ ] **Photo upload** - add a memory; confirm it appears only for your family.
+- [ ] **Today's ParentHug** - greeting, briefing, Before You Walk In all render.
+- [ ] **Subscription gating** - free limits enforced (with `ENFORCE_USAGE_LIMITS`
       on); paywall appears; purchase unlocks features.
-- [ ] **RevenueCat webhook** — a purchase updates the `subscriptions` table.
-- [ ] **Landing page** — looks right on phone and desktop.
-- [ ] **No secrets hardcoded** — `.env` files are filled in, not committed.
-- [ ] **All placeholders replaced** — store links, support email, domain.
-- [ ] **RLS active** — every table shows RLS enabled.
-- [ ] **Storage policies active** — memory files require signed links.
+- [ ] **RevenueCat webhook** - a purchase updates the `subscriptions` table.
+- [ ] **Landing page** - looks right on phone and desktop.
+- [ ] **No secrets hardcoded** - `.env` files are filled in, not committed.
+- [ ] **All placeholders replaced** - store links, support email, domain.
+- [ ] **RLS active** - every table shows RLS enabled.
+- [ ] **Storage policies active** - memory files require signed links.
 
 🎉 When every box is checked, you're ready to launch ParentHug.
 
 ---
 
-### Quick reference — where each secret goes
+### Quick reference - where each secret goes
 
 | Secret | Goes in | Public? |
 | --- | --- | --- |

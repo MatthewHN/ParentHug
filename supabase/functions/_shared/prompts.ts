@@ -62,7 +62,7 @@ Return ONLY a JSON object with EXACTLY these string keys:
   "avoid":        "one common mistake to avoid in this moment",
   "repair_later": "one short idea to reconnect afterwards"
 }
-Keep each value to 1–2 sentences. Match the requested tone.`;
+Keep each value to 1-2 sentences. Match the requested tone.`;
 
 export function buildHugUser(
   situation: string,
@@ -92,13 +92,13 @@ export function placeholderHug(
     : "gentle";
   return {
     regulate:
-      "Drop your shoulders and take one slow breath before you speak — your calm is what helps them borrow calm.",
+      "Drop your shoulders and take one slow breath before you speak - your calm is what helps them borrow calm.",
     say_this:
       `“I can see this is really hard right now. I’m right here with you.” Then, softly: “You’re allowed to be upset. I won’t leave.”`,
     do_next:
       `Get down to ${name}'s eye level, offer a hand or a hug, and name what you see: “You really wanted that.” Give the feeling a moment before fixing anything.`,
     avoid:
-      "Avoid lecturing, bargaining, or piling on consequences mid-meltdown — a flooded child can’t hear reasoning yet.",
+      "Avoid lecturing, bargaining, or piling on consequences mid-meltdown - a flooded child can’t hear reasoning yet.",
     repair_later:
       `Later, when ${name} is calm, reconnect: “That was a big feeling. We got through it together.” Keep it ${gentle} and short for a ${age}.`,
   };
@@ -147,7 +147,7 @@ export function placeholderRepair(
     follow_up:
       "Offer a hug or sit close for a few minutes with no agenda. Later, if a boundary still matters, restate it calmly and briefly once things feel safe again.",
     parent_reassurance:
-      "Rupturing and repairing is how children learn that relationships survive hard moments — your repair matters more than the slip. One tough moment doesn’t undo the thousands of caring ones. You’re a good parent doing hard work.",
+      "Rupturing and repairing is how children learn that relationships survive hard moments - your repair matters more than the slip. One tough moment doesn’t undo the thousands of caring ones. You’re a good parent doing hard work.",
   };
 }
 
@@ -182,18 +182,18 @@ export function placeholderBriefing(
     : `${name} is moving through an ordinary day. Ordinary days are where connection quietly gets built.`;
   return {
     tiny_parenting_move:
-      "Find 5 uninterrupted minutes today to follow their lead — let them pick the game, and just join in.",
+      "Find 5 uninterrupted minutes today to follow their lead - let them pick the game, and just join in.",
     recent_context: context,
     watch_for:
       board.triggers?.length
         ? `Watch for a wobble around: ${board.triggers[0]}. A little extra warmth beforehand goes a long way.`
-        : "Watch for tiredness or hunger tipping small frustrations into big ones — connection before correction.",
+        : "Watch for tiredness or hunger tipping small frustrations into big ones - connection before correction.",
     say_this_today: `“I love being your parent. Even on hard days, I’m so glad you’re mine.”`,
     memory_of_day:
-      `Notice one small thing ${name} did today that made you smile — snap a photo or jot it down for the HugBook.`,
+      `Notice one small thing ${name} did today that made you smile - snap a photo or jot it down for the HugBook.`,
     before_you_walk_in:
       board.headsUp?.length
-        ? `${name} had some ups and downs today (${board.headsUp[0]}). Start with connection, not correction. Try opening with: “Hey, I heard today had some big feelings — want a hug or a little space?”`
-        : `${name} is likely winding down and craving your attention after time apart. Lead with warmth first. Try: “I missed you today — come here, tell me one good thing and one tricky thing.”`,
+        ? `${name} had some ups and downs today (${board.headsUp[0]}). Start with connection, not correction. Try opening with: “Hey, I heard today had some big feelings - want a hug or a little space?”`
+        : `${name} is likely winding down and craving your attention after time apart. Lead with warmth first. Try: “I missed you today - come here, tell me one good thing and one tricky thing.”`,
   };
 }

@@ -1,12 +1,12 @@
 -- =============================================================================
--- ParentHug — 0002_functions.sql
+-- ParentHug - 0002_functions.sql
 -- Membership helpers, updated_at triggers, new-user handler, and safe RPCs.
 --
 -- SECURITY DEFINER note: the membership helpers deliberately run as the function
 -- owner so they can read family_members WITHOUT triggering that table's own RLS
 -- policies (which would otherwise recurse). `set search_path = public` prevents
 -- search-path hijacking. Authorization is derived ONLY from the server-owned
--- family_members table — never from user-editable JWT metadata.
+-- family_members table - never from user-editable JWT metadata.
 -- =============================================================================
 
 -- ---- Membership helpers -----------------------------------------------------

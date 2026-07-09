@@ -2,7 +2,7 @@
 
 > **The next right words when parenting gets hard.**
 
-ParentHug is a warm, calm, premium parenting companion for two-parent families.
+ParentHug is a warm, calm, premium parenting companion for families.
 It helps parents **know what to say** in hard moments, **stay aligned** on a shared
 Family Board, and **preserve** meaningful family memories.
 
@@ -29,9 +29,9 @@ parenthug/
 
 | Feature | What it does |
 | --- | --- |
-| **Hug Button** | Instant, practical scripts for hard moments — *regulate → say this → do next → avoid → repair later*. |
+| **Hug Button** | Instant, practical scripts for hard moments - *regulate → say this → do next → avoid → repair later*. |
 | **Repair Mode** | "I lost my cool" recovery scripts to reconnect after a hard moment. |
-| **Family Board** | A structured coordination board (not a chat) so both parents stay aligned. |
+| **Family Board** | A structured coordination board (not a chat) so trusted caregivers stay aligned. |
 | **Today's ParentHug** | A daily briefing: child context, one tiny move, a "say this today" script, a memory. |
 | **Before You Walk In** | Instant emotional context for the parent coming home. |
 | **HugBook (Memories)** | A private family photo album with milestones and "this day last year". |
@@ -40,7 +40,7 @@ parenthug/
 
 ## Quick start (developers)
 
-### 1. Backend — Supabase
+### 1. Backend - Supabase
 
 ```bash
 # Install the Supabase CLI: https://supabase.com/docs/guides/cli
@@ -64,7 +64,7 @@ supabase functions deploy generate_birthday_collage
 supabase secrets set AI_PROVIDER=openai AI_API_KEY=sk-... REVENUECAT_WEBHOOK_SECRET=whsec_...
 ```
 
-### 2. Mobile — Flutter
+### 2. Mobile - Flutter
 
 ```bash
 cd apps/mobile
@@ -75,7 +75,7 @@ flutter run --dart-define-from-file=.env
 
 Open `apps/mobile` directly in **Android Studio** to run/debug.
 
-### 3. Landing page — Next.js
+### 3. Landing page - Next.js
 
 ```bash
 cd apps/web
@@ -106,9 +106,9 @@ real credentials and complete external account setup. The full checklist lives i
 ## Security posture
 
 - **Row Level Security** is enabled on every table; access is scoped to family membership.
-- **AI keys never touch the app** — all AI calls run inside Supabase Edge Functions.
-- **No secrets are committed** — every secret is a placeholder in a `.env.example`.
-- **Storage is private** — child photos are readable only by family members.
+- **AI keys never touch the app** - all AI calls run inside Supabase Edge Functions.
+- **No secrets are committed** - every secret is a placeholder in a `.env.example`.
+- **Storage is private** - child photos are readable only by family members.
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full model.
 
@@ -116,4 +116,4 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full model.
 
 ## License
 
-Proprietary — © 2026 ParentHug. All rights reserved.
+Proprietary - © 2026 ParentHug. All rights reserved.

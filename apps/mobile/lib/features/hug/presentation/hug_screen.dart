@@ -133,7 +133,7 @@ class _HugScreenState extends ConsumerState<HugScreen> {
                 onSave: () => _saveScript(result),
                 onShare: () {
                   Clipboard.setData(ClipboardData(text: hugToText(result)));
-                  AppSnackbar.success(context, 'Copied — share it with anyone');
+                  AppSnackbar.success(context, 'Copied - share it with anyone');
                 },
                 onAddToBoard: () => _addToBoard(result),
                 onNew: () {

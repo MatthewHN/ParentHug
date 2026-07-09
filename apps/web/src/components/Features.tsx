@@ -7,8 +7,8 @@ export function Features() {
         <div className="section-head">
           <h2>Everything you need in the hard moments</h2>
           <p>
-            One calm home for both parents — practical words, shared context, and
-            the memories worth keeping.
+            One calmer home for every caregiver, with practical words, shared
+            context, and the memories worth keeping.
           </p>
         </div>
         <div className="feature-grid">

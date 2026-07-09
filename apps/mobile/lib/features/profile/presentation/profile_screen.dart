@@ -298,7 +298,7 @@ class _PlanCard extends StatelessWidget {
           Text(
             isFree
                 ? 'You’re on the free plan${hugsRemaining != null ? ' · $hugsRemaining Hugs left this month' : ''}.'
-                : 'Thanks for supporting ParentHug 💛 Both parents are covered.',
+                : 'Thanks for supporting ParentHug 💛 Trusted caregivers are covered.',
             style: TextStyle(color: Colors.white.withValues(alpha: 0.95)),
           ),
           if (isFree) ...[

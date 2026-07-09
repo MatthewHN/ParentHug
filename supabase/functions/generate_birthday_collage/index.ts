@@ -1,8 +1,8 @@
-// generate_birthday_collage — STUB with production-ready architecture.
+// generate_birthday_collage - STUB with production-ready architecture.
 //
 // MVP behaviour: gathers a child's birthday memories and returns the ordered
 // list of source images plus a "pending" status. Real collage/video rendering
-// (an async render job writing a file to Storage) is future work — the shape
+// (an async render job writing a file to Storage) is future work - the shape
 // below is what the client already renders against, so swapping in a real
 // renderer requires no client change.
 //
@@ -58,7 +58,7 @@ Deno.serve(async (req) => {
       child_id: childId,
       title: `${name}'s Birthday Collage`,
       message: sources.length
-        ? `Found ${sources.length} birthday memories. Collage rendering is coming soon — you'll be notified when ${name}'s collage is ready.`
+        ? `Found ${sources.length} birthday memories. Collage rendering is coming soon - you'll be notified when ${name}'s collage is ready.`
         : `Add a few of ${name}'s past birthday photos to the HugBook, then we can build a collage.`,
       source_images: sources,
       collage_url: null,

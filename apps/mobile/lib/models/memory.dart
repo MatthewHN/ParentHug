@@ -28,7 +28,7 @@ class Memory {
   final MilestoneType milestoneType;
   final DateTime createdAt;
 
-  /// Transient — resolved on demand for private-bucket display.
+  /// Transient - resolved on demand for private-bucket display.
   final String? signedUrl;
 
   String get monthYear => DateX.monthYear(memoryDate);

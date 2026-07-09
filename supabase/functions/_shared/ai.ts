@@ -5,9 +5,9 @@
 // null and the caller falls back to a warm, hand-authored static response.
 //
 // Supported providers (set AI_PROVIDER):
-//   * "openai"     — any OpenAI-compatible /chat/completions endpoint
-//   * "anthropic"  — Anthropic Messages API
-//   * "placeholder"/"none"/unset — no external call; caller uses fallback
+//   * "openai"     - any OpenAI-compatible /chat/completions endpoint
+//   * "anthropic"  - Anthropic Messages API
+//   * "placeholder"/"none"/unset - no external call; caller uses fallback
 //
 // Optional overrides: AI_BASE_URL, AI_MODEL.
 

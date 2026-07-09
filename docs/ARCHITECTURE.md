@@ -1,4 +1,4 @@
-# ParentHug — Architecture
+# ParentHug - Architecture
 
 ## 1. System overview
 
@@ -36,8 +36,8 @@ site. All AI and billing logic runs on the server; the app holds no secrets.
 **Key principles**
 - **Secrets never reach the client.** AI keys live only in Edge Function secrets.
 - **Every table is protected by Row Level Security**, scoped to family membership.
-- **One subscription covers a whole family** (both parents).
-- **Runs with placeholders** — no AI key, no RevenueCat, no problem for a demo.
+- **One subscription covers a whole family**.
+- **Runs with placeholders** - no AI key, no RevenueCat, no problem for a demo.
 
 ---
 
@@ -109,32 +109,32 @@ else hangs off `family_id`, which is the unit of sharing and of security.
 RLS is enabled on **every** table. Policies are expressed with two
 `SECURITY DEFINER` helpers:
 
-- `is_family_member(family_id, user_id)` — is this user in this family?
-- `is_family_admin(family_id, user_id)` — …and are they an admin?
+- `is_family_member(family_id, user_id)` - is this user in this family?
+- `is_family_admin(family_id, user_id)` - …and are they an admin?
 
 They run as the function owner so they can read `family_members` without
 triggering that table's own policies (which would recurse), and pin
 `search_path = public` to prevent hijacking. **Authorization is derived only from
-the server-owned `family_members` table — never from user-editable JWT metadata.**
+the server-owned `family_members` table - never from user-editable JWT metadata.**
 
 Typical policy shape:
-- **SELECT / INSERT / UPDATE** — `is_family_member(family_id)`.
-- **DELETE** of sensitive rows — `created_by = auth.uid() OR is_family_admin(...)`.
-- **Member management** — admins only.
-- **subscriptions / usage_limits** — read-only to members; written only by Edge
+- **SELECT / INSERT / UPDATE** - `is_family_member(family_id)`.
+- **DELETE** of sensitive rows - `created_by = auth.uid() OR is_family_admin(...)`.
+- **Member management** - admins only.
+- **subscriptions / usage_limits** - read-only to members; written only by Edge
   Functions using the service role (which bypasses RLS).
 
 Two safe RPCs solve the “new family has no members yet” bootstrap:
-- `create_family(name)` — creates the family, makes the caller admin, seeds a
+- `create_family(name)` - creates the family, makes the caller admin, seeds a
   free subscription + usage row, atomically.
-- `redeem_invite(code)` — lets a signed-in user join via a valid code.
+- `redeem_invite(code)` - lets a signed-in user join via a valid code.
 
 ### Storage
 
-- `memories` (**private**) — child photos. Path convention `‹family_id›/…`; RLS
+- `memories` (**private**) - child photos. Path convention `‹family_id›/…`; RLS
   scopes access by the first path segment via `is_family_member`. The app reads
   images through short-lived **signed URLs**.
-- `avatars` (**public**) — parent profile pictures under `‹user_id›/…`.
+- `avatars` (**public**) - parent profile pictures under `‹user_id›/…`.
 
 ### Migrations (ordered, idempotent)
 
@@ -162,7 +162,7 @@ Deno functions in `supabase/functions/`. Shared code lives in `_shared/`
 
 **Flow of an AI function:**
 1. Authenticate the caller (JWT → `auth.uid()`), verify family membership.
-2. Run a **safety check** — concerning input short-circuits to a calm,
+2. Run a **safety check** - concerning input short-circuits to a calm,
    support-oriented response.
 3. **Usage gating** (free-plan limits; enforced only when `ENFORCE_USAGE_LIMITS`).
 4. Load **child + Family Board context** (service role).

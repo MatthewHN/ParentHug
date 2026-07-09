@@ -1,5 +1,5 @@
 -- =============================================================================
--- ParentHug — 0003_rls.sql
+-- ParentHug - 0003_rls.sql
 -- Enable Row Level Security on EVERY table and define family-scoped policies.
 --
 -- Rules of thumb:

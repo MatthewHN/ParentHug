@@ -141,7 +141,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                       style: Theme.of(context).textTheme.headlineMedium),
                   const SizedBox(height: 8),
                   const Text(
-                    'One subscription covers both parents — unlimited support in every hard moment.',
+                    'One subscription covers your family - unlimited support in every hard moment.',
                     style: TextStyle(
                         color: AppColors.inkMuted, fontSize: 15, height: 1.4),
                   ),

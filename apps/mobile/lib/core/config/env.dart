@@ -1,6 +1,6 @@
 /// Compile-time configuration, supplied via `--dart-define-from-file=.env`.
 ///
-/// Nothing secret lives here. AI keys never touch the app — they live only in
+/// Nothing secret lives here. AI keys never touch the app - they live only in
 /// Supabase Edge Function secrets. The defaults below point at a LOCAL Supabase
 /// stack from an Android emulator so `supabase start` + Run works with zero
 /// config; override everything via `.env` for real devices / hosted projects.
@@ -14,7 +14,7 @@ class Env {
     defaultValue: 'http://10.0.2.2:54321',
   );
 
-  /// Canonical Supabase *local dev* anon key (safe to commit — only works
+  /// Canonical Supabase *local dev* anon key (safe to commit - only works
   /// against a local `supabase start` instance). Replace via `.env` in prod.
   static const supabaseAnonKey = String.fromEnvironment(
     'SUPABASE_ANON_KEY',

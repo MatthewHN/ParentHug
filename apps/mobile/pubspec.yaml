@@ -1,5 +1,5 @@
 name: parenthug
-description: "ParentHug — the next right words when parenting gets hard."
+description: "ParentHug: the next right words when parenting gets hard."
 publish_to: "none"
 version: 1.0.0+1
 
@@ -39,3 +39,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/ParentHug-appcion.png

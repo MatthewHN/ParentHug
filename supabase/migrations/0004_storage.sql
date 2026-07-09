@@ -1,5 +1,5 @@
 -- =============================================================================
--- ParentHug — 0004_storage.sql
+-- ParentHug - 0004_storage.sql
 -- Storage buckets + policies.
 --   * memories  (PRIVATE) : child photos & child avatars. Path convention:
 --                           `<family_id>/<...>`  → access scoped by family_id.

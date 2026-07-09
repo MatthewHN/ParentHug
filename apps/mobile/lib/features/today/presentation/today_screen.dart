@@ -346,7 +346,7 @@ class _RecentBoard extends StatelessWidget {
           if (items.isEmpty)
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text('No updates yet — add a note to keep both parents in sync.',
+              child: Text('No updates yet - add a note to keep your support circle in sync.',
                   style: TextStyle(color: AppColors.inkMuted)),
             )
           else
