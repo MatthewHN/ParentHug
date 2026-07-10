@@ -47,7 +47,7 @@ as $$
   );
 $$;
 
--- Highest active plan for a family (family > plus > free).
+-- Highest active plan for a family (pro > free).
 create or replace function public.family_plan(p_family_id uuid)
 returns plan_tier
 language sql
@@ -62,7 +62,7 @@ as $$
       where s.family_id = p_family_id
         and s.is_active = true
         and (s.expires_at is null or s.expires_at > now())
-      order by array_position(array['family','plus','free']::plan_tier[], s.plan) asc
+      order by array_position(array['pro','free']::plan_tier[], s.plan) asc
       limit 1
     ),
     'free'::plan_tier

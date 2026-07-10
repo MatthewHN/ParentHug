@@ -21,10 +21,9 @@ const ACTIVE_TYPES = new Set([
 // CANCELLATION keeps access until expiration; EXPIRATION/PAUSE end it.
 const INACTIVE_TYPES = new Set(["EXPIRATION", "SUBSCRIPTION_PAUSED", "BILLING_ISSUE"]);
 
-function mapPlan(entitlements: string[], productId: string): "free" | "plus" | "family" {
+function mapPlan(entitlements: string[], productId: string): "free" | "pro" {
   const hay = [...entitlements, productId].join(" ").toLowerCase();
-  if (hay.includes("family")) return "family";
-  if (hay.includes("plus")) return "plus";
+  if (hay.includes("pro")) return "pro";
   return "free";
 }
 

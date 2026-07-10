@@ -8,38 +8,26 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/widgets/buttons.dart';
-import '../../../models/enums.dart';
 import '../../../services/revenuecat_service.dart';
 import '../application/subscription_providers.dart';
 
-/// Static pricing catalog (used for display; real prices come from the store
-/// when RevenueCat is configured).
-class _Plan {
-  const _Plan(this.tier, this.emoji, this.monthly, this.yearly, this.features);
-  final PlanTier tier;
-  final String emoji;
-  final String monthly;
-  final String yearly;
-  final List<String> features;
-}
+/// Product identifier for the single Pro plan (yearly). Must match the product
+/// created in App Store Connect / Google Play and attached to the `pro`
+/// entitlement in RevenueCat.
+const _proProductId = 'parenthug_pro_yearly';
 
-const _plans = [
-  _Plan(PlanTier.plus, '🫶', r'$9.99', r'$59.99', [
-    'Unlimited Hug Button',
-    'Repair Mode',
-    'Full Family Board',
-    'Today’s ParentHug, daily',
-    '2 parent accounts included',
-    '2 child profiles',
-    'Private Memories album',
-  ]),
-  _Plan(PlanTier.family, '🌟', r'$14.99', r'$89.99', [
-    'Everything in Plus',
-    'Up to 4 child profiles',
-    'Extra caregivers',
-    'Advanced memories',
-    'Weekly family recap',
-  ]),
+/// Static display copy. When RevenueCat is configured the real localized price
+/// and trial come from the store; these are the pre-billing fallbacks.
+const _proPrice = r'$149';
+const _trialDays = 3;
+const _proFeatures = [
+  'Unlimited Hug Button',
+  'Repair Mode for after hard moments',
+  'Full Family Board',
+  'Today’s ParentHug, every day',
+  'Your partner & caregivers included',
+  'Up to 20 child profiles',
+  'Private Memories album',
 ];
 
 class PaywallScreen extends ConsumerStatefulWidget {
@@ -50,7 +38,6 @@ class PaywallScreen extends ConsumerStatefulWidget {
 }
 
 class _PaywallScreenState extends ConsumerState<PaywallScreen> {
-  bool _yearly = true;
   bool _busy = false;
   Offerings? _offerings;
 
@@ -65,26 +52,25 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     if (mounted) setState(() => _offerings = offerings);
   }
 
-  Package? _packageFor(PlanTier tier) {
-    final id = 'parenthug_${tier.value}_${_yearly ? 'yearly' : 'monthly'}';
+  Package? _proPackage() {
     final all = _offerings?.all.values ?? const [];
     for (final offering in all) {
       for (final pkg in offering.availablePackages) {
-        if (pkg.storeProduct.identifier == id) return pkg;
+        if (pkg.storeProduct.identifier == _proProductId) return pkg;
       }
     }
     return null;
   }
 
-  Future<void> _purchase(PlanTier tier) async {
+  Future<void> _purchase() async {
     if (!RevenueCatService.instance.isConfigured) {
       AppSnackbar.show(context,
           'In-app purchases activate once billing is configured. You have full demo access for now.');
       return;
     }
-    final pkg = _packageFor(tier);
+    final pkg = _proPackage();
     if (pkg == null) {
-      AppSnackbar.error(context, 'That plan isn’t available yet.');
+      AppSnackbar.error(context, 'The plan isn’t available yet.');
       return;
     }
     setState(() => _busy = true);
@@ -141,26 +127,12 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                       style: Theme.of(context).textTheme.headlineMedium),
                   const SizedBox(height: 8),
                   const Text(
-                    'One subscription covers your family - unlimited support in every hard moment.',
+                    'One subscription covers your whole family - unlimited support in every hard moment. Try it free for $_trialDays days.',
                     style: TextStyle(
                         color: AppColors.inkMuted, fontSize: 15, height: 1.4),
                   ),
                   const SizedBox(height: 20),
-                  _BillingToggle(
-                    yearly: _yearly,
-                    onChanged: (v) => setState(() => _yearly = v),
-                  ),
-                  const SizedBox(height: 18),
-                  for (final plan in _plans) ...[
-                    _PlanCard(
-                      plan: plan,
-                      yearly: _yearly,
-                      busy: _busy,
-                      highlighted: plan.tier == PlanTier.plus,
-                      onSelect: () => _purchase(plan.tier),
-                    ),
-                    const SizedBox(height: 14),
-                  ],
+                  _ProCard(busy: _busy, onSelect: _purchase),
                   const SizedBox(height: 4),
                   Center(
                     child: TextButton(
@@ -170,9 +142,10 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'Subscriptions renew automatically until cancelled. Manage or cancel anytime in your app store settings. Prices shown in USD; local prices may vary.',
+                    'Your $_trialDays-day free trial converts to a $_proPrice/year subscription unless cancelled at least 24 hours before it ends. Manage or cancel anytime in your app store settings. Prices shown in USD; local prices may vary.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.inkFaint, fontSize: 11.5, height: 1.4),
+                    style: TextStyle(
+                        color: AppColors.inkFaint, fontSize: 11.5, height: 1.4),
                   ),
                 ],
               ),
@@ -184,129 +157,68 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   }
 }
 
-class _BillingToggle extends StatelessWidget {
-  const _BillingToggle({required this.yearly, required this.onChanged});
-  final bool yearly;
-  final ValueChanged<bool> onChanged;
+class _ProCard extends StatelessWidget {
+  const _ProCard({required this.busy, required this.onSelect});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(99),
-        border: Border.all(color: AppColors.hairline, width: 1.5),
-      ),
-      child: Row(
-        children: [
-          _seg('Monthly', !yearly, () => onChanged(false)),
-          _seg('Yearly · save 40%', yearly, () => onChanged(true)),
-        ],
-      ),
-    );
-  }
-
-  Widget _seg(String label, bool selected, VoidCallback onTap) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          padding: const EdgeInsets.symmetric(vertical: 11),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: selected ? AppColors.primary : Colors.transparent,
-            borderRadius: BorderRadius.circular(99),
-          ),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: selected ? Colors.white : AppColors.inkMuted,
-              fontWeight: FontWeight.w800,
-              fontSize: 13.5,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _PlanCard extends StatelessWidget {
-  const _PlanCard({
-    required this.plan,
-    required this.yearly,
-    required this.busy,
-    required this.highlighted,
-    required this.onSelect,
-  });
-
-  final _Plan plan;
-  final bool yearly;
   final bool busy;
-  final bool highlighted;
   final VoidCallback onSelect;
 
   @override
   Widget build(BuildContext context) {
-    final price = yearly ? plan.yearly : plan.monthly;
-    final period = yearly ? '/year' : '/month';
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(26),
-        border: Border.all(
-          color: highlighted ? AppColors.primary : AppColors.hairline,
-          width: highlighted ? 2 : 1.5,
-        ),
-        boxShadow: highlighted ? AppShadows.soft : null,
+        border: Border.all(color: AppColors.primary, width: 2),
+        boxShadow: AppShadows.soft,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text(plan.emoji, style: const TextStyle(fontSize: 24)),
+              const Text('🫂', style: TextStyle(fontSize: 24)),
               const SizedBox(width: 8),
-              Text(plan.tier.label,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w900, fontSize: 18)),
+              const Text('ParentHug Pro',
+                  style:
+                      TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
               const Spacer(),
-              if (highlighted)
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: AppColors.primarySoft,
-                    borderRadius: BorderRadius.circular(99),
-                  ),
-                  child: const Text('Most popular',
-                      style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 11.5)),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.primarySoft,
+                  borderRadius: BorderRadius.circular(99),
                 ),
+                child: const Text('$_trialDays-day free trial',
+                    style: TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 11.5)),
+              ),
             ],
           ),
           const SizedBox(height: 12),
-          Row(
+          const Row(
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text(price,
-                  style: const TextStyle(
+              Text(_proPrice,
+                  style: TextStyle(
                       fontWeight: FontWeight.w900,
                       fontSize: 30,
                       color: AppColors.ink)),
-              Text(period,
-                  style: const TextStyle(
+              Text('/year',
+                  style: TextStyle(
                       color: AppColors.inkMuted, fontWeight: FontWeight.w700)),
             ],
           ),
+          const SizedBox(height: 4),
+          const Text('Free for $_trialDays days, then $_proPrice/year.',
+              style: TextStyle(color: AppColors.inkMuted, fontSize: 13)),
           const SizedBox(height: 14),
-          for (final f in plan.features)
+          for (final f in _proFeatures)
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(
@@ -324,11 +236,9 @@ class _PlanCard extends StatelessWidget {
             ),
           const SizedBox(height: 12),
           PrimaryButton(
-            label: 'Choose ${plan.tier == PlanTier.plus ? 'Plus' : 'Family'}',
+            label: 'Start $_trialDays-day free trial',
             loading: busy,
-            gradient: highlighted
-                ? AppColors.hugGradient
-                : AppColors.skyGradient,
+            gradient: AppColors.hugGradient,
             onPressed: onSelect,
           ),
         ],

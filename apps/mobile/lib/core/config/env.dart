@@ -27,8 +27,21 @@ class Env {
   static const revenueCatAndroidKey =
       String.fromEnvironment('REVENUECAT_ANDROID_API_KEY', defaultValue: '');
 
+  // ---- Google Sign-In (native) ----
+  // OAuth client IDs from Google Cloud Console (see docs/MANUAL_SETUP.md).
+  // These are NOT secrets. iOS passes the iOS client id; both platforms pass the
+  // Web client id as `serverClientId` so Supabase receives a verifiable ID token.
+  static const googleIosClientId =
+      String.fromEnvironment('GOOGLE_IOS_CLIENT_ID', defaultValue: '');
+  static const googleWebClientId =
+      String.fromEnvironment('GOOGLE_WEB_CLIENT_ID', defaultValue: '');
+
   static bool get isSupabaseConfigured =>
       supabaseUrl.isNotEmpty && supabaseAnonKey.isNotEmpty;
+
+  /// Google sign-in needs at least the Web (server) client id to mint an ID
+  /// token Supabase can verify. When absent, the Google button stays inert.
+  static bool get isGoogleSignInConfigured => googleWebClientId.isNotEmpty;
 
   /// When RevenueCat isn't configured the app unlocks premium features so the
   /// product can be demoed end-to-end before billing is wired up.

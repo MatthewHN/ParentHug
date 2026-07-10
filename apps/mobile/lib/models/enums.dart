@@ -86,8 +86,7 @@ enum ParentReaction {
 
 enum PlanTier {
   free('free', 'Free'),
-  plus('plus', 'ParentHug Plus'),
-  family('family', 'ParentHug Family');
+  pro('pro', 'ParentHug Pro');
 
   const PlanTier(this.value, this.label);
   final String value;
@@ -98,10 +97,9 @@ enum PlanTier {
 
   bool get isPaid => this != free;
 
-  /// Rank so we can compare entitlements (family > plus > free).
+  /// Rank so we can compare entitlements (pro > free).
   int get rank => switch (this) {
         free => 0,
-        plus => 1,
-        family => 2,
+        pro => 1,
       };
 }

@@ -48,7 +48,7 @@ class _RepairScreenState extends ConsumerState<RepairScreen> {
 
   Future<void> _generate() async {
     FocusScope.of(context).unfocus();
-    if (!ensureEntitled(context, ref, min: PlanTier.plus)) return;
+    if (!ensureEntitled(context, ref, min: PlanTier.pro)) return;
     final familyId = ref.read(currentFamilyIdProvider);
     if (familyId == null) return;
     if (_situation.text.trim().isEmpty) {

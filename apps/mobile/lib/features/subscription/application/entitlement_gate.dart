@@ -11,7 +11,7 @@ import 'subscription_providers.dart';
 bool ensureEntitled(
   BuildContext context,
   WidgetRef ref, {
-  PlanTier min = PlanTier.plus,
+  PlanTier min = PlanTier.pro,
 }) {
   final plan = ref.read(entitlementProvider);
   if (plan.rank >= min.rank) return true;

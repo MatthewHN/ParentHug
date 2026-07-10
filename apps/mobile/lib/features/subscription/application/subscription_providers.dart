@@ -25,27 +25,24 @@ final usageProvider = FutureProvider<UsageLimits?>((ref) {
 /// demoed end-to-end pre-billing. Once configured, the DB subscription (kept in
 /// sync by the RevenueCat webhook) is the source of truth.
 final entitlementProvider = Provider<PlanTier>((ref) {
-  if (!Env.isRevenueCatConfigured) return PlanTier.family;
+  if (!Env.isRevenueCatConfigured) return PlanTier.pro;
   final sub = ref.watch(familySubscriptionProvider).valueOrNull;
   return sub?.effectivePlan ?? PlanTier.free;
 });
 
-final hasPlusProvider = Provider<bool>(
-  (ref) => ref.watch(entitlementProvider).rank >= PlanTier.plus.rank,
+final hasProProvider = Provider<bool>(
+  (ref) => ref.watch(entitlementProvider).rank >= PlanTier.pro.rank,
 );
 
-final hasFamilyPlanProvider = Provider<bool>(
-  (ref) => ref.watch(entitlementProvider) == PlanTier.family,
-);
+/// Max child profiles allowed by the current plan. Pro is effectively
+/// unlimited; free is capped to a single child.
+const _proMaxChildren = 20;
 
-/// Max child profiles allowed by the current plan.
 final maxChildrenProvider = Provider<int>((ref) {
   switch (ref.watch(entitlementProvider)) {
     case PlanTier.free:
       return 1;
-    case PlanTier.plus:
-      return 2;
-    case PlanTier.family:
-      return 4;
+    case PlanTier.pro:
+      return _proMaxChildren;
   }
 });

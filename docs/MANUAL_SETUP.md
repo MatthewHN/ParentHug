@@ -77,9 +77,53 @@ The migrations create two buckets automatically. Confirm under **Storage**:
 - [ ] Under **Authentication → Providers**, confirm **Email** is enabled.
 - [ ] For launch you can keep “Confirm email” **on** (users verify by email) or
       **off** for faster testing. (Local dev has it off.)
-- [ ] *(Optional, later)* Apple & Google sign-in: the app is already wired with
-      placeholders. When ready, enable them here and in
-      `supabase/config.toml`, then flip the buttons on in the app.
+
+#### Google sign-in (iOS + Android)
+The app uses **native** Google sign-in (`signInWithIdToken`), so you create OAuth
+clients in Google Cloud and paste the IDs into Supabase + `apps/mobile/.env`.
+
+1. [ ] **Google Cloud Console** → create/select a project → **APIs & Services →
+   OAuth consent screen** → set it up (External, app name, support email).
+2. [ ] **Credentials → Create credentials → OAuth client ID**, create **three**:
+   - [ ] **Web application** → note its **Client ID** + **Client secret**. Under
+         *Authorized redirect URIs* add:
+         `https://hmqckvqtdlhbebicaxri.supabase.co/auth/v1/callback`
+   - [ ] **iOS** → *Bundle ID* = `app.parenthug` → note its **Client ID** and its
+         **iOS URL scheme** (the *reversed* client ID,
+         `com.googleusercontent.apps.…`).
+   - [ ] **Android** → *Package name* = `app.parenthug` → *SHA-1* = your signing
+         cert’s fingerprint (`keytool -list -v -keystore …`, and add the Play
+         **App signing** SHA-1 once uploaded). No secret for Android.
+3. [ ] **Supabase → Authentication → Providers → Google**: turn it **on** and fill:
+   - **Client IDs** (comma-separated) = **Web**, **iOS**, and **Android** client IDs.
+   - **Client Secret (for OAuth)** = the **Web** client’s secret.
+4. [ ] In `apps/mobile/.env` set:
+   - `GOOGLE_WEB_CLIENT_ID` = the **Web** client ID
+   - `GOOGLE_IOS_CLIENT_ID` = the **iOS** client ID
+5. [ ] In `apps/mobile/ios/Runner/Info.plist`, replace
+   `com.googleusercontent.apps.REPLACE_WITH_REVERSED_IOS_CLIENT_ID` with your
+   iOS client’s reversed client ID (the “iOS URL scheme” from step 2).
+
+> Why three clients? Native Google sign-in needs a platform client per store
+> (iOS bundle id, Android package + SHA-1), and a **Web** client whose ID is the
+> token audience Supabase verifies. Listing all three in Supabase’s *Client IDs*
+> makes every platform’s token acceptable.
+
+#### Apple sign-in (iOS only)
+The **Continue with Apple** button is shown **only on iOS** (native flow, App
+Store policy). No Apple “Services ID” or secret is needed for the iOS-only flow.
+
+1. [ ] **Apple Developer → Certificates, IDs & Profiles → Identifiers** → your
+   App ID `app.parenthug` → enable the **Sign In with Apple** capability.
+2. [ ] In **Xcode** open `apps/mobile/ios/Runner.xcworkspace` → *Runner* target →
+   **Signing & Capabilities** → confirm **Sign in with Apple** is listed (the
+   `Runner.entitlements` file is already committed; Xcode links it automatically).
+3. [ ] **Supabase → Authentication → Providers → Apple**: turn it **on** and set
+   **Client IDs** = `app.parenthug` (your bundle ID). Leave the secret fields
+   blank — they’re only needed for web/Android Apple sign-in, which we don’t use.
+
+> `supabase/config.toml` only affects a **local** `supabase start` stack. For your
+> hosted project, the dashboard toggles above are what matter.
 
 ### 1g. Deploy the server (Edge) functions
 - [ ] With the CLI linked (step 1d), run:
@@ -140,20 +184,18 @@ RevenueCat handles Plus/Family subscriptions across iOS and Android.
 - [ ] Add an **iOS app** (bundle id, e.g. `app.parenthug`).
 - [ ] Add an **Android app** (package name, e.g. `app.parenthug`).
 
-### 3b. Entitlements
-- [ ] Create entitlements exactly named:
-  - [ ] `plus`
-  - [ ] `family`
-  - (There is no paid `free` entitlement - “free” just means no active entitlement.)
+### 3b. Entitlement
+- [ ] Create a single entitlement named exactly:
+  - [ ] `pro`
+  - (There is no `free` entitlement - “free” just means no active `pro`
+    entitlement.)
 
-### 3c. Products (create in App Store Connect / Google Play, then import)
-- [ ] `parenthug_plus_monthly` - $9.99/month
-- [ ] `parenthug_plus_yearly` - $59.99/year
-- [ ] `parenthug_family_monthly` - $14.99/month
-- [ ] `parenthug_family_yearly` - $89.99/year
-- [ ] In RevenueCat, attach the `plus_*` products to the **plus** entitlement and
-      the `family_*` products to the **family** entitlement.
-- [ ] Create an **Offering** (e.g. “default”) containing all four packages.
+### 3c. Product (create in App Store Connect / Google Play, then import)
+- [ ] `parenthug_pro_yearly` - **$149 / year**, with a **3-day free trial**
+      (add the introductory free-trial offer in App Store Connect and in Google
+      Play for the same product).
+- [ ] In RevenueCat, attach `parenthug_pro_yearly` to the **pro** entitlement.
+- [ ] Create an **Offering** (e.g. “default”) containing the yearly package.
 
 ### 3d. Connect the stores
 - [ ] Connect **App Store Connect** (App-Specific Shared Secret).

@@ -23,6 +23,11 @@ dependencies:
   # Payments (RevenueCat)
   purchases_flutter: ^8.2.0
 
+  # Social sign-in (native Google + Apple → Supabase signInWithIdToken)
+  google_sign_in: ^6.2.1
+  sign_in_with_apple: ^6.1.0
+  crypto: ^3.0.3
+
   # UI / assets
   cached_network_image: ^3.4.1
 

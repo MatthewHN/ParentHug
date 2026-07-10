@@ -30,8 +30,9 @@ do $$ begin
   );
 exception when duplicate_object then null; end $$;
 
+-- Single paid tier: 'pro'. ('free' just means no active entitlement.)
 do $$ begin
-  create type plan_tier as enum ('free', 'plus', 'family');
+  create type plan_tier as enum ('free', 'pro');
 exception when duplicate_object then null; end $$;
 
 do $$ begin

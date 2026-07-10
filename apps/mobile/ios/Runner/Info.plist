@@ -49,5 +49,33 @@
 	<string>ParentHug needs access to your photos so you can add family memories to your private HugBook.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>ParentHug needs camera access so you can capture new family memories.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<!-- Supabase auth deep links (password reset, email confirmation). -->
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>app.parenthug.deeplink</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app.parenthug</string>
+			</array>
+		</dict>
+		<!-- Google Sign-In. REPLACE the scheme below with your iOS OAuth client's
+		     "iOS URL scheme" (a.k.a. the REVERSED client ID) from Google Cloud
+		     Console → Credentials → your iOS client. It looks like
+		     com.googleusercontent.apps.1234567890-abcdefg -->
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>google-signin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.REPLACE_WITH_REVERSED_IOS_CLIENT_ID</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
