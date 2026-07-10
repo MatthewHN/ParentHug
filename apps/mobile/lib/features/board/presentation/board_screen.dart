@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_snackbar.dart';
+import '../../../core/widgets/app_header.dart';
 import '../../../core/widgets/selectable_chip.dart';
 import '../../../core/widgets/states.dart';
 import '../../../models/enums.dart';
@@ -42,15 +43,7 @@ class BoardScreen extends ConsumerWidget {
     final repo = ref.read(boardRepositoryProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Family Board'),
-        actions: [
-          IconButton(
-            onPressed: () => showBoardItemEditor(context),
-            icon: const Icon(Icons.add_rounded),
-          ),
-        ],
-      ),
+      appBar: const AppHeader(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => showBoardItemEditor(context),
         backgroundColor: AppColors.primary,

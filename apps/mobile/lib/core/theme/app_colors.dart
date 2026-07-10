@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 
-/// ParentHug brand palette. Warm, calm, colorful, premium.
+/// ParentHug brand palette. Clean, iOS-native neutral canvas with warm brand
+/// accents used sparingly.
 class AppColors {
   AppColors._();
 
-  // Brand
-  static const primary = Color(0xFF2F9CF4); // sky blue
-  static const coral = Color(0xFFFF6B7A);
-  static const yellow = Color(0xFFFFC83D);
-  static const mint = Color(0xFF52E3A2);
-  static const cream = Color(0xFFFFF6EA); // app background
-  static const ink = Color(0xFF1F2A44); // primary text
+  // Brand accents
+  static const primary = Color(0xFF3B82F6); // refined blue (links, selection)
+  static const coral = Color(0xFFFB5D6B); // primary action / brand
+  static const yellow = Color(0xFFF5B93B);
+  static const mint = Color(0xFF34C98B);
+  static const cream = Color(0xFFF4F5F7); // app canvas (neutral, cool)
+  static const ink = Color(0xFF171A21); // primary text (near-black)
 
   // Neutrals / support
   static const surface = Colors.white;
-  static const inkMuted = Color(0xFF6B7385);
-  static const inkFaint = Color(0xFF9AA1B1);
-  static const hairline = Color(0xFFEFE7D8);
-  static const primarySoft = Color(0xFFE7F3FE);
-  static const coralSoft = Color(0xFFFFEAED);
-  static const mintSoft = Color(0xFFE3F9EF);
-  static const yellowSoft = Color(0xFFFFF4D8);
+  static const inkMuted = Color(0xFF6A7180);
+  static const inkFaint = Color(0xFFA0A6B2);
+  static const hairline = Color(0xFFE6E8EC); // cool light hairline
+  static const primarySoft = Color(0xFFEAF2FE);
+  static const coralSoft = Color(0xFFFFEBED);
+  static const mintSoft = Color(0xFFE4F7EF);
+  static const yellowSoft = Color(0xFFFDF3DC);
 
   // Gradients
   static const skyGradient = LinearGradient(

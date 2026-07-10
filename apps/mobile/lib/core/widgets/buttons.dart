@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
-/// Large, friendly gradient primary button with a built-in loading state.
+/// Primary action button — solid brand fill by default, with a built-in
+/// loading state. Pass [gradient] for a highlighted hero button, or [color]
+/// to override the fill.
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
@@ -11,7 +13,8 @@ class PrimaryButton extends StatelessWidget {
     this.onPressed,
     this.loading = false,
     this.icon,
-    this.gradient = AppColors.hugGradient,
+    this.color,
+    this.gradient,
     this.expand = true,
   });
 
@@ -19,7 +22,8 @@ class PrimaryButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool loading;
   final IconData? icon;
-  final Gradient gradient;
+  final Color? color;
+  final Gradient? gradient;
   final bool expand;
 
   @override
@@ -27,14 +31,15 @@ class PrimaryButton extends StatelessWidget {
     final enabled = onPressed != null && !loading;
     final child = AnimatedOpacity(
       duration: const Duration(milliseconds: 150),
-      opacity: enabled ? 1 : 0.6,
+      opacity: enabled ? 1 : 0.55,
       child: Container(
-        height: 56,
+        height: 52,
         width: expand ? double.infinity : null,
-        padding: EdgeInsets.symmetric(horizontal: expand ? 20 : 28),
+        padding: EdgeInsets.symmetric(horizontal: expand ? 20 : 26),
         decoration: BoxDecoration(
           gradient: gradient,
-          borderRadius: BorderRadius.circular(AppSpacing.radius),
+          color: gradient == null ? (color ?? AppColors.coral) : null,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
           boxShadow: enabled ? AppShadows.subtle : null,
         ),
         child: Row(
@@ -61,8 +66,8 @@ class PrimaryButton extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w800,
+                    fontSize: 16.5,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -79,7 +84,7 @@ class PrimaryButton extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(AppSpacing.radius),
+          borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
           onTap: enabled ? onPressed : null,
           child: child,
         ),

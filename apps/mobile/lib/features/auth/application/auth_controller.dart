@@ -40,14 +40,23 @@ class AuthController extends AutoDisposeAsyncNotifier<void> {
         await _linkRevenueCat();
       });
 
-  /// Native Google sign-in. Returns true on success, false on user-cancel.
-  /// A thrown failure lands in the error state for the UI to surface.
-  Future<bool> signInWithGoogle() =>
-      _runSocial(() => ref.read(authRepositoryProvider).signInWithGoogle());
+  /// Native Google sign-in. Returns true on success, false on user-cancel;
+  /// throws on a real failure for the caller to surface. Deliberately does NOT
+  /// touch this notifier's async state — the buttons own their own loading —
+  /// which avoids an AutoDispose "Future already completed" crash if the
+  /// notifier is disposed while the native sheet is open.
+  Future<bool> signInWithGoogle() async {
+    final ok = await ref.read(authRepositoryProvider).signInWithGoogle();
+    if (ok) await _linkRevenueCat();
+    return ok;
+  }
 
-  /// Native Apple sign-in (iOS). Returns true on success, false on user-cancel.
-  Future<bool> signInWithApple() =>
-      _runSocial(() => ref.read(authRepositoryProvider).signInWithApple());
+  /// Native Apple sign-in (iOS). Same contract as [signInWithGoogle].
+  Future<bool> signInWithApple() async {
+    final ok = await ref.read(authRepositoryProvider).signInWithApple();
+    if (ok) await _linkRevenueCat();
+    return ok;
+  }
 
   Future<bool> sendReset(String email) =>
       _run(() => ref.read(authRepositoryProvider).sendPasswordReset(email));
@@ -74,21 +83,6 @@ class AuthController extends AutoDisposeAsyncNotifier<void> {
     }
   }
 
-  /// Like [_run] but the action reports whether a session was actually created
-  /// (false = the user cancelled the native sheet, which is NOT an error).
-  /// RevenueCat is linked only on a real sign-in.
-  Future<bool> _runSocial(Future<bool> Function() action) async {
-    state = const AsyncLoading();
-    try {
-      final ok = await action();
-      if (ok) await _linkRevenueCat();
-      state = const AsyncData(null);
-      return ok;
-    } catch (e, st) {
-      state = AsyncError(e, st);
-      return false;
-    }
-  }
 }
 
 final authControllerProvider =

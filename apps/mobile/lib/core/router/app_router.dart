@@ -83,6 +83,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, __) => const RepairScreen(),
       ),
       GoRoute(
+        path: AppRoutes.profile,
+        parentNavigatorKey: _rootKey,
+        builder: (_, __) => const ProfileScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.paywall,
         parentNavigatorKey: _rootKey,
         pageBuilder: (_, __) => const MaterialPage(
@@ -115,11 +120,6 @@ final routerProvider = Provider<GoRouter>((ref) {
             GoRoute(
                 path: AppRoutes.memories,
                 builder: (_, __) => const MemoriesScreen()),
-          ]),
-          StatefulShellBranch(routes: [
-            GoRoute(
-                path: AppRoutes.profile,
-                builder: (_, __) => const ProfileScreen()),
           ]),
         ],
       ),

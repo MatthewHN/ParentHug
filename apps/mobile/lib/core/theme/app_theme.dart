@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_spacing.dart';
 
-/// Centralized theme. Warm cream canvas, rounded cards, friendly typography.
+/// Centralized theme: clean iOS-native canvas, crisp hairlines, restrained
+/// typography, brand color used as an accent.
 class AppTheme {
   AppTheme._();
 
@@ -30,31 +31,39 @@ class AppTheme {
 
     return base.copyWith(
       colorScheme: colorScheme,
+      splashFactory: InkRipple.splashFactory,
       textTheme: textTheme.copyWith(
         headlineLarge: textTheme.headlineLarge?.copyWith(
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.5,
           height: 1.1,
         ),
         headlineMedium: textTheme.headlineMedium?.copyWith(
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.4,
           height: 1.15,
         ),
-        titleLarge: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
-        titleMedium:
-            textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+        titleLarge: textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.2,
+        ),
+        titleMedium: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         bodyMedium: textTheme.bodyMedium?.copyWith(height: 1.45),
-        labelLarge: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
+        labelLarge: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.cream,
+        backgroundColor: AppColors.surface,
         elevation: 0,
         scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
         centerTitle: false,
         foregroundColor: AppColors.ink,
+        shape: Border(bottom: BorderSide(color: AppColors.hairline, width: 1)),
         titleTextStyle: TextStyle(
           color: AppColors.ink,
-          fontSize: 20,
-          fontWeight: FontWeight.w800,
+          fontSize: 19,
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.3,
         ),
       ),
       cardTheme: CardThemeData(
@@ -67,46 +76,47 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: AppColors.coral,
           foregroundColor: Colors.white,
           elevation: 0,
-          minimumSize: const Size.fromHeight(56),
-          textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+          minimumSize: const Size.fromHeight(52),
+          textStyle: const TextStyle(fontSize: 16.5, fontWeight: FontWeight.w700),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSpacing.radius),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
           ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.ink,
-          minimumSize: const Size.fromHeight(56),
+          backgroundColor: AppColors.surface,
+          minimumSize: const Size.fromHeight(52),
           side: const BorderSide(color: AppColors.hairline, width: 1.5),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSpacing.radius),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
           ),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surface,
+        fillColor: const Color(0xFFF1F3F5),
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         hintStyle: const TextStyle(color: AppColors.inkFaint),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-          borderSide: const BorderSide(color: AppColors.hairline, width: 1.5),
+          borderSide: const BorderSide(color: Colors.transparent),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderSide: const BorderSide(color: AppColors.primary, width: 1.6),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
@@ -114,14 +124,14 @@ class AppTheme {
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-          borderSide: const BorderSide(color: AppColors.coral, width: 2),
+          borderSide: const BorderSide(color: AppColors.coral, width: 1.6),
         ),
       ),
       chipTheme: base.chipTheme.copyWith(
         backgroundColor: AppColors.surface,
         side: const BorderSide(color: AppColors.hairline, width: 1.5),
         labelStyle: const TextStyle(
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           color: AppColors.ink,
         ),
         shape: RoundedRectangleBorder(
@@ -145,10 +155,10 @@ class AppTheme {
         ),
       ),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: AppColors.cream,
+        backgroundColor: AppColors.surface,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
       ),
     );

@@ -8,6 +8,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/utils/date_x.dart';
 import '../../../core/widgets/app_card.dart';
+import '../../../core/widgets/app_header.dart';
 import '../../../core/widgets/states.dart';
 import '../../../models/board_item.dart';
 import '../../../models/daily_briefing.dart';
@@ -27,6 +28,7 @@ class TodayScreen extends ConsumerWidget {
     final name = ref.watch(myProfileProvider).valueOrNull?.firstName ?? 'there';
 
     return Scaffold(
+      appBar: const AppHeader(),
       body: SafeArea(
         bottom: false,
         child: RefreshIndicator(

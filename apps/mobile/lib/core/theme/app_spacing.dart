@@ -12,9 +12,9 @@ class AppSpacing {
   static const double xxl = 32;
   static const double xxxl = 48;
 
-  static const double radiusSm = 14;
-  static const double radius = 22;
-  static const double radiusLg = 30;
+  static const double radiusSm = 12;
+  static const double radius = 16;
+  static const double radiusLg = 22;
   static const double radiusPill = 999;
 
   static const EdgeInsets page = EdgeInsets.fromLTRB(20, 12, 20, 28);
@@ -28,23 +28,23 @@ class AppSpacing {
   static const gap32 = SizedBox(height: 32, width: 32);
 }
 
-/// Soft, premium shadows.
+/// Soft, low, modern shadows (subtle depth, not floating candy).
 class AppShadows {
   AppShadows._();
 
   static List<BoxShadow> soft = [
     BoxShadow(
-      color: const Color(0x141F2A44),
-      blurRadius: 24,
-      offset: const Offset(0, 10),
+      color: const Color(0x14000000),
+      blurRadius: 18,
+      offset: const Offset(0, 8),
     ),
   ];
 
   static List<BoxShadow> subtle = [
     BoxShadow(
-      color: const Color(0x0D1F2A44),
-      blurRadius: 14,
-      offset: const Offset(0, 6),
+      color: const Color(0x0A000000),
+      blurRadius: 10,
+      offset: const Offset(0, 3),
     ),
   ];
 }

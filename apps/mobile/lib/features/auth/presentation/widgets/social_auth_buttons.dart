@@ -33,32 +33,24 @@ class _SocialAuthButtonsState extends ConsumerState<SocialAuthButtons> {
     }
     setState(() => _busyGoogle = true);
     try {
-      final ok =
-          await ref.read(authControllerProvider.notifier).signInWithGoogle();
-      _reportIfFailed(ok);
+      await ref.read(authControllerProvider.notifier).signInWithGoogle();
+      // Success → the router redirect navigates. Cancel → silent no-op.
+    } catch (e) {
+      if (mounted) AppSnackbar.error(context, authErrorMessage(e));
     } finally {
       if (mounted) setState(() => _busyGoogle = false);
     }
-    // On success the router redirect handles navigation.
   }
 
   Future<void> _signInApple() async {
     setState(() => _busyApple = true);
     try {
-      final ok =
-          await ref.read(authControllerProvider.notifier).signInWithApple();
-      _reportIfFailed(ok);
+      await ref.read(authControllerProvider.notifier).signInWithApple();
+    } catch (e) {
+      if (mounted) AppSnackbar.error(context, authErrorMessage(e));
     } finally {
       if (mounted) setState(() => _busyApple = false);
     }
-  }
-
-  /// A `false` result is either a silent user-cancel (no error) or a real
-  /// failure (error set on the controller) — only the latter gets a snackbar.
-  void _reportIfFailed(bool ok) {
-    if (ok || !mounted) return;
-    final err = ref.read(authControllerProvider).error;
-    if (err != null) AppSnackbar.error(context, authErrorMessage(err));
   }
 
   @override

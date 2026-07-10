@@ -6,6 +6,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/utils/date_x.dart';
 import '../../../core/widgets/app_card.dart';
+import '../../../core/widgets/app_header.dart';
 import '../../../core/widgets/states.dart';
 import '../../../models/child.dart';
 import '../../../models/enums.dart';
@@ -55,15 +56,7 @@ class MemoriesScreen extends ConsumerWidget {
     final upcoming = _upcomingBirthday(children);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HugBook'),
-        actions: [
-          IconButton(
-            onPressed: () => _addMemory(context, ref),
-            icon: const Icon(Icons.add_a_photo_outlined),
-          ),
-        ],
-      ),
+      appBar: const AppHeader(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _addMemory(context, ref),
         backgroundColor: AppColors.coral,

@@ -7,6 +7,7 @@ import '../../../core/router/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/widgets/app_card.dart';
+import '../../../core/widgets/app_header.dart';
 import '../../../core/widgets/buttons.dart';
 import '../../../core/widgets/selectable_chip.dart';
 import '../../../models/enums.dart';
@@ -104,8 +105,7 @@ class _HugScreenState extends ConsumerState<HugScreen> {
     final result = state.valueOrNull;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Hug Button'),
+      appBar: AppHeader(
         actions: [
           IconButton(
             tooltip: 'I lost my cool',
