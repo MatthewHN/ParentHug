@@ -348,7 +348,8 @@ class _RecentBoard extends StatelessWidget {
           if (items.isEmpty)
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text('No updates yet - add a note to keep your support circle in sync.',
+              child: Text(
+                  'No updates yet - add a note to keep your support circle in sync.',
                   style: TextStyle(color: AppColors.inkMuted)),
             )
           else
@@ -408,7 +409,8 @@ class _MemoryOfDay extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(22)),
               child: AspectRatio(
                 aspectRatio: 16 / 10,
                 child: MemoryPhoto(memory: lastYear),
@@ -447,7 +449,8 @@ class _MemoryOfDay extends StatelessWidget {
             briefing.memoryOfDay.isEmpty
                 ? 'Capture one small moment today for your HugBook.'
                 : briefing.memoryOfDay,
-            style: const TextStyle(color: AppColors.ink, height: 1.5, fontSize: 15),
+            style: const TextStyle(
+                color: AppColors.ink, height: 1.5, fontSize: 15),
           ),
           const SizedBox(height: 12),
           Align(

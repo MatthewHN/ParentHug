@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/providers/supabase_providers.dart';
+import '../../../services/edge_functions_service.dart';
 import '../../../services/revenuecat_service.dart';
 import '../data/auth_repository.dart';
 
@@ -66,6 +67,12 @@ class AuthController extends AutoDisposeAsyncNotifier<void> {
     await ref.read(authRepositoryProvider).signOut();
   }
 
+  Future<void> deleteAccount() async {
+    await ref.read(edgeFunctionsServiceProvider).invoke('delete_account', {});
+    await RevenueCatService.instance.logout();
+    await ref.read(authRepositoryProvider).signOut();
+  }
+
   Future<void> _linkRevenueCat() async {
     final uid = ref.read(supabaseClientProvider).auth.currentUser?.id;
     if (uid != null) await RevenueCatService.instance.login(uid);
@@ -82,7 +89,6 @@ class AuthController extends AutoDisposeAsyncNotifier<void> {
       return false;
     }
   }
-
 }
 
 final authControllerProvider =

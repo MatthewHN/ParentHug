@@ -19,8 +19,7 @@ class LoadingView extends StatelessWidget {
           ),
           if (message != null) ...[
             const SizedBox(height: 16),
-            Text(message!,
-                style: const TextStyle(color: AppColors.inkMuted)),
+            Text(message!, style: const TextStyle(color: AppColors.inkMuted)),
           ],
         ],
       ),
@@ -55,7 +54,9 @@ class ErrorView extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.ink),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.ink),
             ),
             if (message != null) ...[
               const SizedBox(height: 8),
@@ -68,7 +69,9 @@ class ErrorView extends StatelessWidget {
               SizedBox(
                 width: 180,
                 child: SecondaryButton(
-                    label: 'Try again', icon: Icons.refresh, onPressed: onRetry),
+                    label: 'Try again',
+                    icon: Icons.refresh,
+                    onPressed: onRetry),
               ),
             ],
           ],
@@ -109,13 +112,16 @@ class EmptyView extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  fontSize: 19, fontWeight: FontWeight.w800, color: AppColors.ink),
+                  fontSize: 19,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.ink),
             ),
             if (message != null) ...[
               const SizedBox(height: 8),
               Text(message!,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: AppColors.inkMuted, height: 1.4)),
+                  style:
+                      const TextStyle(color: AppColors.inkMuted, height: 1.4)),
             ],
             if (actionLabel != null && onAction != null) ...[
               const SizedBox(height: 22),

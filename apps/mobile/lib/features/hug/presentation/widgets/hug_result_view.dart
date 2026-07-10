@@ -200,9 +200,18 @@ class _RefineRow extends StatelessWidget {
       spacing: 10,
       runSpacing: 10,
       children: [
-        _RefineChip(label: 'Make gentler', icon: Icons.spa_outlined, onTap: busy ? null : onGentler),
-        _RefineChip(label: 'Make firmer', icon: Icons.shield_outlined, onTap: busy ? null : onFirmer),
-        _RefineChip(label: 'Adapt for age', icon: Icons.child_care_outlined, onTap: busy ? null : onAdaptAge),
+        _RefineChip(
+            label: 'Make gentler',
+            icon: Icons.spa_outlined,
+            onTap: busy ? null : onGentler),
+        _RefineChip(
+            label: 'Make firmer',
+            icon: Icons.shield_outlined,
+            onTap: busy ? null : onFirmer),
+        _RefineChip(
+            label: 'Adapt for age',
+            icon: Icons.child_care_outlined,
+            onTap: busy ? null : onAdaptAge),
       ],
     );
   }
@@ -305,7 +314,8 @@ class _SafetyBanner extends StatelessWidget {
           Expanded(
             child: Text(
               'It sounds really heavy right now. If anyone may be in danger, contact your local emergency number. You deserve support.',
-              style: TextStyle(color: AppColors.ink, height: 1.4, fontSize: 13.5),
+              style:
+                  TextStyle(color: AppColors.ink, height: 1.4, fontSize: 13.5),
             ),
           ),
         ],

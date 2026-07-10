@@ -91,7 +91,9 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
         AppSnackbar.success(context, 'Saved');
       }
     } catch (_) {
-      if (mounted) AppSnackbar.error(context, 'Couldn’t save. Please try again.');
+      if (mounted) {
+        AppSnackbar.error(context, 'Couldn’t save. Please try again.');
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -118,11 +120,13 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(widget.existing == null ? 'Add a child' : 'Edit ${widget.existing!.name}',
+            Text(
+                widget.existing == null
+                    ? 'Add a child'
+                    : 'Edit ${widget.existing!.name}',
                 style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 16),
-            AppTextField(
-                label: 'Name', hint: 'e.g. Leo', controller: _name),
+            AppTextField(label: 'Name', hint: 'e.g. Leo', controller: _name),
             const SizedBox(height: 14),
             AppCard(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),

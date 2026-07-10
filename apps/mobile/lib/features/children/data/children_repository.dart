@@ -14,7 +14,9 @@ class ChildrenRepository {
         .select()
         .eq('family_id', familyId)
         .order('created_at');
-    return rows.map((r) => Child.fromMap(Map<String, dynamic>.from(r))).toList();
+    return rows
+        .map((r) => Child.fromMap(Map<String, dynamic>.from(r)))
+        .toList();
   }
 
   Future<Child> create(String familyId, Child child) async {

@@ -97,7 +97,9 @@ class _BoardItemEditorState extends ConsumerState<_BoardItemEditor> {
         AppSnackbar.success(context, 'Saved to your Family Board');
       }
     } catch (_) {
-      if (mounted) AppSnackbar.error(context, 'Couldn’t save. Please try again.');
+      if (mounted) {
+        AppSnackbar.error(context, 'Couldn’t save. Please try again.');
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }

@@ -15,6 +15,12 @@ class AuthRepository {
   AuthRepository(this._c);
   final SupabaseClient _c;
 
+  GoogleSignIn _googleSignIn() => GoogleSignIn(
+        clientId: Env.googleIosClientId.isEmpty ? null : Env.googleIosClientId,
+        serverClientId:
+            Env.googleWebClientId.isEmpty ? null : Env.googleWebClientId,
+      );
+
   /// Returns true if a session is active immediately (email confirmation off).
   Future<bool> signUp({
     required String email,
@@ -40,12 +46,7 @@ class AuthRepository {
   /// session (no browser round-trip). Returns false if the user cancels the
   /// Google sheet; throws [AuthException] on a real failure.
   Future<bool> signInWithGoogle() async {
-    final google = GoogleSignIn(
-      clientId: Env.googleIosClientId.isEmpty ? null : Env.googleIosClientId,
-      serverClientId:
-          Env.googleWebClientId.isEmpty ? null : Env.googleWebClientId,
-    );
-    final account = await google.signIn();
+    final account = await _googleSignIn().signIn();
     if (account == null) return false; // user dismissed the sheet
     final tokens = await account.authentication;
     final idToken = tokens.idToken;
@@ -75,7 +76,8 @@ class AuthRepository {
     );
     final idToken = credential.identityToken;
     if (idToken == null) {
-      throw const AuthException('Apple sign-in failed: missing identity token.');
+      throw const AuthException(
+          'Apple sign-in failed: missing identity token.');
     }
     await _c.auth.signInWithIdToken(
       provider: OAuthProvider.apple,
@@ -109,10 +111,16 @@ class AuthRepository {
         .join();
   }
 
-  Future<void> signOut() => _c.auth.signOut();
+  Future<void> signOut() async {
+    // Google retains the last account locally unless its native session is
+    // disconnected too. Ignore failures so Supabase logout always completes.
+    try {
+      await _googleSignIn().disconnect();
+    } catch (_) {}
+    await _c.auth.signOut();
+  }
 
-  Future<void> sendPasswordReset(String email) =>
-      _c.auth.resetPasswordForEmail(
+  Future<void> sendPasswordReset(String email) => _c.auth.resetPasswordForEmail(
         email.trim(),
         redirectTo: 'app.parenthug://reset-callback',
       );
@@ -120,8 +128,7 @@ class AuthRepository {
   Future<Profile?> myProfile() async {
     final uid = _c.auth.currentUser?.id;
     if (uid == null) return null;
-    final row =
-        await _c.from('profiles').select().eq('id', uid).maybeSingle();
+    final row = await _c.from('profiles').select().eq('id', uid).maybeSingle();
     return row == null ? null : Profile.fromMap(Map<String, dynamic>.from(row));
   }
 

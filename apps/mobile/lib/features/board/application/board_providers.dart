@@ -7,7 +7,8 @@ import '../../family/application/family_providers.dart';
 import '../data/board_repository.dart';
 
 /// Active category filter on the Family Board (`null` = all).
-final boardCategoryFilterProvider = StateProvider<BoardCategory?>((ref) => null);
+final boardCategoryFilterProvider =
+    StateProvider<BoardCategory?>((ref) => null);
 
 /// The full (non-archived) board for the current family + child/category filter.
 final boardItemsProvider = FutureProvider<List<BoardItem>>((ref) {

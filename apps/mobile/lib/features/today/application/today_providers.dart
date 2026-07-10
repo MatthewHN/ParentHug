@@ -14,5 +14,7 @@ final todayBriefingProvider =
     return const DailyBriefing();
   }
   final childId = ref.watch(selectedChildIdProvider);
-  return ref.watch(briefingRepositoryProvider).todayOrGenerate(familyId, childId);
+  return ref
+      .watch(briefingRepositoryProvider)
+      .todayOrGenerate(familyId, childId);
 });

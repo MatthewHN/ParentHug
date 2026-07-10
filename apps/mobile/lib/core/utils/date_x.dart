@@ -20,8 +20,7 @@ class DateX {
     final now = asOf ?? DateTime.now();
     final years = ageYears(birthday, asOf: now);
     if (years >= 1) return years == 1 ? '1 year' : '$years years';
-    var months =
-        (now.year - birthday.year) * 12 + (now.month - birthday.month);
+    var months = (now.year - birthday.year) * 12 + (now.month - birthday.month);
     if (now.day < birthday.day) months--;
     if (months <= 0) return 'newborn';
     return months == 1 ? '1 month' : '$months months';

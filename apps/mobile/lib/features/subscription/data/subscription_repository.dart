@@ -9,16 +9,13 @@ class SubscriptionRepository {
   SubscriptionRepository(this._c);
   final SupabaseClient _c;
 
-  Future<Subscription?> forFamily(String familyId) async {
-    final row = await _c
-        .from('subscriptions')
-        .select()
-        .eq('family_id', familyId)
-        .maybeSingle();
-    return row == null
-        ? null
-        : Subscription.fromMap(Map<String, dynamic>.from(row));
-  }
+  Stream<Subscription?> watchFamily(String familyId) => _c
+      .from('subscriptions')
+      .stream(primaryKey: ['id'])
+      .eq('family_id', familyId)
+      .map((rows) => rows.isEmpty
+          ? null
+          : Subscription.fromMap(Map<String, dynamic>.from(rows.first)));
 
   Future<UsageLimits?> usage(String familyId) async {
     final row = await _c

@@ -34,8 +34,7 @@ class FamilyRepository {
 
   /// Joins a family via invite code (atomic RPC). Returns the family id.
   Future<String> redeemInvite(String code) async {
-    final res =
-        await _c.rpc('redeem_invite', params: {'p_code': code.trim()});
+    final res = await _c.rpc('redeem_invite', params: {'p_code': code.trim()});
     return res as String;
   }
 

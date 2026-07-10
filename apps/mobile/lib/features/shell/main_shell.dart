@@ -14,8 +14,8 @@ class MainShell extends StatelessWidget {
     _NavSpec('Hug', Icons.volunteer_activism_outlined,
         Icons.volunteer_activism_rounded),
     _NavSpec('Board', Icons.dashboard_outlined, Icons.dashboard_rounded),
-    _NavSpec('Memories', Icons.photo_library_outlined,
-        Icons.photo_library_rounded),
+    _NavSpec(
+        'Memories', Icons.photo_library_outlined, Icons.photo_library_rounded),
   ];
 
   void _go(int index) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -68,14 +69,12 @@ class InviteCodeCard extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: PrimaryButton(
-                label: 'Share invite',
+                label: 'Share',
                 icon: Icons.ios_share_rounded,
                 gradient: AppColors.warmGradient,
                 onPressed: enabled
-                    ? () => _copy(
-                          context,
+                    ? () => Share.share(
                           'Join our family on ParentHug! Use invite code $code in the app.',
-                          'Invite message copied - paste it to your co-parent',
                         )
                     : null,
               ),

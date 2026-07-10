@@ -276,11 +276,15 @@ class _RepairResult extends StatelessWidget {
           children: [
             Expanded(
                 child: SecondaryButton(
-                    label: 'Save', icon: Icons.bookmark_add_outlined, onPressed: onSave)),
+                    label: 'Save',
+                    icon: Icons.bookmark_add_outlined,
+                    onPressed: onSave)),
             const SizedBox(width: 10),
             Expanded(
                 child: SecondaryButton(
-                    label: 'Share', icon: Icons.ios_share_rounded, onPressed: onShare)),
+                    label: 'Share',
+                    icon: Icons.ios_share_rounded,
+                    onPressed: onShare)),
           ],
         ),
         const SizedBox(height: 10),
@@ -332,7 +336,9 @@ class _Card extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(label,
                     style: TextStyle(
-                        color: color, fontWeight: FontWeight.w800, fontSize: 14)),
+                        color: color,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14)),
               ],
             ),
             const SizedBox(height: 8),
@@ -341,7 +347,8 @@ class _Card extends StatelessWidget {
                     color: AppColors.ink,
                     height: 1.5,
                     fontSize: emphasized ? 16 : 15,
-                    fontWeight: emphasized ? FontWeight.w700 : FontWeight.w500)),
+                    fontWeight:
+                        emphasized ? FontWeight.w700 : FontWeight.w500)),
           ],
         ),
       ),

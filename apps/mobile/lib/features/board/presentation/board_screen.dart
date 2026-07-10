@@ -34,8 +34,8 @@ class BoardScreen extends ConsumerWidget {
         if (ok != null && context.mounted) AppSnackbar.success(context, ok);
       } catch (_) {
         if (context.mounted) {
-          AppSnackbar.error(
-              context, 'Only the note’s creator or a family admin can do that.');
+          AppSnackbar.error(context,
+              'Only the note’s creator or a family admin can do that.');
         }
       }
     }
@@ -87,8 +87,7 @@ class BoardScreen extends ConsumerWidget {
                   }
                   return RefreshIndicator(
                     color: AppColors.primary,
-                    onRefresh: () async =>
-                        ref.invalidate(boardItemsProvider),
+                    onRefresh: () async => ref.invalidate(boardItemsProvider),
                     child: ListView.separated(
                       padding: const EdgeInsets.fromLTRB(20, 8, 20, 96),
                       itemCount: items.length,
@@ -97,17 +96,20 @@ class BoardScreen extends ConsumerWidget {
                         final item = items[i];
                         return BoardItemCard(
                           item: item,
-                          childName:
-                              item.childId == null ? null : children[item.childId],
+                          childName: item.childId == null
+                              ? null
+                              : children[item.childId],
                           onPin: () => guard(
                               () => repo.setPinned(item.id, !item.pinned)),
                           onEdit: () =>
                               showBoardItemEditor(context, existing: item),
                           onArchive: () => guard(
-                              () => repo.setArchived(item.id, true), 'Archived'),
-                          onDelete: () =>
-                              _confirmDelete(context, () => guard(
-                                  () => repo.delete(item.id), 'Deleted')),
+                              () => repo.setArchived(item.id, true),
+                              'Archived'),
+                          onDelete: () => _confirmDelete(
+                              context,
+                              () =>
+                                  guard(() => repo.delete(item.id), 'Deleted')),
                         );
                       },
                     ),

@@ -168,8 +168,8 @@ class MemoriesScreen extends ConsumerWidget {
         context: context,
         builder: (_) => AlertDialog(
           title: Text('${child.name}’s Birthday Collage 🎂'),
-          content: Text(res['message']?.toString() ??
-              'We’re getting the collage ready.'),
+          content: Text(
+              res['message']?.toString() ?? 'We’re getting the collage ready.'),
           actions: [
             TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -285,9 +285,8 @@ class _BirthdayCollageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final days = child.birthday == null
-        ? 0
-        : DateX.daysUntilBirthday(child.birthday!);
+    final days =
+        child.birthday == null ? 0 : DateX.daysUntilBirthday(child.birthday!);
     final turning =
         child.ageYears == null ? '' : ' turns ${child.ageYears! + 1}';
     return Container(
@@ -323,8 +322,7 @@ class _BirthdayCollageCard extends StatelessWidget {
           GestureDetector(
             onTap: onCreate,
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(99),
@@ -399,7 +397,8 @@ class _MemoryDetail extends ConsumerWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              Text('${memory.milestoneType.emoji} ${memory.milestoneType.label}',
+              Text(
+                  '${memory.milestoneType.emoji} ${memory.milestoneType.label}',
                   style: const TextStyle(
                       color: AppColors.coral, fontWeight: FontWeight.w800)),
               const Spacer(),
@@ -409,8 +408,7 @@ class _MemoryDetail extends ConsumerWidget {
           ),
           if ((memory.title ?? '').isNotEmpty) ...[
             const SizedBox(height: 10),
-            Text(memory.title!,
-                style: Theme.of(context).textTheme.titleLarge),
+            Text(memory.title!, style: Theme.of(context).textTheme.titleLarge),
           ],
           if ((memory.description ?? '').isNotEmpty) ...[
             const SizedBox(height: 6),

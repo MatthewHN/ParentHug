@@ -266,7 +266,8 @@ class _IntroHeader extends StatelessWidget {
         const SizedBox(height: 6),
         const Text(
           'Tell ParentHug what’s going on and get calm, practical guidance in seconds.',
-          style: TextStyle(color: AppColors.inkMuted, fontSize: 15, height: 1.4),
+          style:
+              TextStyle(color: AppColors.inkMuted, fontSize: 15, height: 1.4),
         ),
       ],
     );

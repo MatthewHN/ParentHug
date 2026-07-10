@@ -181,8 +181,7 @@ class _ProCard extends StatelessWidget {
               const Text('🫂', style: TextStyle(fontSize: 24)),
               const SizedBox(width: 8),
               const Text('ParentHug Pro',
-                  style:
-                      TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
               const Spacer(),
               Container(
                 padding:

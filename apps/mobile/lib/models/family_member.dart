@@ -25,9 +25,7 @@ class FamilyMember {
       familyId: m['family_id'] as String,
       userId: m['user_id'] as String,
       role: MemberRole.from(m['role'] as String?),
-      profile: joined is Map<String, dynamic>
-          ? Profile.fromMap(joined)
-          : null,
+      profile: joined is Map<String, dynamic> ? Profile.fromMap(joined) : null,
     );
   }
 

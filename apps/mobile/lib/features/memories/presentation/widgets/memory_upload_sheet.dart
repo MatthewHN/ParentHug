@@ -61,8 +61,9 @@ class _MemoryUploadSheetState extends ConsumerState<MemoryUploadSheet> {
             bytes: widget.bytes,
             fileExt: widget.fileExt == 'png' ? 'png' : 'jpg',
             title: _title.text.trim().isEmpty ? null : _title.text.trim(),
-            description:
-                _description.text.trim().isEmpty ? null : _description.text.trim(),
+            description: _description.text.trim().isEmpty
+                ? null
+                : _description.text.trim(),
             memoryDate: _date,
             milestone: _milestone,
           );
@@ -109,7 +110,9 @@ class _MemoryUploadSheetState extends ConsumerState<MemoryUploadSheet> {
             ),
             const SizedBox(height: 16),
             AppTextField(
-                label: 'Title', hint: 'e.g. First bike ride', controller: _title),
+                label: 'Title',
+                hint: 'e.g. First bike ride',
+                controller: _title),
             const SizedBox(height: 14),
             AppTextField(
               label: 'Description (optional)',
@@ -119,8 +122,7 @@ class _MemoryUploadSheetState extends ConsumerState<MemoryUploadSheet> {
               minLines: 2,
             ),
             const SizedBox(height: 14),
-            _DateRow(
-                date: _date, onPick: (d) => setState(() => _date = d)),
+            _DateRow(date: _date, onPick: (d) => setState(() => _date = d)),
             const SizedBox(height: 16),
             const _Label('Milestone'),
             const SizedBox(height: 10),

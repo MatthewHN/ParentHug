@@ -47,7 +47,8 @@ class AppTheme {
           fontWeight: FontWeight.w700,
           letterSpacing: -0.2,
         ),
-        titleMedium: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+        titleMedium:
+            textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         bodyMedium: textTheme.bodyMedium?.copyWith(height: 1.45),
         labelLarge: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
@@ -80,7 +81,8 @@ class AppTheme {
           foregroundColor: Colors.white,
           elevation: 0,
           minimumSize: const Size.fromHeight(52),
-          textStyle: const TextStyle(fontSize: 16.5, fontWeight: FontWeight.w700),
+          textStyle:
+              const TextStyle(fontSize: 16.5, fontWeight: FontWeight.w700),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
           ),

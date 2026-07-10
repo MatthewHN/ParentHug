@@ -26,13 +26,12 @@ void main() {
   });
 
   group('PlanTier', () {
-    test('ranking orders plans', () {
-      expect(PlanTier.family.rank, greaterThan(PlanTier.plus.rank));
-      expect(PlanTier.plus.rank, greaterThan(PlanTier.free.rank));
+    test('pro ranks above free', () {
+      expect(PlanTier.pro.rank, greaterThan(PlanTier.free.rank));
     });
 
     test('parses from string', () {
-      expect(PlanTier.from('plus'), PlanTier.plus);
+      expect(PlanTier.from('pro'), PlanTier.pro);
       expect(PlanTier.from('unknown'), PlanTier.free);
     });
   });

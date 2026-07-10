@@ -44,7 +44,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   List<String> get _flow => switch (_mode) {
         'join' => const ['choose', 'join'],
-        'create' => const ['choose', 'family', 'child', 'goals', 'invite', 'finish'],
+        'create' => const [
+            'choose',
+            'family',
+            'child',
+            'goals',
+            'invite',
+            'finish'
+          ],
         _ => const ['choose'],
       };
 
@@ -84,7 +91,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   String _friendly(Object e) {
     final s = e.toString();
-    if (s.contains('Invalid or expired')) return 'That invite code isn’t valid.';
+    if (s.contains('Invalid or expired')) {
+      return 'That invite code isn’t valid.';
+    }
     return 'Something went wrong. Please try again.';
   }
 
@@ -277,8 +286,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     SelectableChip(
                       label: g,
                       selected: _goals.contains(g),
-                      onTap: () => setState(() =>
-                          _goals.contains(g) ? _goals.remove(g) : _goals.add(g)),
+                      onTap: () => setState(() => _goals.contains(g)
+                          ? _goals.remove(g)
+                          : _goals.add(g)),
                     ),
                 ],
               ),

@@ -33,7 +33,8 @@ class BoardItemCard extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(99),
@@ -140,11 +141,11 @@ class _Menu extends StatelessWidget {
         ),
         PopupMenuItem(value: 'edit', child: _row(Icons.edit_outlined, 'Edit')),
         PopupMenuItem(
-            value: 'archive',
-            child: _row(Icons.archive_outlined, 'Archive')),
+            value: 'archive', child: _row(Icons.archive_outlined, 'Archive')),
         PopupMenuItem(
           value: 'delete',
-          child: _row(Icons.delete_outline_rounded, 'Delete', color: AppColors.coral),
+          child: _row(Icons.delete_outline_rounded, 'Delete',
+              color: AppColors.coral),
         ),
       ],
     );

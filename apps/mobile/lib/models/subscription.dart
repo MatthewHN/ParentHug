@@ -12,6 +12,10 @@ class Subscription {
     this.productId,
     this.rcEntitlement,
     this.expiresAt,
+    this.trialStartedAt,
+    this.trialEndsAt,
+    this.manualPlan,
+    this.manualAccessExpiresAt,
   });
 
   final String id;
@@ -23,9 +27,34 @@ class Subscription {
   final String? productId;
   final String? rcEntitlement;
   final DateTime? expiresAt;
+  final DateTime? trialStartedAt;
+  final DateTime? trialEndsAt;
+  final PlanTier? manualPlan;
+  final DateTime? manualAccessExpiresAt;
+
+  bool get hasManualAccess =>
+      manualPlan != null &&
+      (manualAccessExpiresAt == null ||
+          manualAccessExpiresAt!.isAfter(DateTime.now()));
+
+  bool get hasActiveTrial =>
+      status == 'trial' &&
+      trialEndsAt != null &&
+      trialEndsAt!.isAfter(DateTime.now());
+
+  int get trialDaysRemaining {
+    if (!hasActiveTrial) return 0;
+    final hours = trialEndsAt!.difference(DateTime.now()).inHours;
+    return (hours / 24).ceil().clamp(1, 365);
+  }
+
+  bool get isSubscribed =>
+      !hasManualAccess && !hasActiveTrial && isActive && effectivePlan.isPaid;
 
   /// Effective plan: only a currently-active, unexpired subscription counts.
   PlanTier get effectivePlan {
+    if (hasManualAccess) return manualPlan!;
+    if (hasActiveTrial) return PlanTier.pro;
     if (!isActive) return PlanTier.free;
     if (expiresAt != null && expiresAt!.isBefore(DateTime.now())) {
       return PlanTier.free;
@@ -43,5 +72,11 @@ class Subscription {
         productId: m['product_id'] as String?,
         rcEntitlement: m['rc_entitlement'] as String?,
         expiresAt: asDate(m['expires_at']),
+        trialStartedAt: asDate(m['trial_started_at']),
+        trialEndsAt: asDate(m['trial_ends_at']),
+        manualPlan: m['manual_plan'] == null
+            ? null
+            : PlanTier.from(m['manual_plan'] as String?),
+        manualAccessExpiresAt: asDate(m['manual_access_expires_at']),
       );
 }

@@ -62,7 +62,10 @@ class BoardRepository {
       if (title != null) 'title': title,
       if (body != null) 'body': body,
       if (category != null) 'category': category.value,
-      if (clearChild) 'child_id': null else if (childId != null) 'child_id': childId,
+      if (clearChild)
+        'child_id': null
+      else if (childId != null)
+        'child_id': childId,
       'updated_at': DateTime.now().toIso8601String(),
     }).eq('id', id);
   }
