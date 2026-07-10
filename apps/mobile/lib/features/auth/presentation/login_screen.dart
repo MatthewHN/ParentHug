@@ -6,12 +6,12 @@ import '../../../core/router/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/utils/validators.dart';
-import '../../../core/widgets/app_logo.dart';
 import '../../../core/widgets/app_text_field.dart';
 import '../../../core/widgets/buttons.dart';
 import '../application/auth_controller.dart';
-import 'widgets/social_auth_buttons.dart';
 
+/// Email/password sign-in. Reached from the Welcome screen's "Or use email"
+/// link — most users are steered toward Google/Apple, so this stays minimal.
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -49,24 +49,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final loading = ref.watch(authControllerProvider).isLoading;
     return Scaffold(
+      appBar: AppBar(leading: const BackButton()),
       body: SafeArea(
+        top: false,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 40),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AppLogo(size: 46),
-                const SizedBox(height: 36),
-                Text('Welcome back',
+                Text('Log in with email',
                     style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: 8),
                 const Text(
-                  'Let’s get you and your co-parent back in sync.',
+                  'Welcome back. Let’s get you and your co-parent back in sync.',
                   style: TextStyle(color: AppColors.inkMuted, fontSize: 15),
                 ),
-                const SizedBox(height: 28),
+                const SizedBox(height: 26),
                 AppTextField(
                   label: 'Email',
                   hint: 'you@example.com',
@@ -109,11 +109,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   loading: loading,
                   onPressed: _submit,
                 ),
-                const SizedBox(height: 24),
-                const _OrDivider(),
                 const SizedBox(height: 20),
-                const SocialAuthButtons(),
-                const SizedBox(height: 24),
                 Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -132,23 +128,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _OrDivider extends StatelessWidget {
-  const _OrDivider();
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: const [
-        Expanded(child: Divider(color: AppColors.hairline)),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          child: Text('or', style: TextStyle(color: AppColors.inkFaint)),
-        ),
-        Expanded(child: Divider(color: AppColors.hairline)),
-      ],
     );
   }
 }

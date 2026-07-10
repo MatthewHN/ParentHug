@@ -77,7 +77,7 @@ class _SocialAuthButtonsState extends ConsumerState<SocialAuthButtons> {
         ],
         _SocialButton(
           label: 'Continue with Google',
-          leading: const _GoogleGlyph(),
+          leading: Image.asset('assets/google-icon.png', width: 20, height: 20),
           loading: _busyGoogle,
           onTap: anyBusy ? null : _signInGoogle,
         ),
@@ -141,28 +141,3 @@ class _SocialButton extends StatelessWidget {
   }
 }
 
-class _GoogleGlyph extends StatelessWidget {
-  const _GoogleGlyph();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 22,
-      height: 22,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        gradient: const LinearGradient(
-          colors: [Color(0xFF4285F4), Color(0xFF34A853)],
-        ),
-      ),
-      child: const Text(
-        'G',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w900,
-          fontSize: 14,
-        ),
-      ),
-    );
-  }
-}

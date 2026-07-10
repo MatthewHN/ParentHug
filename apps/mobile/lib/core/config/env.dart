@@ -1,40 +1,68 @@
-/// Compile-time configuration, supplied via `--dart-define-from-file=.env`.
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+/// App configuration, resolved in priority order:
+///   1. `apps/mobile/.env`, loaded at runtime by flutter_dotenv — works no
+///      matter how the app is launched (Android Studio ▶, `flutter run`, …),
+///      so you don't have to remember `--dart-define-from-file=.env`.
+///   2. `--dart-define` / `--dart-define-from-file` compile-time values.
+///   3. Built-in local-dev defaults.
 ///
 /// Nothing secret lives here. AI keys never touch the app - they live only in
-/// Supabase Edge Function secrets. The defaults below point at a LOCAL Supabase
-/// stack from an Android emulator so `supabase start` + Run works with zero
-/// config; override everything via `.env` for real devices / hosted projects.
+/// Supabase Edge Function secrets.
 class Env {
   Env._();
 
-  static const supabaseUrl = String.fromEnvironment(
-    'SUPABASE_URL',
-    // Android emulator reaches the host machine at 10.0.2.2.
-    // iOS simulator / web: use http://127.0.0.1:54321. Real project: https URL.
-    defaultValue: 'http://10.0.2.2:54321',
-  );
+  /// Runtime `.env` value → compile-time `--dart-define` ([define]) → [fallback].
+  static String _resolve(String key, String define, String fallback) {
+    final fromEnv = dotenv.isInitialized ? dotenv.maybeGet(key) : null;
+    if (fromEnv != null && fromEnv.isNotEmpty) return fromEnv;
+    if (define.isNotEmpty) return define;
+    return fallback;
+  }
+
+  static String get supabaseUrl => _resolve(
+        'SUPABASE_URL',
+        const String.fromEnvironment('SUPABASE_URL'),
+        // Android emulator reaches the host machine at 10.0.2.2.
+        // iOS simulator / web: http://127.0.0.1:54321. Real project: https URL.
+        'http://10.0.2.2:54321',
+      );
 
   /// Canonical Supabase *local dev* anon key (safe to commit - only works
-  /// against a local `supabase start` instance). Replace via `.env` in prod.
-  static const supabaseAnonKey = String.fromEnvironment(
-    'SUPABASE_ANON_KEY',
-    defaultValue:
+  /// against a local `supabase start` instance). Overridden via `.env` in prod.
+  static String get supabaseAnonKey => _resolve(
+        'SUPABASE_ANON_KEY',
+        const String.fromEnvironment('SUPABASE_ANON_KEY'),
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0',
-  );
+      );
 
-  static const revenueCatIosKey =
-      String.fromEnvironment('REVENUECAT_IOS_API_KEY', defaultValue: '');
-  static const revenueCatAndroidKey =
-      String.fromEnvironment('REVENUECAT_ANDROID_API_KEY', defaultValue: '');
+  static String get revenueCatIosKey => _resolve(
+        'REVENUECAT_IOS_API_KEY',
+        const String.fromEnvironment('REVENUECAT_IOS_API_KEY'),
+        '',
+      );
+
+  static String get revenueCatAndroidKey => _resolve(
+        'REVENUECAT_ANDROID_API_KEY',
+        const String.fromEnvironment('REVENUECAT_ANDROID_API_KEY'),
+        '',
+      );
 
   // ---- Google Sign-In (native) ----
   // OAuth client IDs from Google Cloud Console (see docs/MANUAL_SETUP.md).
   // These are NOT secrets. iOS passes the iOS client id; both platforms pass the
   // Web client id as `serverClientId` so Supabase receives a verifiable ID token.
-  static const googleIosClientId =
-      String.fromEnvironment('GOOGLE_IOS_CLIENT_ID', defaultValue: '');
-  static const googleWebClientId =
-      String.fromEnvironment('GOOGLE_WEB_CLIENT_ID', defaultValue: '');
+  static String get googleIosClientId => _resolve(
+        'GOOGLE_IOS_CLIENT_ID',
+        const String.fromEnvironment('GOOGLE_IOS_CLIENT_ID'),
+        '',
+      );
+
+  static String get googleWebClientId => _resolve(
+        'GOOGLE_WEB_CLIENT_ID',
+        const String.fromEnvironment('GOOGLE_WEB_CLIENT_ID'),
+        '',
+      );
 
   static bool get isSupabaseConfigured =>
       supabaseUrl.isNotEmpty && supabaseAnonKey.isNotEmpty;

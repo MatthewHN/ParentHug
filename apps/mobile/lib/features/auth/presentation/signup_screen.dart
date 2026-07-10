@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/providers/supabase_providers.dart';
+import '../../../core/router/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/utils/validators.dart';
@@ -53,7 +54,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         context,
         'Almost there! Check your email to confirm your account.',
       );
-      context.go('/login');
+      context.go(AppRoutes.emailLogin);
     }
     // Otherwise the router redirect takes the user into onboarding.
   }
@@ -138,7 +139,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       const Text('Already have an account?',
                           style: TextStyle(color: AppColors.inkMuted)),
                       TextButton(
-                        onPressed: () => context.go('/login'),
+                        onPressed: () => context.go(AppRoutes.emailLogin),
                         child: const Text('Log in'),
                       ),
                     ],

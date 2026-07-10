@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/forgot_password_screen.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/signup_screen.dart';
+import '../../features/auth/presentation/welcome_screen.dart';
 import '../../features/board/presentation/board_screen.dart';
 import '../../features/hug/presentation/hug_screen.dart';
 import '../../features/memories/presentation/memories_screen.dart';
@@ -58,6 +59,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.login,
+        builder: (_, __) => const WelcomeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.emailLogin,
         builder: (_, __) => const LoginScreen(),
       ),
       GoRoute(

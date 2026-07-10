@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -8,6 +9,13 @@ import 'services/revenuecat_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Load runtime config from the bundled .env so the app works regardless of
+  // how it's launched. Non-fatal: if .env is absent we fall back to
+  // --dart-define values / built-in defaults (see Env).
+  try {
+    await dotenv.load(fileName: '.env');
+  } catch (_) {}
 
   await Supabase.initialize(
     url: Env.supabaseUrl,
