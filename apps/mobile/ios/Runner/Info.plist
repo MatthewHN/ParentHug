@@ -73,7 +73,7 @@
 			<string>google-signin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.REPLACE_WITH_REVERSED_IOS_CLIENT_ID</string>
+				<string>com.googleusercontent.apps.827131342643-rvi6d7b5enh4upb1bmct1rsqacqk9o70</string>
 			</array>
 		</dict>
 	</array>
