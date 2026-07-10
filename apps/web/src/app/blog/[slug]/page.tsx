@@ -1,5 +1,7 @@
+import type { ReactNode } from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogPost, blogPosts } from "@/lib/blog";
+import { getBlogPost, blogPosts, type BlogPost } from "@/lib/blog";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -29,12 +31,49 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
+const LINK_RE = /\[([^\]]+)\]\(([^)]+)\)/g;
+
+/** Render text with inline [label](url) links — internal (/) as Next <Link>. */
+function renderRich(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  let key = 0;
+  for (const match of text.matchAll(LINK_RE)) {
+    const index = match.index ?? 0;
+    if (index > last) nodes.push(text.slice(last, index));
+    const [full, label, url] = match;
+    nodes.push(
+      url.startsWith("/") ? (
+        <Link key={key++} href={url}>
+          {label}
+        </Link>
+      ) : (
+        <a key={key++} href={url} target="_blank" rel="noopener noreferrer">
+          {label}
+        </a>
+      ),
+    );
+    last = index + full.length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
+}
+
+/** Plain text for structured data — strips the markdown link syntax. */
+function stripMarkdown(text: string): string {
+  return text.replace(LINK_RE, "$1");
+}
+
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = getBlogPost(params.slug);
 
   if (!post) {
     notFound();
   }
+
+  const related = (post.related ?? [])
+    .map((slug) => getBlogPost(slug))
+    .filter((p): p is BlogPost => Boolean(p));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -60,7 +99,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       name: faq.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer,
+        text: stripMarkdown(faq.answer),
       },
     })),
   };
@@ -83,7 +122,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <section key={section.heading}>
             <h2>{section.heading}</h2>
             {section.body.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph}>{renderRich(paragraph)}</p>
             ))}
           </section>
         ))}
@@ -93,10 +132,34 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           {post.faqs.map((faq) => (
             <div className="faq-item" key={faq.question}>
               <h3>{faq.question}</h3>
-              <p>{faq.answer}</p>
+              <p>{renderRich(faq.answer)}</p>
             </div>
           ))}
         </section>
+
+        <aside className="blog-cta">
+          <h3>Get the words before you need them</h3>
+          <p>
+            ParentHug turns the moment you are dreading into a short, calm
+            script — for tantrums, back talk, screen-time battles, and bedtime.
+          </p>
+          <Link className="btn btn-primary" href="/download">
+            Get ParentHug
+          </Link>
+        </aside>
+
+        {related.length > 0 && (
+          <section className="blog-related">
+            <h2>Keep reading</h2>
+            <ul>
+              {related.map((r) => (
+                <li key={r.slug}>
+                  <Link href={`/blog/${r.slug}`}>{r.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </article>
     </div>
   );

@@ -614,6 +614,45 @@ h1.hero-title {
   padding-top: 14px;
   margin-top: 14px;
 }
+.blog-cta {
+  margin: 40px 0 12px;
+  padding: 24px 26px;
+  border: 1.5px solid var(--hairline);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #fff, var(--primary-soft, #f3f0ff));
+}
+.blog-cta h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink);
+}
+.blog-cta p {
+  margin: 0 0 16px;
+}
+.blog-cta .btn {
+  text-decoration: none;
+}
+.blog-related {
+  margin-top: 8px;
+}
+.blog-related ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+.blog-related li {
+  padding: 12px 0;
+  border-top: 1px solid var(--hairline);
+}
+.blog-related li a {
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 17px;
+}
+.blog-related li a:hover {
+  color: var(--primary);
+}
 
 /* ---- Responsive ---- */
 @media (max-width: 900px) {
