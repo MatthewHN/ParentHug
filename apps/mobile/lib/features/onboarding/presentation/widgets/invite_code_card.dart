@@ -73,9 +73,25 @@ class InviteCodeCard extends StatelessWidget {
                 icon: Icons.ios_share_rounded,
                 gradient: AppColors.warmGradient,
                 onPressed: enabled
-                    ? () => Share.share(
-                          'Join our family on ParentHug! Use invite code $code in the app.',
-                        )
+                    ? () async {
+                        try {
+                          await Share.share(
+                            'Join our family on ParentHug! Use invite code $code in the app.',
+                          );
+                        } on MissingPluginException {
+                          if (context.mounted) {
+                            AppSnackbar.show(
+                              context,
+                              'Sharing is available after the next app update.',
+                            );
+                          }
+                        } catch (_) {
+                          if (context.mounted) {
+                            AppSnackbar.error(
+                                context, 'Couldn’t open sharing right now.');
+                          }
+                        }
+                      }
                     : null,
               ),
             ),

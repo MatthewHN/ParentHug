@@ -29,7 +29,9 @@ children, but it must never feel childlike.
   active subscription with a thank-you message, complimentary access, or an
   ended-trial conversion message. It never says “free plan.”
 - Family invitations use the native system share sheet through a simple
-  `Share` action.
+  `Share` action. Review and share actions gracefully explain when a native
+  plugin is unavailable (for example, after a hot reload that predates a full
+  native rebuild).
 - The old Tools section is removed. The Account section now offers Sign out and
   Delete account. Deletion requires confirmation and removes the account and
   associated data server-side.

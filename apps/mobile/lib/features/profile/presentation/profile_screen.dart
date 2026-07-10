@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show MissingPluginException;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -251,12 +252,24 @@ class _EmailCard extends StatelessWidget {
 class _ReviewCard extends StatelessWidget {
   const _ReviewCard();
 
-  Future<void> _requestReview() async {
-    final review = InAppReview.instance;
-    if (await review.isAvailable()) {
-      await review.requestReview();
-    } else {
-      await review.openStoreListing();
+  Future<void> _requestReview(BuildContext context) async {
+    try {
+      final review = InAppReview.instance;
+      if (await review.isAvailable()) {
+        await review.requestReview();
+      } else {
+        await review.openStoreListing();
+      }
+    } on MissingPluginException {
+      if (context.mounted) {
+        AppSnackbar.show(
+            context, 'Reviews are available after the next app update.');
+      }
+    } catch (_) {
+      if (context.mounted) {
+        AppSnackbar.show(
+            context, 'We couldn’t open the review page right now.');
+      }
     }
   }
 
@@ -264,7 +277,7 @@ class _ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) => AppCard(
         color: AppColors.yellowSoft,
         border: Border.all(color: const Color(0xFFF6D98C)),
-        onTap: _requestReview,
+        onTap: () => _requestReview(context),
         child: const Row(
           children: [
             Icon(Icons.favorite_rounded, color: AppColors.coral),
