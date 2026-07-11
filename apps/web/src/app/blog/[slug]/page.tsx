@@ -31,6 +31,10 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
+function toIsoDate(date: string): string {
+  return new Date(`${date} UTC`).toISOString().slice(0, 10);
+}
+
 const LINK_RE = /\[([^\]]+)\]\(([^)]+)\)/g;
 
 /** Render text with inline [label](url) links — internal (/) as Next <Link>. */
@@ -80,8 +84,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     "@type": "Article",
     headline: post.title,
     description: post.description,
-    datePublished: "2026-07-09",
-    dateModified: "2026-07-09",
+    datePublished: toIsoDate(post.date),
+    dateModified: toIsoDate(post.date),
     author: {
       "@type": "Organization",
       name: "ParentHug",

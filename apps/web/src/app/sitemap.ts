@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 const staticRoutes = ["", "/download", "/blog", "/terms", "/privacy"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-07-09");
+  const lastModified = new Date("2026-07-11");
 
   return [
     ...staticRoutes.map((route) => ({

@@ -556,6 +556,666 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "what-to-say-when-your-child-hits",
+    title: "What to Say When Your Child Hits",
+    description:
+      "Calm, firm scripts for hitting, kicking, and biting that protect everyone without shaming your child.",
+    date: "July 11, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "what to say when child hits",
+      "toddler hitting script",
+      "how to stop a child from hitting",
+      "gentle parenting aggression",
+    ],
+    related: [
+      "what-to-say-when-your-child-is-melting-down",
+      "gentle-parenting-boundaries-that-work",
+      "repair-after-yelling-at-your-child",
+    ],
+    sections: [
+      {
+        heading: "Block the hit before you explain it",
+        body: [
+          "When a child hits, safety comes before teaching. Move close enough to gently block their hands or create space between children. A long explanation can wait until their body is calm.",
+          "Try: I will not let you hit. I am moving your body back so everyone can be safe.",
+        ],
+      },
+      {
+        heading: "Keep the limit clear and the shame out",
+        body: [
+          "A child can be furious and still need a firm boundary. Avoid labels like mean or bad; they do not teach the skill your child needs next.",
+          "Try: You are so mad. Hitting hurts people. You can stomp, squeeze this pillow, or come with me for a reset.",
+        ],
+      },
+      {
+        heading: "Practice a safer way after the storm",
+        body: [
+          "Once your child is regulated, briefly name what happened and rehearse the replacement. Repetition outside the crisis makes the words easier to find next time.",
+          "Try: You wanted the truck. Next time say, My turn when you are done. Let us practice that together.",
+        ],
+      },
+      {
+        heading: "Make repair an invitation",
+        body: [
+          "Repair helps the hurt child feel seen and helps the child who hit reconnect without being forced into a performance. Offer a few concrete ways to make things better.",
+          "Try: Your brother is hurt. You can bring ice, help rebuild his tower, or give him some space. Which feels right?",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I make my child say sorry after hitting?",
+        answer:
+          "An immediate forced apology is rarely meaningful. First regulate and protect everyone, then invite your child to repair the harm in a concrete way.",
+      },
+      {
+        question: "Why does my child hit when they are upset?",
+        answer:
+          "Young children often lack the language, impulse control, or coping skills to handle a big feeling safely. The behavior needs a boundary, but it is also a skill gap to teach.",
+      },
+      {
+        question: "Can ParentHug help with aggressive behavior?",
+        answer:
+          "Yes. Share the moment, your child's age, and what happened, and ParentHug can give you a short safety-first script to use right away.",
+      },
+    ],
+  },
+  {
+    slug: "picky-eating-without-power-struggles",
+    title: "Picky Eating Without Power Struggles",
+    description:
+      "A calmer approach to picky eating: what to say at the table and how to step out of the food battle.",
+    date: "July 11, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "picky eating without power struggles",
+      "what to say to picky eater",
+      "toddler refuses dinner",
+      "calm family meals",
+    ],
+    related: [
+      "gentle-parenting-boundaries-that-work",
+      "what-to-say-when-your-child-talks-back",
+      "morning-routine-without-yelling",
+    ],
+    sections: [
+      {
+        heading: "Take pressure off the table",
+        body: [
+          "Food pressure can make an already cautious eater dig in harder. Your job is to offer regular meals and a calm setting; your child can listen to their own hunger and fullness.",
+          "Try: This is what we are having. You do not have to eat it. Your body can decide whether it is hungry.",
+        ],
+      },
+      {
+        heading: "Keep one familiar food nearby",
+        body: [
+          "A familiar food gives a cautious child a safe place to begin without turning dinner into a custom order. Serve it alongside, not instead of, the rest of the meal.",
+          "Try: I put rice on the table because you usually like it. The chicken and peas can stay on your plate or on the serving dish.",
+        ],
+      },
+      {
+        heading: "Use neutral language about food",
+        body: [
+          "Talking about food as good, bad, clean, or a reward can raise the stakes. Describe what is there and let curiosity do more work than convincing.",
+          "Try: These carrots are crunchy. You can smell one, lick one, or leave it alone. All of those are okay.",
+        ],
+      },
+      {
+        heading: "End the meal without bargaining",
+        body: [
+          "When a child says they are done, it helps to trust the routine instead of negotiating another bite. A predictable next snack or meal takes away the panic on both sides.",
+          "Try: Okay, dinner is finished. The kitchen is closed until bedtime snack, and you can eat then if your body is hungry.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I make my child take one bite?",
+        answer:
+          "Pressure can make new foods feel less safe. Offer exposure without demanding a bite, and let repeated low-pressure encounters build familiarity.",
+      },
+      {
+        question: "What if my child only eats a few foods?",
+        answer:
+          "Keep serving accepted foods with small portions of family foods. If eating is extremely limited, painful, or affecting growth, speak with your child's pediatric clinician or a feeding specialist.",
+      },
+      {
+        question: "How can ParentHug help at dinner?",
+        answer:
+          "ParentHug can give you a calm line for the exact dinner standoff, so you can hold the routine without turning the meal into a fight.",
+      },
+    ],
+  },
+  {
+    slug: "separation-anxiety-drop-off-script",
+    title: "A Simple Script for Separation Anxiety at Drop-Off",
+    description:
+      "What to say when preschool, school, or childcare drop-off brings tears, clinging, or a hard goodbye.",
+    date: "July 11, 2026",
+    readTime: "5 min read",
+    keywords: [
+      "separation anxiety drop off script",
+      "child cries at school drop off",
+      "preschool drop off tears",
+      "what to say at daycare goodbye",
+    ],
+    related: [
+      "morning-routine-without-yelling",
+      "bedtime-battles-calm-parenting-script",
+      "what-to-say-when-your-child-is-melting-down",
+    ],
+    sections: [
+      {
+        heading: "Treat the tears as connection, not defiance",
+        body: [
+          "A hard goodbye often means your child is attached to you and unsure about the transition. You can take that feeling seriously without making the goodbye endlessly long.",
+          "Try: You wish I could stay. Saying goodbye is hard. Your teacher will help you, and I will come back after snack time.",
+        ],
+      },
+      {
+        heading: "Create one predictable goodbye ritual",
+        body: [
+          "A brief ritual gives your child something reliable to hold onto. Keep it the same each day so the ritual, rather than a new negotiation, carries the moment.",
+          "Try: We do two hugs, a high-five, then a window wave. I love you and I will see you after school.",
+        ],
+      },
+      {
+        heading: "Leave with confidence once you say goodbye",
+        body: [
+          "Returning for another goodbye can accidentally teach a child that escalating keeps you there. When the caregiver is ready, follow the ritual and leave warmly and steadily.",
+          "Try: I hear you. It is time for me to go now. Ms. Ana is with you. I will be back after lunch.",
+        ],
+      },
+      {
+        heading: "Reconnect before you ask for the report",
+        body: [
+          "At pickup, let your child land with you before asking how the day went. Connection first makes it easier for them to share when they are ready.",
+          "Try: I am so glad to see you. Do you want a hug, a snack, or to tell me one thing from your day?",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I sneak out when my child is distracted?",
+        answer:
+          "Usually no. A predictable goodbye helps children learn that you leave and return. Work with the caregiver on a short ritual instead of disappearing.",
+      },
+      {
+        question: "How long does separation anxiety last?",
+        answer:
+          "It varies by child and transition. Consistent routines and warm, confident goodbyes often help; discuss persistent distress with your child's clinician or school team.",
+      },
+      {
+        question: "Can ParentHug help with school drop-off?",
+        answer:
+          "Yes. ParentHug can tailor a short goodbye script to your child's age, the setting, and the part of drop-off that feels hardest.",
+      },
+    ],
+  },
+  {
+    slug: "potty-training-accidents-what-to-say",
+    title: "What to Say After a Potty Training Accident",
+    description:
+      "A shame-free response to potty accidents that helps children feel safe, capable, and ready to try again.",
+    date: "July 11, 2026",
+    readTime: "5 min read",
+    keywords: [
+      "what to say after potty accident",
+      "potty training accidents",
+      "shame free potty training",
+      "toddler toilet learning script",
+    ],
+    related: [
+      "picky-eating-without-power-struggles",
+      "what-to-say-when-your-child-is-melting-down",
+      "gentle-parenting-boundaries-that-work",
+    ],
+    sections: [
+      {
+        heading: "Keep your face and voice neutral",
+        body: [
+          "Accidents are part of learning body signals and managing a new routine. A big reaction can add embarrassment to something your child is still figuring out.",
+          "Try: Your clothes are wet. That happens while we are learning. Let us get cleaned up.",
+        ],
+      },
+      {
+        heading: "Focus on the next step, not the mistake",
+        body: [
+          "The useful lesson is what to do when the body sends a signal. Keep it practical and brief instead of asking why the accident happened.",
+          "Try: Pee goes in the potty. Next time your body gives you that feeling, we can walk quickly to the bathroom together.",
+        ],
+      },
+      {
+        heading: "Let your child help without making it punishment",
+        body: [
+          "Involving a child in cleanup can build responsibility when it is framed as a simple family task, not a consequence meant to embarrass them.",
+          "Try: I will wipe the floor. You can put these clothes in the basket and choose fresh pants.",
+        ],
+      },
+      {
+        heading: "Notice patterns with curiosity",
+        body: [
+          "A few calm observations can help you adjust timing or routines. Avoid turning every outing into a test; your child needs room to learn gradually.",
+          "Try: We had an accident after a long game. Tomorrow I will remind you to try the potty before we start playing.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I punish potty training accidents?",
+        answer:
+          "No. Punishment or shame can make toilet learning more stressful. Keep cleanup calm and teach the next step instead.",
+      },
+      {
+        question: "What if my child was doing well and starts having accidents?",
+        answer:
+          "Changes in routine, stress, illness, or simply development can affect toileting. Stay neutral and contact a pediatric clinician if you have concerns about pain, constipation, or a sudden ongoing change.",
+      },
+      {
+        question: "Can ParentHug help during potty training?",
+        answer:
+          "Yes. Describe the accident or resistance and ParentHug can give you words that keep the moment calm and matter-of-fact.",
+      },
+    ],
+  },
+  {
+    slug: "public-tantrum-calm-parenting-script",
+    title: "A Calm Parenting Script for a Public Tantrum",
+    description:
+      "What to do and say when your child melts down in a shop, restaurant, airport, or other public place.",
+    date: "July 11, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "public tantrum script",
+      "toddler tantrum in store",
+      "what to do during public meltdown",
+      "calm parenting in public",
+    ],
+    related: [
+      "what-to-say-when-your-child-is-melting-down",
+      "turn-off-screen-time-without-a-meltdown",
+      "repair-after-yelling-at-your-child",
+    ],
+    sections: [
+      {
+        heading: "Forget the audience and find safety",
+        body: [
+          "A public meltdown can make any parent feel watched. Bring your attention back to your child and the immediate safety question, not to strangers' opinions.",
+          "Try: You are having a hard time. I am taking you somewhere quieter so we can be safe.",
+        ],
+      },
+      {
+        heading: "Use one low, steady sentence",
+        body: [
+          "Your child is unlikely to process a speech in the middle of a storm. A repeatable line steadies you too, especially when you feel embarrassed or rushed.",
+          "Try: I will not buy the candy. I will stay with you while you are upset.",
+        ],
+      },
+      {
+        heading: "Change the environment when you can",
+        body: [
+          "A quieter corner, car, hallway, or step outside may lower the stimulation enough for both of you to regroup. Leaving is not giving in when the goal is regulation.",
+          "Try: We are taking a reset outside. We can decide about the shopping list when our bodies are calmer.",
+        ],
+      },
+      {
+        heading: "Do the teaching later",
+        body: [
+          "Save reflection for after the child has recovered and you have too. One short repair is more useful than replaying the whole scene.",
+          "Try: The store was hard today. Next time you can tell me, I need a break, and we can step outside before it gets so big.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I give in to stop a public tantrum?",
+        answer:
+          "You can leave or pause the errand to support regulation without changing the limit. Keep the boundary simple and decide later whether the situation needs a different plan next time.",
+      },
+      {
+        question: "What if people are staring?",
+        answer:
+          "Focus on safety and your child. You do not owe bystanders an explanation. A calm exit or quiet reset is enough.",
+      },
+      {
+        question: "How can ParentHug help in public?",
+        answer:
+          "ParentHug provides short, usable scripts for the moment, so you have words ready when your nervous system is under pressure too.",
+      },
+    ],
+  },
+  {
+    slug: "homework-battles-without-yelling",
+    title: "How to Handle Homework Battles Without Yelling",
+    description:
+      "Calm scripts for homework resistance, tears, and avoidance that protect both learning and your relationship.",
+    date: "July 11, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "homework battles without yelling",
+      "child refuses homework",
+      "homework resistance script",
+      "how to help child with homework",
+    ],
+    related: [
+      "what-to-say-when-your-child-talks-back",
+      "morning-routine-without-yelling",
+      "repair-after-yelling-at-your-child",
+    ],
+    sections: [
+      {
+        heading: "Start by finding the hard part",
+        body: [
+          "Refusal can mean boredom, overwhelm, hunger, fear of getting it wrong, or a task that is genuinely too hard. Curiosity gets you farther than repeating the instruction.",
+          "Try: Homework feels impossible right now. Is the hard part starting, knowing what to do, or worrying about a mistake?",
+        ],
+      },
+      {
+        heading: "Make starting smaller",
+        body: [
+          "A huge assignment can make a child freeze. Shrink the first action until it feels doable, then let momentum build one small step at a time.",
+          "Try: We are not doing all of it yet. Let us put your name on the page and read the first question together.",
+        ],
+      },
+      {
+        heading: "Be a helper, not the second teacher",
+        body: [
+          "It is tempting to take over when time is short. Instead, offer support that lets your child do the thinking and lets the teacher see what still needs teaching.",
+          "Try: I can read the question with you, help you make a plan, or sit nearby. Which kind of help do you want?",
+        ],
+      },
+      {
+        heading: "End with information, not shame",
+        body: [
+          "If homework repeatedly ends in distress, that is useful information for the school team. Preserve the relationship and communicate the pattern rather than forcing a nightly showdown.",
+          "Try: We worked for twenty minutes and this part still feels too hard. I will let your teacher know so we can make a plan.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I make my child finish every homework problem?",
+        answer:
+          "Follow school expectations where possible, but persistent distress or inability to complete work is worth sharing with the teacher. Avoid turning support into a nightly power struggle.",
+      },
+      {
+        question: "What if my child gets angry when I offer help?",
+        answer:
+          "Offer choices about the kind of support and take a brief reset if needed. Feeling watched or corrected can add pressure to an already difficult task.",
+      },
+      {
+        question: "Can ParentHug help with homework fights?",
+        answer:
+          "Yes. ParentHug can help you choose a short, calm response for the specific point where homework gets stuck.",
+      },
+    ],
+  },
+  {
+    slug: "transitions-without-tears",
+    title: "How to Make Transitions Easier for Kids",
+    description:
+      "Simple scripts for leaving the playground, stopping play, getting in the car, and other everyday transitions.",
+    date: "July 11, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "how to make transitions easier for kids",
+      "leaving playground meltdown",
+      "transition scripts for children",
+      "toddler transition help",
+    ],
+    related: [
+      "turn-off-screen-time-without-a-meltdown",
+      "public-tantrum-calm-parenting-script",
+      "bedtime-battles-calm-parenting-script",
+    ],
+    sections: [
+      {
+        heading: "Give a warning the child can understand",
+        body: [
+          "Transitions are easier when they are not surprises. A short, concrete warning gives your child's brain time to shift gears before the change arrives.",
+          "Try: Five more pushes on the swing, then we walk to the car. I will count them with you.",
+        ],
+      },
+      {
+        heading: "Connect before you direct",
+        body: [
+          "A moment of eye contact, touch, or shared noticing can make the next instruction easier to hear. You are joining your child before asking them to leave something they enjoy.",
+          "Try: You made that tower so tall. I see how proud you are. In two minutes it will be time to clean up.",
+        ],
+      },
+      {
+        heading: "Offer a small choice inside the non-negotiable",
+        body: [
+          "The transition may be fixed, but a small choice gives your child a little agency. Keep both options acceptable and avoid creating a new negotiation.",
+          "Try: It is time to go. Do you want to hop to the car or hold my hand while we walk?",
+        ],
+      },
+      {
+        heading: "Carry the feeling through the change",
+        body: [
+          "A child can be upset and still move forward. Naming the loss while helping the transition teaches that big feelings do not have to stop the day.",
+          "Try: You are sad to leave. I understand. We are leaving now, and we can put playground time on tomorrow's plan.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Why are transitions so hard for my child?",
+        answer:
+          "Children are developing flexible thinking and self-regulation. Ending something enjoyable or starting something unfamiliar can feel like a real loss or demand.",
+      },
+      {
+        question: "Do transition warnings really help?",
+        answer:
+          "They often do when they are concrete and consistent. Use a timer, number of turns, or familiar ritual instead of a vague warning your child cannot picture.",
+      },
+      {
+        question: "Can ParentHug help with daily transitions?",
+        answer:
+          "Yes. Tell ParentHug where the transition happens and what your child does, and it can create a short script and next-step plan.",
+      },
+    ],
+  },
+  {
+    slug: "when-your-child-lies-what-to-say",
+    title: "What to Say When Your Child Lies",
+    description:
+      "A calm way to respond to lying that builds honesty, responsibility, and enough safety for the truth to come out.",
+    date: "July 11, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "what to say when child lies",
+      "how to respond to child lying",
+      "teach children honesty",
+      "parenting script for lying",
+    ],
+    related: [
+      "gentle-parenting-boundaries-that-work",
+      "what-to-say-when-your-child-talks-back",
+      "repair-after-yelling-at-your-child",
+    ],
+    sections: [
+      {
+        heading: "Pause before you accuse",
+        body: [
+          "Children may lie to avoid trouble, protect someone, test imagination, or because the truth feels overwhelming. An accusation can make honesty feel even less safe.",
+          "Try: I found crayons on the wall. I want to understand what happened. You can tell me the truth, and we will handle it together.",
+        ],
+      },
+      {
+        heading: "Make truth-telling the easier path",
+        body: [
+          "Your child still needs accountability, but it helps to separate the mistake from the choice to be honest. Notice the courage it takes to tell the truth.",
+          "Try: Thank you for telling me. Drawing on the wall is not okay, and now we can clean it up together.",
+        ],
+      },
+      {
+        heading: "Use consequences to repair, not humiliate",
+        body: [
+          "A related repair teaches more than a punishment meant to make a child feel bad. Keep it practical, proportionate, and focused on what can be made right.",
+          "Try: The marker needs to be put away for today. First we will help clean the wall, then we can choose paper for drawing tomorrow.",
+        ],
+      },
+      {
+        heading: "Teach the words for next time",
+        body: [
+          "Once the problem is solved, give your child language for a hard truth. Practicing a simple sentence makes it more available when they need it.",
+          "Try: Next time you can say, I did something I think you will be mad about, but I want to tell you.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is lying normal in children?",
+        answer:
+          "It is common as children develop imagination, self-protection, and an understanding of rules. The response should teach honesty and responsibility rather than label the child.",
+      },
+      {
+        question: "Should there be a consequence for lying?",
+        answer:
+          "Address the underlying behavior and use a related repair. You can also make clear that honesty helps adults solve problems and rebuild trust.",
+      },
+      {
+        question: "Can ParentHug help me respond calmly?",
+        answer:
+          "Yes. ParentHug can give you a script that keeps the door open for honesty while still holding a clear boundary.",
+      },
+    ],
+  },
+  {
+    slug: "preparing-for-a-new-baby-with-a-toddler",
+    title: "How to Prepare Your Toddler for a New Baby",
+    description:
+      "Simple, honest ways to prepare an older child for a new sibling and make room for the big feelings that come with it.",
+    date: "July 11, 2026",
+    readTime: "7 min read",
+    keywords: [
+      "prepare toddler for new baby",
+      "help child adjust to new sibling",
+      "new baby sibling jealousy",
+      "what to say about new baby",
+    ],
+    related: [
+      "what-to-say-when-siblings-fight",
+      "gentle-parenting-boundaries-that-work",
+      "separation-anxiety-drop-off-script",
+    ],
+    sections: [
+      {
+        heading: "Use simple, true language",
+        body: [
+          "Young children do best with concrete explanations close enough to the change to make sense. Share what will affect them without promising that life will stay exactly the same.",
+          "Try: A baby is growing in my belly. When the baby comes, they will cry and need a lot of help. You will still have your place in our family.",
+        ],
+      },
+      {
+        heading: "Let excitement and worry share the room",
+        body: [
+          "Your child can love the idea of a baby and dislike the disruptions at the same time. Making space for both feelings helps jealousy feel less forbidden.",
+          "Try: You are excited to be a big sibling, and you also wish things would not change. Both feelings make sense.",
+        ],
+      },
+      {
+        heading: "Practice the practical changes early",
+        body: [
+          "If sleep, childcare, rooms, or routines will change, introduce them gradually when possible. That prevents every transition from becoming associated with the baby.",
+          "Try: Grandma will do bedtime sometimes when the baby comes. Let us practice our Grandma bedtime routine this week.",
+        ],
+      },
+      {
+        heading: "Protect small moments of connection",
+        body: [
+          "A short predictable ritual with the older child can matter more than a large outing. The message is that connection remains available even when your hands are full.",
+          "Try: After the baby's morning feed, you and I will have ten minutes for your book. That is our time.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I involve my toddler in baby preparation?",
+        answer:
+          "Offer small, optional roles such as choosing a book or bringing a diaper. Involvement can help, but your child does not need to be a helper all the time.",
+      },
+      {
+        question: "What if my older child says they do not want the baby?",
+        answer:
+          "Stay calm and name the feeling rather than correcting it. You can say that they do not have to like every change and that adults will keep everyone safe and loved.",
+      },
+      {
+        question: "Can ParentHug help with new sibling adjustment?",
+        answer:
+          "Yes. ParentHug can create gentle scripts for pregnancy questions, jealousy, introductions, and the first hard weeks with a new baby.",
+      },
+    ],
+  },
+  {
+    slug: "helping-your-child-with-big-worries",
+    title: "What to Say When Your Child Has Big Worries",
+    description:
+      "Supportive scripts for childhood worries, fears, and anxious questions without dismissing what your child feels.",
+    date: "July 11, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "what to say when child is worried",
+      "help child with anxiety",
+      "childhood fears parenting script",
+      "calm words for anxious child",
+    ],
+    related: [
+      "bedtime-battles-calm-parenting-script",
+      "separation-anxiety-drop-off-script",
+      "what-to-say-when-your-child-is-melting-down",
+    ],
+    sections: [
+      {
+        heading: "Name the worry before you solve it",
+        body: [
+          "Reassurance lands better when a child first feels understood. You do not have to agree that danger is likely in order to take their fear seriously.",
+          "Try: You are worried that I will not come back after school. That is a really scary thought to carry by yourself.",
+        ],
+      },
+      {
+        heading: "Offer a grounded, honest reassurance",
+        body: [
+          "Avoid promises you cannot make. Instead, name what is true now and the plan for handling the situation, which gives your child something dependable.",
+          "Try: I cannot promise you will never feel scared. I can promise your teacher and I know how to help you, and I will be there at pickup.",
+        ],
+      },
+      {
+        heading: "Give the worry a small action",
+        body: [
+          "A simple coping step can help a child feel less alone with a big feeling. Practice it when things are calm so it is familiar when worry arrives.",
+          "Try: When the worry comes, put your hand on your heart and take three slow breaths. Then you can tell an adult, I need help with a worry.",
+        ],
+      },
+      {
+        heading: "Know when to invite more support",
+        body: [
+          "Worries deserve extra attention when they are persistent, getting in the way of sleep, school, friendships, or daily life, or causing significant distress. A pediatric clinician or mental-health professional can help you make a plan.",
+          "Try: I notice worry is making many parts of the day hard. We are going to talk to someone whose job is helping kids with big worries.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I tell my child there is nothing to worry about?",
+        answer:
+          "It is usually more helpful to acknowledge the feeling first. Then offer a calm, truthful reminder of what is safe and what the plan is.",
+      },
+      {
+        question: "When should I seek help for my child's anxiety?",
+        answer:
+          "Consider professional support when worry is persistent, severe, or interfering with daily life. A pediatric clinician can help you decide on an appropriate next step.",
+      },
+      {
+        question: "Can ParentHug help with anxious moments?",
+        answer:
+          "ParentHug can offer a short, warm script for the immediate conversation. It is supportive parenting guidance, not a replacement for professional care when a child needs it.",
+      },
+    ],
+  },
 ];
 
 export function getBlogPost(slug: string) {

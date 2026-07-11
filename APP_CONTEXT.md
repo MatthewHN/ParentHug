@@ -21,6 +21,18 @@ children, but it must never feel childlike.
   editable display name and no indication of the Google sign-in provider.
 - Child profiles are never limited by a subscription tier.
 
+## Website content (July 2026)
+
+- The ParentHug website includes an SEO-focused parenting blog with practical,
+  non-shaming, age-aware scripts for hard everyday moments.
+- Published topics cover meltdowns, repair, boundaries, bedtime, sibling
+  conflict, back talk, screen time, routines, hitting, picky eating,
+  separation, toilet learning, public tantrums, homework, transitions, honesty,
+  new siblings, and childhood worries.
+- Blog guidance is supportive and practical, with a clear note to seek a
+  pediatric clinician or mental-health professional when a health or persistent
+  distress concern needs professional support.
+
 ## Profile screen (July 2026)
 
 - Shows the signed-in email on a single ellipsized line.
