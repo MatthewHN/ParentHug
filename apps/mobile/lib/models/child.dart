@@ -7,7 +7,7 @@ class Child {
     required this.familyId,
     required this.name,
     this.birthday,
-    this.temperament,
+    this.temperaments = const [],
     this.commonStruggles = const [],
     this.parentGoals = const [],
     this.notes,
@@ -20,7 +20,7 @@ class Child {
   final String familyId;
   final String name;
   final DateTime? birthday;
-  final String? temperament;
+  final List<String> temperaments;
   final List<String> commonStruggles;
   final List<String> parentGoals;
   final String? notes;
@@ -36,7 +36,7 @@ class Child {
         familyId: m['family_id'] as String,
         name: (m['name'] as String?) ?? '',
         birthday: asDate(m['birthday']),
-        temperament: m['temperament'] as String?,
+        temperaments: asStringList(m['temperament']),
         commonStruggles: asStringList(m['common_struggles']),
         parentGoals: asStringList(m['parent_goals']),
         notes: m['notes'] as String?,
@@ -49,7 +49,7 @@ class Child {
   Map<String, dynamic> toWrite() => {
         'name': name,
         'birthday': birthday?.toIso8601String().split('T').first,
-        'temperament': temperament,
+        'temperament': temperaments,
         'common_struggles': commonStruggles,
         'parent_goals': parentGoals,
         'notes': notes,

@@ -60,10 +60,12 @@ enum HugTone {
 }
 
 enum RepairTone {
-  short('short', 'Short'),
   gentle('gentle', 'Gentle'),
+  warm('warm', 'Warm'),
   honest('honest', 'Honest'),
-  ageAppropriate('age_appropriate', 'Age-appropriate');
+  brief('brief', 'Brief'),
+  playful('playful', 'Playful'),
+  firm('firm', 'Firm');
 
   const RepairTone(this.value, this.label);
   final String value;

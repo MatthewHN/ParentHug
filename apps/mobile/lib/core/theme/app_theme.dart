@@ -53,7 +53,7 @@ class AppTheme {
         labelLarge: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.surface,
+        backgroundColor: AppColors.cream,
         elevation: 0,
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
@@ -77,7 +77,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.coral,
+          backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           elevation: 0,
           minimumSize: const Size.fromHeight(52),

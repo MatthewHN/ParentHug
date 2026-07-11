@@ -20,6 +20,16 @@ children, but it must never feel childlike.
 - The account/profile experience is intentionally simple: email only, no
   editable display name and no indication of the Google sign-in provider.
 - Child profiles are never limited by a subscription tier.
+- The Hug panic card is cleanly rounded without a red outer tint, and clearing
+  a Hug conversation uses a trash icon.
+- Repair Mode uses a heart-led `Repair` action and keeps generated scripts
+  private to the session (no save or share actions).
+- Today features the most recently uploaded memory immediately. When no memory
+  exists it shows the bundled `kid.jpg` placeholder; memory titles are visible
+  as captions and can be searched from HugBook.
+- Child temperament choices include both strengths and harder traits. Child
+  ages are already complete labels (for example, `newborn`), without appending
+  `old`.
 
 ## Website content (July 2026)
 

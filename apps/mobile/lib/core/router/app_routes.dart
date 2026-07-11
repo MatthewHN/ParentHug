@@ -17,6 +17,7 @@ class AppRoutes {
   static const today = '/today';
   static const hug = '/hug';
   static const board = '/board';
+  static const library = '/library';
   static const memories = '/memories';
   static const profile = '/profile';
 

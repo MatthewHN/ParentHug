@@ -61,6 +61,10 @@ class MemoriesRepository {
     return Memory.fromMap(Map<String, dynamic>.from(row));
   }
 
+  /// Raw image bytes for a memory, for saving to the gallery or sharing.
+  Future<Uint8List> downloadBytes(String storagePath) =>
+      _c.storage.from(_bucket).download(storagePath);
+
   Future<String?> signedUrl(String storagePath, {int expiresIn = 3600}) async {
     try {
       return await _c.storage

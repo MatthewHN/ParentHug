@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,24 +7,15 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/buttons.dart';
+import '../../../core/widgets/expandable_chip_field.dart';
 import '../../../core/widgets/selectable_chip.dart';
 import '../../../models/enums.dart';
 import '../../../models/repair_response.dart';
 import '../../../services/edge_functions_service.dart';
-import '../../board/application/board_providers.dart';
-import '../../board/data/board_repository.dart';
-import '../../board/data/scripts_repository.dart';
 import '../../children/application/children_providers.dart';
-import '../../children/presentation/widgets/child_selector.dart';
 import '../../family/application/family_providers.dart';
 import '../../subscription/application/entitlement_gate.dart';
 import '../application/repair_controller.dart';
-
-String repairToText(RepairResponse r) => [
-      '💬 What to say\n${r.repairScript}',
-      '✅ What to do next\n${r.followUp}',
-      '🤍 For you\n${r.parentReassurance}',
-    ].join('\n\n');
 
 class RepairScreen extends ConsumerStatefulWidget {
   const RepairScreen({super.key});
@@ -38,7 +28,13 @@ class _RepairScreenState extends ConsumerState<RepairScreen> {
   final _situation = TextEditingController();
   ParentReaction _reaction = ParentReaction.yelled;
   RepairTone _tone = RepairTone.gentle;
-  bool _actionBusy = false;
+  String? _childId;
+
+  @override
+  void initState() {
+    super.initState();
+    _childId = ref.read(selectedChildIdProvider);
+  }
 
   @override
   void dispose() {
@@ -55,25 +51,18 @@ class _RepairScreenState extends ConsumerState<RepairScreen> {
       AppSnackbar.error(context, 'Tell us what happened.');
       return;
     }
+    final children = ref.read(childrenProvider).valueOrNull ?? const [];
+    if (children.isNotEmpty && _childId == null) {
+      AppSnackbar.error(context, 'Choose which child this was with.');
+      return;
+    }
     await ref.read(repairControllerProvider.notifier).generate(
           familyId: familyId,
-          childId: ref.read(selectedChildIdProvider),
+          childId: _childId,
           situation: _situation.text.trim(),
           reaction: _reaction,
           tone: _tone,
         );
-  }
-
-  Future<void> _withBusy(Future<void> Function() action, String done) async {
-    setState(() => _actionBusy = true);
-    try {
-      await action();
-      if (mounted) AppSnackbar.success(context, done);
-    } catch (_) {
-      if (mounted) AppSnackbar.error(context, 'Couldn’t do that right now.');
-    } finally {
-      if (mounted) setState(() => _actionBusy = false);
-    }
   }
 
   @override
@@ -100,34 +89,6 @@ class _RepairScreenState extends ConsumerState<RepairScreen> {
             if (result != null)
               _RepairResult(
                 response: result,
-                busy: _actionBusy,
-                onSave: () => _withBusy(() async {
-                  final familyId = ref.read(currentFamilyIdProvider)!;
-                  await ref.read(scriptsRepositoryProvider).save(
-                        familyId: familyId,
-                        childId: ref.read(selectedChildIdProvider),
-                        title: 'Repair script',
-                        body: repairToText(result),
-                        source: 'repair',
-                        sourceId: result.id,
-                      );
-                  ref.invalidate(savedScriptsProvider);
-                }, 'Saved to your scripts'),
-                onShare: () {
-                  Clipboard.setData(ClipboardData(text: repairToText(result)));
-                  AppSnackbar.success(context, 'Copied to share');
-                },
-                onAddToBoard: () => _withBusy(() async {
-                  final familyId = ref.read(currentFamilyIdProvider)!;
-                  await ref.read(boardRepositoryProvider).create(
-                        familyId: familyId,
-                        childId: ref.read(selectedChildIdProvider),
-                        category: BoardCategory.savedScripts,
-                        title: 'Repair script',
-                        body: result.repairScript,
-                      );
-                  ref.invalidate(boardItemsProvider);
-                }, 'Added to your Family Board'),
                 onNew: () {
                   ref.read(repairControllerProvider.notifier).reset();
                   _situation.clear();
@@ -136,66 +97,58 @@ class _RepairScreenState extends ConsumerState<RepairScreen> {
             else ...[
               const _RepairIntro(),
               const SizedBox(height: 18),
-              const ChildSelector(),
-              const SizedBox(height: 16),
-              AppCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('What happened?',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16,
-                            color: AppColors.ink)),
-                    const SizedBox(height: 12),
-                    TextField(
-                      controller: _situation,
-                      maxLines: 4,
-                      minLines: 3,
-                      textCapitalization: TextCapitalization.sentences,
-                      decoration: const InputDecoration(
-                        hintText:
-                            'e.g. I snapped at bedtime after asking three times.',
-                      ),
-                    ),
-                  ],
+              _ChildPicker(
+                selectedId: _childId,
+                onSelect: (id) => setState(() => _childId = id),
+              ),
+              const Text('What happened?',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                      color: AppColors.ink)),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _situation,
+                maxLines: 4,
+                minLines: 3,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: const InputDecoration(
+                  hintText:
+                      'e.g. I snapped at bedtime after asking three times.',
                 ),
               ),
-              const SizedBox(height: 22),
-              const _Label('What did you do?'),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  for (final r in ParentReaction.values)
-                    SelectableChip(
-                      label: r.label,
-                      selected: _reaction == r,
-                      color: AppColors.coral,
-                      onTap: () => setState(() => _reaction = r),
-                    ),
-                ],
+              const SizedBox(height: 18),
+              ExpandableChipField(
+                label: 'What did you do?',
+                hint: 'Choose what happened',
+                color: AppColors.coral,
+                multiSelect: false,
+                options: [for (final r in ParentReaction.values) r.label],
+                selected: {_reaction.label},
+                onChanged: (s) => setState(() {
+                  if (s.isNotEmpty) {
+                    _reaction = ParentReaction.values
+                        .firstWhere((r) => r.label == s.first);
+                  }
+                }),
               ),
-              const SizedBox(height: 22),
-              const _Label('Tone'),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  for (final t in RepairTone.values)
-                    SelectableChip(
-                      label: t.label,
-                      selected: _tone == t,
-                      onTap: () => setState(() => _tone = t),
-                    ),
-                ],
+              const SizedBox(height: 16),
+              ExpandableChipField(
+                label: 'Tone',
+                hint: 'Choose a tone',
+                multiSelect: false,
+                options: [for (final t in RepairTone.values) t.label],
+                selected: {_tone.label},
+                onChanged: (s) => setState(() {
+                  if (s.isNotEmpty) {
+                    _tone =
+                        RepairTone.values.firstWhere((t) => t.label == s.first);
+                  }
+                }),
               ),
-              const SizedBox(height: 26),
+              const SizedBox(height: 24),
               PrimaryButton(
-                label: 'Get a repair script',
-                icon: Icons.healing_rounded,
+                label: '❤️ Repair',
                 gradient: AppColors.warmGradient,
                 loading: state.isLoading,
                 onPressed: _generate,
@@ -230,21 +183,47 @@ class _RepairIntro extends StatelessWidget {
   }
 }
 
+/// Required single-select "who was this with?" so the repair script can be
+/// tuned to the right child (and their age). Renders nothing with no children.
+class _ChildPicker extends ConsumerWidget {
+  const _ChildPicker({required this.selectedId, required this.onSelect});
+  final String? selectedId;
+  final ValueChanged<String?> onSelect;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final children = ref.watch(childrenProvider).valueOrNull ?? const [];
+    if (children.isEmpty) return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _Label('Who was it with?'),
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            for (final c in children)
+              SelectableChip(
+                label: c.name,
+                selected: selectedId == c.id,
+                onTap: () => onSelect(c.id),
+              ),
+          ],
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+}
+
 class _RepairResult extends StatelessWidget {
   const _RepairResult({
     required this.response,
-    required this.busy,
-    required this.onSave,
-    required this.onShare,
-    required this.onAddToBoard,
     required this.onNew,
   });
 
   final RepairResponse response;
-  final bool busy;
-  final VoidCallback onSave;
-  final VoidCallback onShare;
-  final VoidCallback onAddToBoard;
   final VoidCallback onNew;
 
   @override
@@ -271,27 +250,6 @@ class _RepairResult extends StatelessWidget {
           text: response.parentReassurance,
           color: const Color(0xFFB07CF6),
         ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(
-                child: SecondaryButton(
-                    label: 'Save',
-                    icon: Icons.bookmark_add_outlined,
-                    onPressed: onSave)),
-            const SizedBox(width: 10),
-            Expanded(
-                child: SecondaryButton(
-                    label: 'Share',
-                    icon: Icons.ios_share_rounded,
-                    onPressed: onShare)),
-          ],
-        ),
-        const SizedBox(height: 10),
-        SecondaryButton(
-            label: 'Add to Family Board',
-            icon: Icons.push_pin_outlined,
-            onPressed: onAddToBoard),
         const SizedBox(height: 8),
         Center(
           child: TextButton.icon(

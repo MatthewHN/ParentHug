@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/enums.dart';
 import '../../../models/repair_response.dart';
+import '../../../services/review_prompter.dart';
 import '../../subscription/application/subscription_providers.dart';
 import '../data/repair_repository.dart';
 
@@ -29,6 +30,9 @@ class RepairController extends AutoDisposeAsyncNotifier<RepairResponse?> {
           ),
     );
     ref.invalidate(usageProvider);
+    if (!state.hasError) {
+      unawaited(ReviewPrompter.instance.recordPositiveAction());
+    }
   }
 
   void reset() => state = const AsyncData(null);

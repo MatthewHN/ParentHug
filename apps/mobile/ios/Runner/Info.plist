@@ -47,6 +47,8 @@
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>ParentHug needs access to your photos so you can add family memories to your private HugBook.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>ParentHug needs permission to save family memories to your photos.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>ParentHug needs camera access so you can capture new family memories.</string>
 	<key>CFBundleURLTypes</key>

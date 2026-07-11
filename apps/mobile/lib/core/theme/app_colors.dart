@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  // Brand accents
-  static const primary = Color(0xFF3B82F6); // refined blue (links, selection)
-  static const coral = Color(0xFFFB5D6B); // primary action / brand
+  // Brand accents. Blue leads (chrome, primary actions); coral is the warm
+  // emotional accent (Hug moments, destructive actions).
+  static const primary = Color(0xFF3B82F6); // brand blue (chrome, actions)
+  static const primaryDark = Color(0xFF2563EB); // deeper blue for gradients
+  static const coral = Color(0xFFFB5D6B); // warm emotional accent
   static const yellow = Color(0xFFF5B93B);
   static const mint = Color(0xFF34C98B);
-  static const cream = Color(0xFFF4F5F7); // app canvas (neutral, cool)
+  static const cream = Color(0xFFE9F0FB); // app canvas (soft blue tint)
   static const ink = Color(0xFF171A21); // primary text (near-black)
 
   // Neutrals / support
@@ -24,6 +26,12 @@ class AppColors {
   static const yellowSoft = Color(0xFFFDF3DC);
 
   // Gradients
+  /// The blue brand wash used on the shared header and hero banners.
+  static const blueGradient = LinearGradient(
+    colors: [primary, primaryDark],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
   static const skyGradient = LinearGradient(
     colors: [Color(0xFF2F9CF4), Color(0xFF52E3A2)],
     begin: Alignment.topLeft,

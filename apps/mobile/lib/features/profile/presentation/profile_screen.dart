@@ -92,8 +92,10 @@ class ProfileScreen extends ConsumerWidget {
                                       fontSize: 16)),
                               Text(
                                 child.birthday == null
-                                    ? (child.temperament ?? 'Add details')
-                                    : '${child.ageLabel} old${child.temperament != null ? ' · ${child.temperament}' : ''}',
+                                    ? (child.temperaments.isEmpty
+                                        ? 'Add details'
+                                        : child.temperaments.join(', '))
+                                    : '${child.ageLabel}${child.temperaments.isNotEmpty ? ' · ${child.temperaments.join(', ')}' : ''}',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -252,14 +254,12 @@ class _EmailCard extends StatelessWidget {
 class _ReviewCard extends StatelessWidget {
   const _ReviewCard();
 
-  Future<void> _requestReview(BuildContext context) async {
+  /// The card takes users straight to the store listing to leave a review.
+  /// (The native in-app review sheet is triggered separately, after a few
+  /// positive actions — see ReviewPrompter — never from a button.)
+  Future<void> _openStoreListing(BuildContext context) async {
     try {
-      final review = InAppReview.instance;
-      if (await review.isAvailable()) {
-        await review.requestReview();
-      } else {
-        await review.openStoreListing();
-      }
+      await InAppReview.instance.openStoreListing();
     } on MissingPluginException {
       if (context.mounted) {
         AppSnackbar.show(
@@ -277,7 +277,7 @@ class _ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) => AppCard(
         color: AppColors.yellowSoft,
         border: Border.all(color: const Color(0xFFF6D98C)),
-        onTap: () => _requestReview(context),
+        onTap: () => _openStoreListing(context),
         child: const Row(
           children: [
             Icon(Icons.favorite_rounded, color: AppColors.coral),

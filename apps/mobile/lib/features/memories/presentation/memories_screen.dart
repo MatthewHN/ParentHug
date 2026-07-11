@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gal/gal.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/app_sheet.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/utils/date_x.dart';
-import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/app_header.dart';
+import '../../../core/widgets/buttons.dart';
 import '../../../core/widgets/states.dart';
 import '../../../models/child.dart';
 import '../../../models/enums.dart';
@@ -20,8 +26,23 @@ import '../data/memories_repository.dart';
 import 'widgets/memory_image.dart';
 import 'widgets/memory_upload_sheet.dart';
 
-class MemoriesScreen extends ConsumerWidget {
+class MemoriesScreen extends ConsumerStatefulWidget {
   const MemoriesScreen({super.key});
+
+  @override
+  ConsumerState<MemoriesScreen> createState() => _MemoriesScreenState();
+}
+
+class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
+  final _searchController = TextEditingController();
+  bool _searching = false;
+  String _query = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   Future<void> _addMemory(BuildContext context, WidgetRef ref) async {
     try {
@@ -36,9 +57,8 @@ class MemoriesScreen extends ConsumerWidget {
           ? file.name.split('.').last.toLowerCase()
           : 'jpg';
       if (!context.mounted) return;
-      showModalBottomSheet<void>(
+      showAppSheet<void>(
         context: context,
-        isScrollControlled: true,
         builder: (_) => MemoryUploadSheet(bytes: bytes, fileExt: ext),
       );
     } catch (_) {
@@ -49,17 +69,31 @@ class MemoriesScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final memoriesAsync = ref.watch(memoriesProvider);
     final children = ref.watch(childrenProvider).valueOrNull ?? const [];
-    final lastYear = ref.watch(thisDayLastYearProvider);
     final upcoming = _upcomingBirthday(children);
 
     return Scaffold(
-      appBar: const AppHeader(),
+      appBar: AppHeader(
+        actions: [
+          IconButton(
+            tooltip: _searching ? 'Close title search' : 'Search memory titles',
+            icon: Icon(_searching ? Icons.close_rounded : Icons.search_rounded),
+            onPressed: () => setState(() {
+              _searching = !_searching;
+              if (!_searching) {
+                _searchController.clear();
+                _query = '';
+              }
+            }),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: 'fab_memories',
         onPressed: () => _addMemory(context, ref),
-        backgroundColor: AppColors.coral,
+        backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add_a_photo_rounded),
         label: const Text('Add memory',
@@ -72,6 +106,13 @@ class MemoriesScreen extends ConsumerWidget {
           error: (e, _) =>
               ErrorView(onRetry: () => ref.invalidate(memoriesProvider)),
           data: (memories) {
+            final query = _query.trim().toLowerCase();
+            final filteredMemories = query.isEmpty
+                ? memories
+                : memories
+                    .where((memory) =>
+                        memory.displayTitle.toLowerCase().contains(query))
+                    .toList();
             return RefreshIndicator(
               color: AppColors.primary,
               onRefresh: () async => ref.invalidate(memoriesProvider),
@@ -80,6 +121,29 @@ class MemoriesScreen extends ConsumerWidget {
                 children: [
                   const ChildSelector(),
                   const SizedBox(height: 16),
+                  if (_searching) ...[
+                    TextField(
+                      controller: _searchController,
+                      autofocus: true,
+                      onChanged: (value) => setState(() => _query = value),
+                      textInputAction: TextInputAction.search,
+                      decoration: InputDecoration(
+                        hintText: 'Search memory titles',
+                        prefixIcon: const Icon(Icons.search_rounded),
+                        suffixIcon: _query.isEmpty
+                            ? null
+                            : IconButton(
+                                tooltip: 'Clear search',
+                                icon: const Icon(Icons.clear_rounded),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  setState(() => _query = '');
+                                },
+                              ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
                   if (upcoming != null) ...[
                     _BirthdayCollageCard(
                       child: upcoming,
@@ -87,14 +151,12 @@ class MemoriesScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 16),
                   ],
-                  if (lastYear != null) ...[
-                    _ThisDayLastYear(memory: lastYear),
-                    const SizedBox(height: 16),
-                  ],
                   if (memories.isEmpty)
                     _EmptyMemories(onAdd: () => _addMemory(context, ref))
+                  else if (filteredMemories.isEmpty)
+                    const _NoMatchingMemories()
                   else
-                    ..._buildTimeline(context, memories),
+                    ..._buildTimeline(context, filteredMemories),
                 ],
               ),
             );
@@ -127,6 +189,7 @@ class MemoriesScreen extends ConsumerWidget {
           crossAxisCount: 3,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
+          childAspectRatio: 0.72,
         ),
         itemCount: items.length,
         itemBuilder: (_, i) => _MemoryTile(
@@ -140,9 +203,8 @@ class MemoriesScreen extends ConsumerWidget {
   }
 
   void _openMemory(BuildContext context, Memory memory) {
-    showModalBottomSheet<void>(
+    showAppSheet<void>(
       context: context,
-      isScrollControlled: true,
       builder: (_) => _MemoryDetail(memory: memory),
     );
   }
@@ -202,77 +264,51 @@ class _MemoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Stack(
-          fit: StackFit.expand,
+    return Semantics(
+      button: true,
+      label: memory.displayTitle,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MemoryPhoto(memory: memory),
-            if (memory.milestoneType != MilestoneType.everyday)
-              Positioned(
-                top: 6,
-                left: 6,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Colors.black26,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Text(memory.milestoneType.emoji,
-                      style: const TextStyle(fontSize: 12)),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    MemoryPhoto(memory: memory),
+                    if (memory.milestoneType != MilestoneType.everyday)
+                      Positioned(
+                        top: 6,
+                        left: 6,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: const BoxDecoration(
+                            color: Colors.black26,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(memory.milestoneType.emoji,
+                              style: const TextStyle(fontSize: 12)),
+                        ),
+                      ),
+                  ],
                 ),
               ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              memory.displayTitle,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                  color: AppColors.ink,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 12),
+            ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _ThisDayLastYear extends StatelessWidget {
-  const _ThisDayLastYear({required this.memory});
-  final Memory memory;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCard(
-      padding: EdgeInsets.zero,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
-            child: AspectRatio(
-                aspectRatio: 16 / 9, child: MemoryPhoto(memory: memory)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                const Text('✨', style: TextStyle(fontSize: 22)),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('This day last year',
-                          style: TextStyle(
-                              color: AppColors.coral,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 13)),
-                      Text(memory.title ?? DateX.fullDate(memory.memoryDate),
-                          style: const TextStyle(
-                              color: AppColors.ink,
-                              fontWeight: FontWeight.w700)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -365,12 +401,86 @@ class _EmptyMemories extends StatelessWidget {
   }
 }
 
-class _MemoryDetail extends ConsumerWidget {
+class _NoMatchingMemories extends StatelessWidget {
+  const _NoMatchingMemories();
+
+  @override
+  Widget build(BuildContext context) => const Padding(
+        padding: EdgeInsets.only(top: 40),
+        child: EmptyView(
+          emoji: '🔎',
+          title: 'No matching memories',
+          message: 'Try a different word from the memory title.',
+        ),
+      );
+}
+
+class _MemoryDetail extends ConsumerStatefulWidget {
   const _MemoryDetail({required this.memory});
   final Memory memory;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_MemoryDetail> createState() => _MemoryDetailState();
+}
+
+class _MemoryDetailState extends ConsumerState<_MemoryDetail> {
+  bool _busy = false;
+
+  Memory get memory => widget.memory;
+
+  Future<void> _download() async {
+    setState(() => _busy = true);
+    try {
+      final bytes = await ref
+          .read(memoriesRepositoryProvider)
+          .downloadBytes(memory.storagePath);
+      await Gal.putImageBytes(bytes);
+      if (mounted) AppSnackbar.success(context, 'Saved to your photos');
+    } on GalException catch (e) {
+      if (mounted) {
+        AppSnackbar.error(
+            context,
+            e.type == GalExceptionType.accessDenied
+                ? 'Allow photo access to save memories.'
+                : 'Couldn’t save that photo.');
+      }
+    } catch (_) {
+      if (mounted) AppSnackbar.error(context, 'Couldn’t save that photo.');
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _share() async {
+    setState(() => _busy = true);
+    try {
+      final bytes = await ref
+          .read(memoriesRepositoryProvider)
+          .downloadBytes(memory.storagePath);
+      final ext = memory.storagePath.split('.').last;
+      final dir = await getTemporaryDirectory();
+      final file = File('${dir.path}/memory.$ext');
+      await file.writeAsBytes(bytes);
+      await Share.shareXFiles([XFile(file.path)], text: memory.title);
+    } catch (_) {
+      if (mounted) AppSnackbar.error(context, 'Couldn’t share that photo.');
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _delete() async {
+    Navigator.pop(context);
+    try {
+      await ref.read(memoriesRepositoryProvider).delete(memory);
+      ref.invalidate(memoriesProvider);
+    } catch (_) {
+      if (mounted) AppSnackbar.error(context, 'Couldn’t delete that memory.');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
       child: Column(
@@ -408,7 +518,8 @@ class _MemoryDetail extends ConsumerWidget {
           ),
           if ((memory.title ?? '').isNotEmpty) ...[
             const SizedBox(height: 10),
-            Text(memory.title!, style: Theme.of(context).textTheme.titleLarge),
+            Text(memory.displayTitle,
+                style: Theme.of(context).textTheme.titleLarge),
           ],
           if ((memory.description ?? '').isNotEmpty) ...[
             const SizedBox(height: 6),
@@ -416,22 +527,34 @@ class _MemoryDetail extends ConsumerWidget {
                 style: const TextStyle(color: AppColors.ink, height: 1.5)),
           ],
           const SizedBox(height: 20),
-          TextButton.icon(
-            onPressed: () async {
-              Navigator.pop(context);
-              try {
-                await ref.read(memoriesRepositoryProvider).delete(memory);
-                ref.invalidate(memoriesProvider);
-              } catch (_) {
-                if (context.mounted) {
-                  AppSnackbar.error(context, 'Couldn’t delete that memory.');
-                }
-              }
-            },
-            icon: const Icon(Icons.delete_outline_rounded,
-                color: AppColors.coral),
-            label: const Text('Delete memory',
-                style: TextStyle(color: AppColors.coral)),
+          Row(
+            children: [
+              Expanded(
+                child: SecondaryButton(
+                  label: 'Download',
+                  icon: Icons.download_rounded,
+                  onPressed: _busy ? null : _download,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: SecondaryButton(
+                  label: 'Share',
+                  icon: Icons.ios_share_rounded,
+                  onPressed: _busy ? null : _share,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Center(
+            child: TextButton.icon(
+              onPressed: _busy ? null : _delete,
+              icon: const Icon(Icons.delete_outline_rounded,
+                  color: AppColors.coral),
+              label: const Text('Delete memory',
+                  style: TextStyle(color: AppColors.coral)),
+            ),
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/buttons.dart';
 import '../../../../core/widgets/selectable_chip.dart';
 import '../../../../models/enums.dart';
+import '../../../../services/review_prompter.dart';
 import '../../../children/application/children_providers.dart';
 import '../../../family/application/family_providers.dart';
 import '../../application/memories_providers.dart';
@@ -31,9 +33,8 @@ class MemoryUploadSheet extends ConsumerStatefulWidget {
 
 class _MemoryUploadSheetState extends ConsumerState<MemoryUploadSheet> {
   final _title = TextEditingController();
-  final _description = TextEditingController();
   DateTime _date = DateTime.now();
-  MilestoneType _milestone = MilestoneType.everyday;
+  static const _milestone = MilestoneType.everyday;
   String? _childId;
   bool _busy = false;
 
@@ -46,7 +47,6 @@ class _MemoryUploadSheetState extends ConsumerState<MemoryUploadSheet> {
   @override
   void dispose() {
     _title.dispose();
-    _description.dispose();
     super.dispose();
   }
 
@@ -61,13 +61,12 @@ class _MemoryUploadSheetState extends ConsumerState<MemoryUploadSheet> {
             bytes: widget.bytes,
             fileExt: widget.fileExt == 'png' ? 'png' : 'jpg',
             title: _title.text.trim().isEmpty ? null : _title.text.trim(),
-            description: _description.text.trim().isEmpty
-                ? null
-                : _description.text.trim(),
+            description: null,
             memoryDate: _date,
             milestone: _milestone,
           );
       ref.invalidate(memoriesProvider);
+      unawaited(ReviewPrompter.instance.recordPositiveAction());
       if (mounted) {
         Navigator.pop(context);
         AppSnackbar.success(context, 'Added to your HugBook');
@@ -114,30 +113,7 @@ class _MemoryUploadSheetState extends ConsumerState<MemoryUploadSheet> {
                 hint: 'e.g. First bike ride',
                 controller: _title),
             const SizedBox(height: 14),
-            AppTextField(
-              label: 'Description (optional)',
-              hint: 'What made this moment special?',
-              controller: _description,
-              maxLines: 3,
-              minLines: 2,
-            ),
-            const SizedBox(height: 14),
             _DateRow(date: _date, onPick: (d) => setState(() => _date = d)),
-            const SizedBox(height: 16),
-            const _Label('Milestone'),
-            const SizedBox(height: 10),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                for (final m in MilestoneType.values)
-                  SelectableChip(
-                    label: '${m.emoji} ${m.label}',
-                    selected: _milestone == m,
-                    onTap: () => setState(() => _milestone = m),
-                  ),
-              ],
-            ),
             if (children.isNotEmpty) ...[
               const SizedBox(height: 16),
               const _Label('Who’s in it?'),

@@ -34,7 +34,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final _inviteCode = TextEditingController();
   final _childName = TextEditingController();
   DateTime? _birthday;
-  String? _temperament;
+  final Set<String> _temperaments = {};
   final Set<String> _goals = {};
   final Set<String> _struggles = {};
 
@@ -128,7 +128,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               familyId: _familyId!,
               name: _childName.text.trim(),
               birthday: _birthday,
-              temperament: _temperament,
+              temperaments: _temperaments.toList(),
               commonStruggles: _struggles.toList(),
               parentGoals: _goals.toList(),
               createdBy: '',
@@ -260,10 +260,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   for (final t in ChildOptions.temperaments)
                     SelectableChip(
                       label: t,
-                      selected: _temperament == t,
+                      selected: _temperaments.contains(t),
                       color: AppColors.mint,
-                      onTap: () => setState(
-                          () => _temperament = _temperament == t ? null : t),
+                      onTap: () => setState(() => _temperaments.contains(t)
+                          ? _temperaments.remove(t)
+                          : _temperaments.add(t)),
                     ),
                 ],
               ),

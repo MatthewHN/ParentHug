@@ -14,6 +14,7 @@ class MainShell extends StatelessWidget {
     _NavSpec('Hug', Icons.volunteer_activism_outlined,
         Icons.volunteer_activism_rounded),
     _NavSpec('Board', Icons.dashboard_outlined, Icons.dashboard_rounded),
+    _NavSpec('Library', Icons.grid_view_outlined, Icons.grid_view_rounded),
     _NavSpec(
         'Memories', Icons.photo_library_outlined, Icons.photo_library_rounded),
   ];
@@ -74,7 +75,7 @@ class _NavTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected ? AppColors.coral : AppColors.inkFaint;
+    final color = selected ? AppColors.primary : AppColors.inkFaint;
     return InkResponse(
       onTap: onTap,
       radius: 38,

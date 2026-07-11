@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/app_sheet.dart';
 import '../../../../core/utils/app_snackbar.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/buttons.dart';
@@ -13,26 +14,34 @@ import '../../../family/application/family_providers.dart';
 import '../../application/board_providers.dart';
 import '../../data/board_repository.dart';
 
-/// Opens the create/edit sheet for a board item.
+/// Opens the create/edit sheet for a board item. When [lockCategory] is true the
+/// category picker is hidden — used from the Board's category cards, where the
+/// card itself already determines the category.
 Future<void> showBoardItemEditor(
   BuildContext context, {
   BoardItem? existing,
   BoardCategory? initialCategory,
+  bool lockCategory = false,
 }) {
-  return showModalBottomSheet<void>(
+  return showAppSheet<void>(
     context: context,
-    isScrollControlled: true,
     builder: (_) => _BoardItemEditor(
       existing: existing,
       initialCategory: initialCategory,
+      lockCategory: lockCategory,
     ),
   );
 }
 
 class _BoardItemEditor extends ConsumerStatefulWidget {
-  const _BoardItemEditor({this.existing, this.initialCategory});
+  const _BoardItemEditor({
+    this.existing,
+    this.initialCategory,
+    this.lockCategory = false,
+  });
   final BoardItem? existing;
   final BoardCategory? initialCategory;
+  final bool lockCategory;
 
   @override
   ConsumerState<_BoardItemEditor> createState() => _BoardItemEditorState();
@@ -128,25 +137,32 @@ class _BoardItemEditorState extends ConsumerState<_BoardItemEditor> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(widget.existing == null ? 'New board note' : 'Edit note',
+            Text(
+                widget.existing != null
+                    ? 'Edit note'
+                    : widget.lockCategory
+                        ? 'New ${_category.label.toLowerCase()} entry'
+                        : 'New board note',
                 style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: 16),
-            const _Label('Category'),
-            const SizedBox(height: 10),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                for (final c in BoardCategory.values)
-                  SelectableChip(
-                    label: c.label,
-                    emoji: c.emoji,
-                    selected: _category == c,
-                    color: AppColors.category(c.value),
-                    onTap: () => setState(() => _category = c),
-                  ),
-              ],
-            ),
+            if (!widget.lockCategory) ...[
+              const SizedBox(height: 16),
+              const _Label('Category'),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (final c in BoardCategory.values)
+                    SelectableChip(
+                      label: c.label,
+                      emoji: c.emoji,
+                      selected: _category == c,
+                      color: AppColors.category(c.value),
+                      onTap: () => setState(() => _category = c),
+                    ),
+                ],
+              ),
+            ],
             if (children.isNotEmpty) ...[
               const SizedBox(height: 16),
               const _Label('About which child?'),

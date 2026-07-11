@@ -41,6 +41,9 @@ dependencies:
   intl: ^0.19.0
   image_picker: ^1.1.2
   uuid: ^4.5.1
+  shared_preferences: ^2.3.2
+  path_provider: ^2.1.4 # temp file for sharing a memory image
+  gal: ^2.3.2 # save a memory image to the device gallery
 
 dev_dependencies:
   flutter_test:

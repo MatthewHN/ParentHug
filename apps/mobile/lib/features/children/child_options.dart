@@ -11,6 +11,11 @@ class ChildOptions {
     'Playful',
     'Shy',
     'Big feelings',
+    'Slow to warm up',
+    'Easily frustrated',
+    'Impulsive',
+    'Strong-willed',
+    'Anxious',
   ];
 
   static const goals = [

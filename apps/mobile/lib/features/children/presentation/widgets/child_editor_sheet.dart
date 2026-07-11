@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/app_sheet.dart';
 import '../../../../core/utils/app_snackbar.dart';
 import '../../../../core/utils/date_x.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/buttons.dart';
-import '../../../../core/widgets/selectable_chip.dart';
+import '../../../../core/widgets/expandable_chip_field.dart';
 import '../../../../models/child.dart';
 import '../../../family/application/family_providers.dart';
 import '../../application/children_providers.dart';
@@ -15,9 +16,8 @@ import '../../child_options.dart';
 import '../../data/children_repository.dart';
 
 Future<void> showChildEditor(BuildContext context, {Child? existing}) {
-  return showModalBottomSheet<void>(
+  return showAppSheet<void>(
     context: context,
-    isScrollControlled: true,
     builder: (_) => _ChildEditor(existing: existing),
   );
 }
@@ -34,7 +34,7 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
   late final TextEditingController _name;
   late final TextEditingController _notes;
   DateTime? _birthday;
-  String? _temperament;
+  late final Set<String> _temperaments;
   late final Set<String> _goals;
   late final Set<String> _struggles;
   bool _busy = false;
@@ -46,7 +46,7 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
     _name = TextEditingController(text: e?.name ?? '');
     _notes = TextEditingController(text: e?.notes ?? '');
     _birthday = e?.birthday;
-    _temperament = e?.temperament;
+    _temperaments = {...?e?.temperaments};
     _goals = {...?e?.parentGoals};
     _struggles = {...?e?.commonStruggles};
   }
@@ -73,7 +73,7 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
         familyId: familyId,
         name: _name.text.trim(),
         birthday: _birthday,
-        temperament: _temperament,
+        temperaments: _temperaments.toList(),
         commonStruggles: _struggles.toList(),
         parentGoals: _goals.toList(),
         notes: _notes.text.trim().isEmpty ? null : _notes.text.trim(),
@@ -93,6 +93,49 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
     } catch (_) {
       if (mounted) {
         AppSnackbar.error(context, 'Couldn’t save. Please try again.');
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _remove() async {
+    final existing = widget.existing;
+    if (existing == null) return;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Remove ${existing.name}?'),
+        content: const Text(
+            'This removes this child’s profile and details from your family. This can’t be undone.'),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Cancel')),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: TextButton.styleFrom(foregroundColor: AppColors.coral),
+            child: const Text('Remove'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    setState(() => _busy = true);
+    try {
+      await ref.read(childrenRepositoryProvider).delete(existing.id);
+      // Clear the focused child if it was the one we just removed.
+      if (ref.read(selectedChildIdProvider) == existing.id) {
+        ref.read(selectedChildIdProvider.notifier).state = null;
+      }
+      ref.invalidate(childrenProvider);
+      if (mounted) {
+        Navigator.pop(context);
+        AppSnackbar.success(context, 'Removed');
+      }
+    } catch (_) {
+      if (mounted) {
+        AppSnackbar.error(context, 'Couldn’t remove. Please try again.');
       }
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -158,44 +201,43 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
               ),
             ),
             const SizedBox(height: 16),
-            const _Label('Temperament'),
-            const SizedBox(height: 10),
-            _wrap([
-              for (final t in ChildOptions.temperaments)
-                SelectableChip(
-                  label: t,
-                  color: AppColors.mint,
-                  selected: _temperament == t,
-                  onTap: () => setState(
-                      () => _temperament = _temperament == t ? null : t),
-                ),
-            ]),
+            ExpandableChipField(
+              label: 'Temperament',
+              hint: 'Select temperament',
+              color: AppColors.mint,
+              options: ChildOptions.temperaments,
+              selected: _temperaments,
+              onChanged: (s) => setState(() {
+                _temperaments
+                  ..clear()
+                  ..addAll(s);
+              }),
+            ),
             const SizedBox(height: 16),
-            const _Label('Parenting goals'),
-            const SizedBox(height: 10),
-            _wrap([
-              for (final g in ChildOptions.goals)
-                SelectableChip(
-                  label: g,
-                  selected: _goals.contains(g),
-                  onTap: () => setState(() =>
-                      _goals.contains(g) ? _goals.remove(g) : _goals.add(g)),
-                ),
-            ]),
+            ExpandableChipField(
+              label: 'Parenting goals',
+              hint: 'Select goals',
+              options: ChildOptions.goals,
+              selected: _goals,
+              onChanged: (s) => setState(() {
+                _goals
+                  ..clear()
+                  ..addAll(s);
+              }),
+            ),
             const SizedBox(height: 16),
-            const _Label('Common struggles'),
-            const SizedBox(height: 10),
-            _wrap([
-              for (final s in ChildOptions.struggles)
-                SelectableChip(
-                  label: s,
-                  color: AppColors.coral,
-                  selected: _struggles.contains(s),
-                  onTap: () => setState(() => _struggles.contains(s)
-                      ? _struggles.remove(s)
-                      : _struggles.add(s)),
-                ),
-            ]),
+            ExpandableChipField(
+              label: 'Common struggles',
+              hint: 'Select struggles',
+              color: AppColors.coral,
+              options: ChildOptions.struggles,
+              selected: _struggles,
+              onChanged: (s) => setState(() {
+                _struggles
+                  ..clear()
+                  ..addAll(s);
+              }),
+            ),
             const SizedBox(height: 16),
             AppTextField(
               label: 'Notes (optional)',
@@ -209,21 +251,22 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
                 label: widget.existing == null ? 'Add child' : 'Save changes',
                 loading: _busy,
                 onPressed: _save),
+            if (widget.existing != null) ...[
+              const SizedBox(height: 6),
+              Center(
+                child: TextButton.icon(
+                  onPressed: _busy ? null : _remove,
+                  icon: const Icon(Icons.delete_outline_rounded,
+                      size: 18, color: AppColors.coral),
+                  label: const Text('Remove child',
+                      style: TextStyle(color: AppColors.coral)),
+                ),
+              ),
+            ],
           ],
         ),
       ),
     );
   }
 
-  Widget _wrap(List<Widget> children) =>
-      Wrap(spacing: 8, runSpacing: 8, children: children);
-}
-
-class _Label extends StatelessWidget {
-  const _Label(this.text);
-  final String text;
-  @override
-  Widget build(BuildContext context) => Text(text,
-      style: const TextStyle(
-          fontWeight: FontWeight.w800, color: AppColors.ink, fontSize: 14.5));
 }

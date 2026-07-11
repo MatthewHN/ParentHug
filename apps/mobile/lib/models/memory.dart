@@ -33,6 +33,14 @@ class Memory {
 
   String get monthYear => DateX.monthYear(memoryDate);
 
+  /// User-facing caption for memory cards and search results.
+  String get displayTitle {
+    final value = title?.trim();
+    return value == null || value.isEmpty
+        ? 'A moment worth remembering'
+        : value;
+  }
+
   factory Memory.fromMap(Map<String, dynamic> m) => Memory(
         id: m['id'] as String,
         familyId: m['family_id'] as String,

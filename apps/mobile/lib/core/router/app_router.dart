@@ -8,6 +8,7 @@ import '../../features/auth/presentation/signup_screen.dart';
 import '../../features/auth/presentation/welcome_screen.dart';
 import '../../features/board/presentation/board_screen.dart';
 import '../../features/hug/presentation/hug_screen.dart';
+import '../../features/library/presentation/library_screen.dart';
 import '../../features/memories/presentation/memories_screen.dart';
 import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
@@ -115,6 +116,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(routes: [
             GoRoute(
                 path: AppRoutes.board, builder: (_, __) => const BoardScreen()),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+                path: AppRoutes.library,
+                builder: (_, __) => const LibraryScreen()),
           ]),
           StatefulShellBranch(routes: [
             GoRoute(

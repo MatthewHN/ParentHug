@@ -12,18 +12,16 @@ final memoriesProvider = FutureProvider<List<Memory>>((ref) {
   return ref.watch(memoriesRepositoryProvider).list(familyId, childId: childId);
 });
 
-/// A memory from this calendar day in a previous year ("This day last year").
-final thisDayLastYearProvider = Provider<Memory?>((ref) {
+/// The newest uploaded memory for the active child (or the whole family).
+/// This uses upload time rather than the photo's calendar date so new uploads
+/// appear on Today immediately.
+final memoryOfDayProvider = Provider<Memory?>((ref) {
   final memories = ref.watch(memoriesProvider).valueOrNull ?? const [];
-  final now = DateTime.now();
-  for (final m in memories) {
-    if (m.memoryDate.month == now.month &&
-        m.memoryDate.day == now.day &&
-        m.memoryDate.year < now.year) {
-      return m;
-    }
-  }
-  return null;
+  if (memories.isEmpty) return null;
+  return memories.reduce(
+    (latest, memory) =>
+        memory.createdAt.isAfter(latest.createdAt) ? memory : latest,
+  );
 });
 
 /// Resolves a short-lived signed URL for a private memory image.
