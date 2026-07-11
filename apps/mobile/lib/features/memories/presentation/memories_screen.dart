@@ -44,6 +44,14 @@ class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
     super.dispose();
   }
 
+  void _toggleSearch() => setState(() {
+        _searching = !_searching;
+        if (!_searching) {
+          _searchController.clear();
+          _query = '';
+        }
+      });
+
   Future<void> _addMemory(BuildContext context, WidgetRef ref) async {
     try {
       final file = await ImagePicker().pickImage(
@@ -75,21 +83,7 @@ class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
     final upcoming = _upcomingBirthday(children);
 
     return Scaffold(
-      appBar: AppHeader(
-        actions: [
-          IconButton(
-            tooltip: _searching ? 'Close title search' : 'Search memory titles',
-            icon: Icon(_searching ? Icons.close_rounded : Icons.search_rounded),
-            onPressed: () => setState(() {
-              _searching = !_searching;
-              if (!_searching) {
-                _searchController.clear();
-                _query = '';
-              }
-            }),
-          ),
-        ],
-      ),
+      appBar: const AppHeader(),
       floatingActionButton: FloatingActionButton.extended(
         heroTag: 'fab_memories',
         onPressed: () => _addMemory(context, ref),
@@ -173,14 +167,30 @@ class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
       groups.putIfAbsent(m.monthYear, () => []).add(m);
     }
     final widgets = <Widget>[];
+    var isFirstGroup = true;
     groups.forEach((month, items) {
       widgets.add(Padding(
         padding: const EdgeInsets.only(top: 4, bottom: 12),
-        child: Text(month,
-            style: const TextStyle(
-                fontWeight: FontWeight.w800,
-                fontSize: 16,
-                color: AppColors.ink)),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(month,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                      color: AppColors.ink)),
+            ),
+            if (isFirstGroup)
+              IconButton(
+                tooltip:
+                    _searching ? 'Close title search' : 'Search memory titles',
+                visualDensity: VisualDensity.compact,
+                icon: Icon(
+                    _searching ? Icons.close_rounded : Icons.search_rounded),
+                onPressed: _toggleSearch,
+              ),
+          ],
+        ),
       ));
       widgets.add(GridView.builder(
         shrinkWrap: true,
@@ -198,6 +208,7 @@ class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
         ),
       ));
       widgets.add(const SizedBox(height: 18));
+      isFirstGroup = false;
     });
     return widgets;
   }
