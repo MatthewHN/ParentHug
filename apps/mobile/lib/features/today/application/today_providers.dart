@@ -13,7 +13,17 @@ final todayBriefingProvider =
   if (familyId == null) {
     return const DailyBriefing();
   }
-  final childId = ref.watch(selectedChildIdProvider);
+  // Wait for children rather than generating a briefing with an empty child ID
+  // while profiles are still loading. On "All", use the first child so every
+  // suggestion has complete developmental context.
+  final children = await ref.watch(childrenProvider.future);
+  final selectedChildId = ref.watch(selectedChildIdProvider);
+  final selectedExists = children.any((child) => child.id == selectedChildId);
+  final childId = selectedExists
+      ? selectedChildId
+      : children.isEmpty
+          ? null
+          : children.first.id;
   return ref
       .watch(briefingRepositoryProvider)
       .todayOrGenerate(familyId, childId);

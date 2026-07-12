@@ -8,6 +8,8 @@ import 'package:parenthug/features/board/presentation/widgets/board_category_car
 import 'package:parenthug/features/children/application/children_providers.dart';
 import 'package:parenthug/features/hug/presentation/hug_screen.dart';
 import 'package:parenthug/features/library/presentation/library_screen.dart';
+import 'package:parenthug/features/library/presentation/impostor_screen.dart';
+import 'package:parenthug/features/library/presentation/charades_screen.dart';
 import 'package:parenthug/models/child.dart';
 
 void main() {
@@ -41,7 +43,7 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
-  testWidgets('LibraryScreen renders its sectioned placeholder structure',
+  testWidgets('LibraryScreen renders the requested family play categories',
       (tester) async {
     // Tall surface so the whole ListView builds (it virtualizes by default).
     await tester.binding.setSurfaceSize(const Size(500, 1600));
@@ -58,14 +60,59 @@ void main() {
     );
     await tester.pump();
 
-    // Header, search, all section titles, and sample tiles are present.
+    // Header, requested category titles, and playable entries are present.
     expect(find.text('ParentHug'), findsOneWidget);
-    expect(find.text('Search activities & games'), findsOneWidget);
-    expect(find.text('Activities'), findsOneWidget);
-    expect(find.text('Talks'), findsOneWidget);
+    expect(find.text('Bring to life'), findsOneWidget);
     expect(find.text('Games'), findsOneWidget);
-    expect(find.text('Indoor'), findsOneWidget);
+    expect(find.text('Photo to video'), findsOneWidget);
     expect(find.text('Charades'), findsOneWidget);
+    expect(find.text('Impostor'), findsOneWidget);
+  });
+
+  testWidgets('Charades tile opens its ready screen', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(500, 1600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          myProfileProvider.overrideWith((ref) => Future.value(null)),
+        ],
+        child: const MaterialApp(home: LibraryScreen()),
+      ),
+    );
+
+    await tester.tap(find.text('Charades'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Ready for Charades?'), findsOneWidget);
+  });
+
+  testWidgets('Charades round fits a small landscape screen and shows Done',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(640, 320));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(const MaterialApp(home: CharadesScreen()));
+    await tester.tap(find.text('Start playing'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 5));
+
+    expect(find.text('Done'), findsOneWidget);
+    expect(find.text('Go again'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Impostor creates one card per player', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: ImpostorScreen()));
+
+    await tester.tap(find.text('Play'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Choose your card'), findsOneWidget);
+    expect(find.text('Player 1'), findsOneWidget);
+    expect(find.text('Player 2'), findsOneWidget);
+    expect(find.text('Player 3'), findsOneWidget);
   });
 
   testWidgets('ExpandableChipField expands and reports a selection',

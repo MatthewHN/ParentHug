@@ -35,6 +35,7 @@ class MemoriesScreen extends ConsumerStatefulWidget {
 
 class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
   final _searchController = TextEditingController();
+  final _optimisticallyDeletedIds = <String>{};
   bool _searching = false;
   String _query = '';
 
@@ -101,10 +102,15 @@ class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
               ErrorView(onRetry: () => ref.invalidate(memoriesProvider)),
           data: (memories) {
             final query = _query.trim().toLowerCase();
+            final visibleMemories = memories
+                .where(
+                    (memory) => !_optimisticallyDeletedIds.contains(memory.id))
+                .toList();
             final filteredMemories = query.isEmpty
-                ? memories
+                ? visibleMemories
                 : memories
                     .where((memory) =>
+                        !_optimisticallyDeletedIds.contains(memory.id) &&
                         memory.displayTitle.toLowerCase().contains(query))
                     .toList();
             return RefreshIndicator(
@@ -145,7 +151,7 @@ class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
                     ),
                     const SizedBox(height: 16),
                   ],
-                  if (memories.isEmpty)
+                  if (visibleMemories.isEmpty)
                     _EmptyMemories(onAdd: () => _addMemory(context, ref))
                   else if (filteredMemories.isEmpty)
                     const _NoMatchingMemories()
@@ -216,7 +222,19 @@ class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
   void _openMemory(BuildContext context, Memory memory) {
     showAppSheet<void>(
       context: context,
-      builder: (_) => _MemoryDetail(memory: memory),
+      builder: (_) => _MemoryDetail(
+        memory: memory,
+        onOptimisticDelete: () {
+          if (mounted) {
+            setState(() => _optimisticallyDeletedIds.add(memory.id));
+          }
+        },
+        onDeleteFailed: () {
+          if (mounted) {
+            setState(() => _optimisticallyDeletedIds.remove(memory.id));
+          }
+        },
+      ),
     );
   }
 
@@ -427,8 +445,14 @@ class _NoMatchingMemories extends StatelessWidget {
 }
 
 class _MemoryDetail extends ConsumerStatefulWidget {
-  const _MemoryDetail({required this.memory});
+  const _MemoryDetail({
+    required this.memory,
+    required this.onOptimisticDelete,
+    required this.onDeleteFailed,
+  });
   final Memory memory;
+  final VoidCallback onOptimisticDelete;
+  final VoidCallback onDeleteFailed;
 
   @override
   ConsumerState<_MemoryDetail> createState() => _MemoryDetailState();
@@ -481,11 +505,13 @@ class _MemoryDetailState extends ConsumerState<_MemoryDetail> {
   }
 
   Future<void> _delete() async {
+    widget.onOptimisticDelete();
     Navigator.pop(context);
     try {
       await ref.read(memoriesRepositoryProvider).delete(memory);
       ref.invalidate(memoriesProvider);
     } catch (_) {
+      widget.onDeleteFailed();
       if (mounted) AppSnackbar.error(context, 'Couldn’t delete that memory.');
     }
   }

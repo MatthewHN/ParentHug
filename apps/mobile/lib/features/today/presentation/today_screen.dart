@@ -172,9 +172,10 @@ class _MemoryOfDay extends StatelessWidget {
             ClipRRect(
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(22)),
-              child: AspectRatio(
-                aspectRatio: 16 / 10,
-                child: MemoryPhoto(memory: memory),
+              child: MemoryPhoto(
+                memory: memory,
+                fit: BoxFit.contain,
+                width: double.infinity,
               ),
             ),
             Padding(
@@ -208,10 +209,8 @@ class _MemoryOfDay extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
-            child: AspectRatio(
-              aspectRatio: 16 / 10,
-              child: Image.asset('assets/kid.jpg', fit: BoxFit.cover),
-            ),
+            child: Image.asset('assets/kid.jpg',
+                width: double.infinity, fit: BoxFit.contain),
           ),
           Padding(
             padding: const EdgeInsets.all(16),

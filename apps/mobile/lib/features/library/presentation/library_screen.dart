@@ -4,140 +4,109 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_snackbar.dart';
 import '../../../core/widgets/app_header.dart';
 import '../../../core/widgets/section_header.dart';
+import 'charades_screen.dart';
+import 'impostor_screen.dart';
 
-/// Placeholder Library tab: a browsable shelf of activities, conversation
-/// starters, and games for families. The structure is in place; the individual
-/// items are stubs ("coming soon") until the real content is wired up.
+/// A small, intentional shelf of family play. Video-generation entries are
+/// discoverable here but remain unavailable until their APIs are connected.
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});
 
   static const _sections = <_LibrarySection>[
-    _LibrarySection('Activities', [
-      _LibraryItem('Indoor', '🏠', AppColors.yellowSoft),
-      _LibraryItem('Outdoor', '🧭', AppColors.mintSoft),
-      _LibraryItem('Holidays', '🎁', AppColors.coralSoft),
-    ]),
-    _LibrarySection('Talks', [
-      _LibraryItem('Word Games', '🗣️', AppColors.primarySoft),
-      _LibraryItem('Questions', '💬', AppColors.mintSoft),
-      _LibraryItem('Tell a Story', '📖', AppColors.yellowSoft),
+    _LibrarySection('Bring to life', [
+      _LibraryItem('Photo to video', '📷', Color(0xFFFFD98A)),
+      _LibraryItem('Drawing to video', '🎨', AppColors.mintSoft),
+      _LibraryItem('Dream to video', '🌙', AppColors.coralSoft),
     ]),
     _LibrarySection('Games', [
-      _LibraryItem('Charades', '🎭', AppColors.coralSoft),
-      _LibraryItem('Guess the Flag', '🚩', AppColors.primarySoft),
-      _LibraryItem('Mood Tracker', '🙂', AppColors.yellowSoft),
+      _LibraryItem('Charades', '🎭', AppColors.yellowSoft),
+      _LibraryItem('Impostor', '🕵️', Color(0xFFD6C5FF)),
     ]),
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppHeader(),
-      body: SafeArea(
-        top: false,
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
-          children: [
-            const _SearchBar(),
-            const SizedBox(height: 8),
-            for (final section in _sections) ...[
-              const SizedBox(height: 18),
-              SectionHeader(title: section.title),
-              const SizedBox(height: 12),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 0.82,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: const AppHeader(),
+        body: SafeArea(
+          top: false,
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+            children: [
+              for (final section in _sections) ...[
+                const SizedBox(height: 24),
+                SectionHeader(title: section.title),
+                const SizedBox(height: 12),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    childAspectRatio: 0.82,
+                  ),
+                  itemCount: section.items.length,
+                  itemBuilder: (_, index) => _Tile(item: section.items[index]),
                 ),
-                itemCount: section.items.length,
-                itemBuilder: (_, i) => _Tile(item: section.items[i]),
-              ),
+              ],
             ],
-            const SizedBox(height: 24),
-            Center(
-              child: Text(
-                'More activities & games are on the way.',
-                style: TextStyle(
-                    color: AppColors.inkFaint,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class _SearchBar extends StatelessWidget {
-  const _SearchBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => AppSnackbar.show(context, 'Search is coming soon'),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-        decoration: BoxDecoration(
-          color: const Color(0xFFF1F3F5),
-          borderRadius: BorderRadius.circular(14),
-        ),
-        child: const Row(
-          children: [
-            Icon(Icons.search_rounded, color: AppColors.inkFaint),
-            SizedBox(width: 10),
-            Text('Search activities & games',
-                style: TextStyle(color: AppColors.inkFaint, fontSize: 15)),
-          ],
-        ),
-      ),
-    );
-  }
+      );
 }
 
 class _Tile extends StatelessWidget {
   const _Tile({required this.item});
   final _LibraryItem item;
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => AppSnackbar.show(context, '${item.label} is coming soon'),
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: item.color,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.hairline),
-              ),
-              alignment: Alignment.center,
-              child: Text(item.emoji, style: const TextStyle(fontSize: 32)),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            item.label,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 12.5,
-                color: AppColors.ink),
-          ),
-        ],
-      ),
-    );
+  void _open(BuildContext context) {
+    switch (item.label) {
+      case 'Charades':
+        Navigator.of(context, rootNavigator: true).push(
+            MaterialPageRoute<void>(builder: (_) => const CharadesScreen()));
+      case 'Impostor':
+        Navigator.of(context, rootNavigator: true).push(
+            MaterialPageRoute<void>(builder: (_) => const ImpostorScreen()));
+      default:
+        AppSnackbar.show(context, '${item.label} is coming soon');
+    }
   }
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+        button: true,
+        label: item.label,
+        child: GestureDetector(
+          onTap: () => _open(context),
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: item.color,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: AppColors.hairline),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(item.emoji, style: const TextStyle(fontSize: 32)),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                item.label,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12.5,
+                    color: AppColors.ink),
+              ),
+            ],
+          ),
+        ),
+      );
 }
 
 class _LibrarySection {

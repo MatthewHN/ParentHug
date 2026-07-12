@@ -5,7 +5,7 @@
 import { handleOptions, jsonResponse } from "../_shared/cors.ts";
 import { adminClient, getUserId } from "../_shared/supabase.ts";
 import { callAiJson, coerceShape } from "../_shared/ai.ts";
-import { BRIEFING_SYSTEM, buildBriefingUser, placeholderBriefing } from "../_shared/prompts.ts";
+import { BRIEFING_SYSTEM, buildBriefingUser, needsParentFacingGuidance, placeholderBriefing } from "../_shared/prompts.ts";
 import { loadBoardContext, loadChildContext } from "../_shared/context.ts";
 
 const KEYS = [
@@ -38,14 +38,16 @@ Deno.serve(async (req) => {
     });
     if (!isMember) return jsonResponse({ error: "forbidden" }, 403);
 
-    const child = await loadChildContext(db, childId);
+    const child = await loadChildContext(db, childId, familyId);
     const board = await loadBoardContext(db, familyId, childId);
 
     const ai = await callAiJson({
       system: BRIEFING_SYSTEM,
       user: buildBriefingUser(child, board),
     });
-    const out = coerceShape(ai, KEYS) ?? placeholderBriefing(child, board);
+    const out = needsParentFacingGuidance(child)
+      ? placeholderBriefing(child, board)
+      : coerceShape(ai, KEYS) ?? placeholderBriefing(child, board);
 
     // One briefing per family+child+day: replace any existing row for today.
     const today = new Date().toISOString().slice(0, 10);

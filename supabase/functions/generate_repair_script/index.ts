@@ -4,7 +4,7 @@
 import { handleOptions, jsonResponse } from "../_shared/cors.ts";
 import { adminClient, getUserId } from "../_shared/supabase.ts";
 import { callAiJson, coerceShape } from "../_shared/ai.ts";
-import { buildRepairUser, placeholderRepair, REPAIR_SYSTEM } from "../_shared/prompts.ts";
+import { buildRepairUser, needsParentFacingGuidance, placeholderRepair, REPAIR_SYSTEM } from "../_shared/prompts.ts";
 import { loadChildContext } from "../_shared/context.ts";
 import { needsSafety, safetyRepair } from "../_shared/safety.ts";
 import { trackUsage } from "../_shared/usage.ts";
@@ -70,12 +70,14 @@ Deno.serve(async (req) => {
       );
     }
 
-    const child = await loadChildContext(db, childId);
+    const child = await loadChildContext(db, childId, familyId);
     const ai = await callAiJson({
       system: REPAIR_SYSTEM,
       user: buildRepairUser(situation, parentReaction, tone, child),
     });
-    const out = coerceShape(ai, KEYS) ?? placeholderRepair(parentReaction, child);
+    const out = needsParentFacingGuidance(child)
+      ? placeholderRepair(parentReaction, child)
+      : coerceShape(ai, KEYS) ?? placeholderRepair(parentReaction, child);
 
     const id = await save(db, { familyId, childId, uid, situation, parentReaction, tone, out });
     return jsonResponse({ ...out, id, plan: usage.plan });

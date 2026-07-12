@@ -15,15 +15,15 @@ class DateX {
     return age < 0 ? 0 : age;
   }
 
-  /// Friendly age: "8 months", "1 year", "4 years".
+  /// Friendly age: "newborn", "8 months old", "1 year old".
   static String ageLabel(DateTime birthday, {DateTime? asOf}) {
     final now = asOf ?? DateTime.now();
     final years = ageYears(birthday, asOf: now);
-    if (years >= 1) return years == 1 ? '1 year' : '$years years';
+    if (years >= 1) return years == 1 ? '1 year old' : '$years years old';
     var months = (now.year - birthday.year) * 12 + (now.month - birthday.month);
     if (now.day < birthday.day) months--;
     if (months <= 0) return 'newborn';
-    return months == 1 ? '1 month' : '$months months';
+    return months == 1 ? '1 month old' : '$months months old';
   }
 
   /// Days until the next birthday.

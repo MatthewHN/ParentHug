@@ -4,7 +4,7 @@
 import { handleOptions, jsonResponse } from "../_shared/cors.ts";
 import { adminClient, getUserId } from "../_shared/supabase.ts";
 import { callAiJson, coerceShape } from "../_shared/ai.ts";
-import { buildHugUser, HUG_SYSTEM, placeholderHug } from "../_shared/prompts.ts";
+import { buildHugUser, HUG_SYSTEM, needsParentFacingGuidance, placeholderHug } from "../_shared/prompts.ts";
 import { loadBoardContext, loadChildContext } from "../_shared/context.ts";
 import { needsSafety, safetyHug } from "../_shared/safety.ts";
 import { trackUsage } from "../_shared/usage.ts";
@@ -71,13 +71,15 @@ Deno.serve(async (req) => {
       );
     }
 
-    const child = await loadChildContext(db, childId);
+    const child = await loadChildContext(db, childId, familyId);
     const board = await loadBoardContext(db, familyId, childId);
     const ai = await callAiJson({
       system: HUG_SYSTEM,
       user: buildHugUser(situation, tone, child, board),
     });
-    const out = coerceShape(ai, KEYS) ?? placeholderHug(situation, tone, child);
+    const out = needsParentFacingGuidance(child)
+      ? placeholderHug(situation, tone, child)
+      : coerceShape(ai, KEYS) ?? placeholderHug(situation, tone, child);
 
     const id = await save(db, { familyId, childId, uid, situation, tone, out });
     return jsonResponse({ ...out, id, plan: usage.plan });

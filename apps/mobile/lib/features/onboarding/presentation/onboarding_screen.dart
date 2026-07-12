@@ -118,6 +118,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           AppSnackbar.error(context, 'Add your child’s name.');
           return;
         }
+        if (_birthday == null) {
+          AppSnackbar.error(context, 'Add your child’s birthday.');
+          return;
+        }
         _advance();
       case 'goals':
         await _run(() async {
@@ -199,7 +203,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       loading: _busy,
                       onPressed: _continue,
                     ),
-                    if (_key == 'invite' || _key == 'child' || _key == 'goals')
+                    if (_key == 'invite' || _key == 'goals')
                       TextButton(
                         onPressed: _busy
                             ? null
@@ -544,7 +548,7 @@ class _BirthdayPicker extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _Label('Birthday (optional)'),
+        const _Label('Birthday'),
         const SizedBox(height: 8),
         AppCard(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -564,7 +568,7 @@ class _BirthdayPicker extends StatelessWidget {
               const SizedBox(width: 12),
               Text(
                 birthday == null
-                    ? 'Select birthday'
+                    ? 'Select birthday (required)'
                     : '${DateX.fullDate(birthday!)}  ·  ${DateX.ageLabel(birthday!)}',
                 style: TextStyle(
                   color: birthday == null ? AppColors.inkFaint : AppColors.ink,

@@ -30,6 +30,22 @@ children, but it must never feel childlike.
 - Child temperament choices include both strengths and harder traits. Child
   ages are already complete labels (for example, `newborn`), without appending
   `old`.
+- Memory-of-the-day images preserve their complete source aspect ratio, and
+  deleted memories disappear optimistically before the backend request ends.
+- The Library has two categories: `Bring to life` exposes future Photo to
+  video, Drawing to video, and Dream to video integrations; `Games` contains
+  Charades and Impostor. Both games share a 1,000-entry deck made only from
+  simple, curated animals, actions, people, foods, objects, and places.
+- Active Charades rounds take over the full screen in landscape with no bottom
+  navigation, use an overflow-safe layout, and always show `Done` and
+  `Go again`. Impostor uses clue-and-vote rules: each player gives one related
+  word or short hint, then the group votes for the player bluffing.
+- Child birthdays are required for new and edited profiles. Every AI-generated
+  Hug, Repair, and daily briefing receives the child's birthday, developmental
+  stage, temperament, struggles, goals, notes, and relevant moment context.
+  Guidance for newborns and infants is parent-facing rather than asking them to
+  understand spoken instructions or discuss feelings.
+- OpenAI-backed functions default to `gpt-5-mini`.
 
 ## Website content (July 2026)
 

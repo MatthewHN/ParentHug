@@ -4,8 +4,11 @@
 
 export interface ChildContext {
   name?: string | null;
+  birthday?: string | null;
   ageYears?: number | null;
-  temperament?: string | null;
+  ageMonths?: number | null;
+  developmentalStage?: string | null;
+  temperament?: string[] | null;
   struggles?: string[] | null;
   goals?: string[] | null;
   notes?: string | null;
@@ -22,11 +25,40 @@ export interface BoardContext {
 const AGE = (c: ChildContext) =>
   c.ageYears != null ? `${c.ageYears}-year-old` : "young child";
 const NAME = (c: ChildContext) => (c.name && c.name.trim()) || "your child";
+export const needsParentFacingGuidance = (c: ChildContext) =>
+  c.ageMonths != null && c.ageMonths < 24;
+
+function developmentalRules(c: ChildContext): string {
+  const months = c.ageMonths;
+  if (months == null) {
+    return "Birthday is missing. Avoid age-specific assumptions and keep guidance conservative.";
+  }
+  if (months < 24) {
+    return "This child is under two and cannot be expected to reason, discuss feelings, follow multi-step language, or calm down on request. Address the parent in every words-to-say field and recommend only simple caregiving and co-regulation.";
+  }
+  if (months < 48) {
+    return "Use one-step actions and very short concrete phrases. Do not ask for a feelings discussion, lengthy explanation, or mature self-control.";
+  }
+  if (months < 96) {
+    return "Use simple child-friendly language, play, and concrete choices suitable for a young child.";
+  }
+  if (months < 144) {
+    return "Use school-age language, collaborative problem-solving, and specific practical actions without talking down to the child.";
+  }
+  if (months < 216) {
+    return "Use respectful teen-appropriate language, privacy, autonomy, and collaboration. Do not suggest preschool play, drawing feelings, sticker charts, or bedtime stories.";
+  }
+  return "Address this person as a young adult. Use respectful adult conversation and autonomy; never suggest child activities, bedtime stories, or parental control scripts.";
+}
 
 function childBlurb(c: ChildContext): string {
   const bits: string[] = [];
-  bits.push(`Child: ${NAME(c)}${c.ageYears != null ? `, age ${c.ageYears}` : ""}.`);
-  if (c.temperament) bits.push(`Temperament: ${c.temperament}.`);
+  bits.push(`Child: ${NAME(c)}.`);
+  if (c.birthday) bits.push(`Birthday: ${c.birthday}.`);
+  if (c.ageMonths != null) bits.push(`Age: ${c.ageMonths} months.`);
+  if (c.ageYears != null) bits.push(`Age in completed years: ${c.ageYears}.`);
+  if (c.developmentalStage) bits.push(`Developmental stage: ${c.developmentalStage}.`);
+  if (c.temperament?.length) bits.push(`Temperament: ${c.temperament.join(", ")}.`);
   if (c.struggles?.length) bits.push(`Common struggles: ${c.struggles.join(", ")}.`);
   if (c.goals?.length) bits.push(`Parent goals: ${c.goals.join(", ")}.`);
   if (c.notes) bits.push(`Notes: ${c.notes}.`);
@@ -53,11 +85,16 @@ Voice: warm, practical, concise, non-judgmental, evidence-informed. Never shame
 the parent or the child. Avoid medical or psychiatric diagnosis. Do not give
 emergency mental-health advice beyond gently recommending professional support
 when appropriate. Always give exact words the parent can say out loud.
+Apply the supplied developmental requirement exactly. Never ask a child under
+two to reason, discuss feelings, follow multi-step language, or calm down on
+request. Never give preschool activities or bedtime-story advice to teens or
+young adults. Respect notes about disability or neurodivergence without
+diagnosing, stereotyping, or treating chronological age as ability.
 
 Return ONLY a JSON object with EXACTLY these string keys:
 {
   "regulate":     "one short grounding step for the parent (1 sentence)",
-  "say_this":     "exact warm words to say to the child, in quotes",
+  "say_this":     "exact words for the parent to say to themselves, or to the child only when developmentally appropriate",
   "do_next":      "one concrete physical next action",
   "avoid":        "one common mistake to avoid in this moment",
   "repair_later": "one short idea to reconnect afterwards"
@@ -74,6 +111,7 @@ export function buildHugUser(
     `Situation: ${situation}`,
     `Desired tone: ${tone}`,
     childBlurb(child),
+    `Developmental requirement: ${developmentalRules(child)}`,
     `Family context: ${boardBlurb(board)}`,
   ].join("\n");
 }
@@ -83,6 +121,15 @@ export function placeholderHug(
   tone: string,
   child: ChildContext,
 ): Record<string, string> {
+  if (needsParentFacingGuidance(child)) {
+    return {
+      regulate: "Take one slow breath and remind yourself: this is temporary, and you can meet this moment one small step at a time.",
+      say_this: "Say to yourself: 'My baby is having a hard moment, not giving me a hard time. I can be the calm here.'",
+      do_next: "Check the basics - feeding, sleep, comfort, temperature, or a diaper - then hold, rock, or sit close in the way that usually settles your baby.",
+      avoid: "Avoid expecting a newborn or infant to understand instructions, explain feelings, or calm down on request.",
+      repair_later: "Give yourself credit for returning to calm. Your steady presence, not perfect words, is what your baby needs.",
+    };
+  }
   const name = NAME(child);
   const age = AGE(child);
   const gentle = tone === "firm"
@@ -113,10 +160,14 @@ Help the parent apologize and reconnect WITHOUT overburdening the child with adu
 guilt. Keep scripts short and age-appropriate (very short for young children).
 Encourage reconnection. Reassure the parent warmly without excusing genuinely
 harmful behavior. Never shame. Avoid diagnosis.
+Apply the supplied developmental requirement exactly. A child under two must
+not receive an apology script they are expected to understand; address the
+parent instead. For teens and young adults, use respectful mature language and
+never suggest preschool repair activities.
 
 Return ONLY a JSON object with EXACTLY these string keys:
 {
-  "repair_script":      "short, age-appropriate words to say to the child, in quotes",
+  "repair_script":      "short words for parent self-talk, or an apology to the child only when developmentally appropriate",
   "follow_up":          "one concrete way to reconnect or follow through",
   "parent_reassurance": "kind, grounding reassurance for the parent (2-3 sentences)"
 }`;
@@ -132,6 +183,7 @@ export function buildRepairUser(
     `What the parent did: ${parentReaction}`,
     `Desired tone: ${tone}`,
     childBlurb(child),
+    `Developmental requirement: ${developmentalRules(child)}`,
   ].join("\n");
 }
 
@@ -139,6 +191,13 @@ export function placeholderRepair(
   parentReaction: string,
   child: ChildContext,
 ): Record<string, string> {
+  if (needsParentFacingGuidance(child)) {
+    return {
+      repair_script: "Say to yourself: 'I had a hard moment. I can reset now and give my baby calm, safe care.'",
+      follow_up: "Put your baby somewhere safe if you need a breath, then return for simple care: hold them, feed them, change them, or sit close and soothe.",
+      parent_reassurance: "Newborns do not need a perfect explanation; they need a parent who keeps returning to safety and care. A pause and reset count.",
+    };
+  }
   const name = NAME(child);
   const reaction = parentReaction.replace(/_/g, " ");
   return {
@@ -157,25 +216,43 @@ export function placeholderRepair(
 export const BRIEFING_SYSTEM = `You are ParentHug's daily briefing. Summarize a child's recent context for a
 busy parent and give ONE practical move for today. Be gentle and useful. No shame,
 no streak pressure. Always include exact "say this" words.
+Apply the supplied developmental requirement exactly. Guidance for a child
+under two must be parent-facing and cannot require language, feeling labels, or
+discussion. Guidance for teens and young adults must respect autonomy and must
+not suggest preschool play, drawing feelings, or bedtime stories.
 
 Return ONLY a JSON object with EXACTLY these string keys:
 {
   "tiny_parenting_move": "one small, doable action for today (1 sentence)",
   "recent_context":      "2-3 sentence summary of what's going on lately",
   "watch_for":           "one thing to gently watch for today",
-  "say_this_today":      "one warm phrase to try today, in quotes",
+  "say_this_today":      "one phrase for parent self-talk, or for the child only when developmentally appropriate",
   "memory_of_day":       "a short, warm nudge to notice or capture a small moment",
   "before_you_walk_in":  "for the parent arriving home: 2 sentences of emotional context + one connecting phrase to open with, in quotes"
 }`;
 
 export function buildBriefingUser(child: ChildContext, board: BoardContext): string {
-  return [childBlurb(child), `Recent family board: ${boardBlurb(board)}`].join("\n");
+  return [
+    childBlurb(child),
+    `Developmental requirement: ${developmentalRules(child)}`,
+    `Recent family board: ${boardBlurb(board)}`,
+  ].join("\n");
 }
 
 export function placeholderBriefing(
   child: ChildContext,
   board: BoardContext,
 ): Record<string, string> {
+  if (needsParentFacingGuidance(child)) {
+    return {
+      tiny_parenting_move: "Choose one small reset today: pause, soften your shoulders, and meet one need at a time.",
+      recent_context: "Your baby is still learning the world through comfort, rhythm, and your steady presence. There is no need to rush a hard moment into words.",
+      watch_for: "Watch for hunger, tiredness, overstimulation, or discomfort, and trust simple soothing before trying to solve more.",
+      say_this_today: "Say to yourself: 'This is temporary. I can slow down and be a safe place for my baby.'",
+      memory_of_day: "Notice one tiny expression, stretch, or quiet moment today that you may want to remember.",
+      before_you_walk_in: "Your baby may need comfort more than conversation after time apart. Start with a calm voice, gentle touch, and the rhythm that helps them settle.",
+    };
+  }
   const name = NAME(child);
   const context = board.headsUp?.length
     ? board.headsUp.join(" ")

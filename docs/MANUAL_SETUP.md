@@ -161,7 +161,7 @@ The app never holds an AI key - only your Supabase server does.
   # Anthropic example:
   supabase secrets set AI_PROVIDER=anthropic AI_API_KEY=sk-ant-xxxxx
   ```
-  *(Optional)* choose a model: `supabase secrets set AI_MODEL=gpt-4o-mini`
+  *(Optional)* choose a model: `supabase secrets set AI_MODEL=gpt-5-mini`
 - [ ] Confirm AI calls only happen server-side - they do; the app calls your
       functions, never the AI directly. (Nothing to change.)
 - [ ] Test each function from the app:

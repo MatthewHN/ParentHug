@@ -43,7 +43,7 @@ export async function callAiJson(
 
 async function callOpenAiCompatible(apiKey: string, msg: AiMessage): Promise<string> {
   const base = Deno.env.get("AI_BASE_URL") ?? "https://api.openai.com/v1";
-  const model = Deno.env.get("AI_MODEL") ?? "gpt-4o-mini";
+  const model = Deno.env.get("AI_MODEL") ?? "gpt-5-mini";
   const res = await withTimeout((signal) =>
     fetch(`${base}/chat/completions`, {
       method: "POST",
@@ -54,7 +54,8 @@ async function callOpenAiCompatible(apiKey: string, msg: AiMessage): Promise<str
       },
       body: JSON.stringify({
         model,
-        temperature: 0.7,
+        // GPT-5 reasoning models reject non-default sampling parameters.
+        ...(model.startsWith("gpt-5") ? {} : { temperature: 0.7 }),
         response_format: { type: "json_object" },
         messages: [
           { role: "system", content: msg.system },

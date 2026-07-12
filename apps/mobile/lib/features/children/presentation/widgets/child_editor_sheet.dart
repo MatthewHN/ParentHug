@@ -63,6 +63,10 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
       AppSnackbar.error(context, 'Add your child’s name.');
       return;
     }
+    if (_birthday == null) {
+      AppSnackbar.error(context, 'Add your child’s birthday.');
+      return;
+    }
     final familyId = ref.read(currentFamilyIdProvider);
     if (familyId == null) return;
     setState(() => _busy = true);
@@ -189,7 +193,7 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
                   const SizedBox(width: 12),
                   Text(
                     _birthday == null
-                        ? 'Select birthday'
+                        ? 'Select birthday (required)'
                         : '${DateX.fullDate(_birthday!)}  ·  ${DateX.ageLabel(_birthday!)}',
                     style: TextStyle(
                         color: _birthday == null
@@ -268,5 +272,4 @@ class _ChildEditorState extends ConsumerState<_ChildEditor> {
       ),
     );
   }
-
 }
