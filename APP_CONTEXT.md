@@ -63,6 +63,8 @@ children, but it must never feel childlike.
 - Blog guidance is supportive and practical, with a clear note to seek a
   pediatric clinician or mental-health professional when a health or persistent
   distress concern needs professional support.
+- Blog article CTA buttons use white foreground text on the ParentHug gradient
+  so the download action remains readable.
 
 ## Profile screen (July 2026)
 

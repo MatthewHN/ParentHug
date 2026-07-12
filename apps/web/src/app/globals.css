@@ -633,6 +633,9 @@ h1.hero-title {
 .blog-cta .btn {
   text-decoration: none;
 }
+.blog-cta .btn-primary {
+  color: #fff;
+}
 .blog-related {
   margin-top: 8px;
 }
