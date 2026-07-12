@@ -1216,6 +1216,596 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "parenting-app-for-toddler-tantrum-scripts",
+    title: "Looking for a Parenting App for Toddler Tantrum Scripts?",
+    description:
+      "How ParentHug gives parents short, calm words for a toddler tantrum when it is hard to think clearly.",
+    date: "July 12, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "parenting app for toddler tantrum scripts",
+      "app that tells me what to say during toddler tantrum",
+      "ParentHug toddler meltdown help",
+      "calm words for tantrums app",
+    ],
+    related: [
+      "what-to-say-when-your-child-is-melting-down",
+      "public-tantrum-calm-parenting-script",
+      "parenthug-app-for-screen-time-battles",
+    ],
+    sections: [
+      {
+        heading: "When you need words, not another parenting article",
+        body: [
+          "A toddler's meltdown can make even a prepared parent freeze or raise their voice. In that moment, broad advice is less useful than one calm sentence and one safe next step.",
+          "ParentHug is built for that gap. You describe what is happening, and the Hug experience gives a short parent-facing response: how to regulate yourself, what to say, what to do next, what to avoid, and how to repair if needed.",
+        ],
+      },
+      {
+        heading: "Use the details that matter",
+        body: [
+          "A script for a tired two-year-old at the supermarket is not the same as one for a six-year-old who cannot leave the playground. ParentHug uses the child context you provide, including birthday, developmental stage, temperament, struggles, goals, notes, and the immediate moment.",
+          "That lets the prompt stay specific: My three-year-old is screaming because we left the park, and I am getting overwhelmed. The result is meant to be brief enough to use while the situation is still happening.",
+        ],
+      },
+      {
+        heading: "Keep the boundary and the connection",
+        body: [
+          "The goal is not to make every feeling disappear or to give in. ParentHug is designed around calm, practical language that can validate a child's feeling while keeping a necessary limit in place.",
+          "For more examples you can use right away, read [What to Say When Your Child Is Melting Down](/blog/what-to-say-when-your-child-is-melting-down) or [download ParentHug](/download) to have the in-the-moment tool available.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Does ParentHug give me a script during a toddler tantrum?",
+        answer:
+          "Yes. Describe the behavior and context in Hug, and ParentHug returns a concise, practical response with words and next steps for the moment.",
+      },
+      {
+        question: "Can ParentHug help if I am the one getting overwhelmed?",
+        answer:
+          "Yes. The response starts with parent regulation and keeps the guidance short so it is useful when your own capacity is low.",
+      },
+      {
+        question: "Is ParentHug a replacement for professional care?",
+        answer:
+          "No. It offers everyday parenting support and scripts. For safety, health, or persistent distress concerns, seek appropriate professional support.",
+      },
+    ],
+  },
+  {
+    slug: "app-to-repair-after-yelling-at-your-child",
+    title: "Is There an App to Help You Repair After Yelling at Your Child?",
+    description:
+      "How ParentHug Repair Mode gives parents a private, warm script for reconnecting after they lose their cool.",
+    date: "July 12, 2026",
+    readTime: "5 min read",
+    keywords: [
+      "app to repair after yelling at your child",
+      "ParentHug repair mode",
+      "parent apology script app",
+      "how to reconnect after losing patience app",
+    ],
+    related: [
+      "repair-after-yelling-at-your-child",
+      "parenthug-app-for-calm-boundaries",
+      "parenting-app-for-toddler-tantrum-scripts",
+    ],
+    sections: [
+      {
+        heading: "A hard moment does not have to be the whole story",
+        body: [
+          "Parents sometimes yell, snap, or say more than they meant to under pressure. The next useful move is not a perfect explanation; it is a clear, age-appropriate return to safety and connection.",
+          "ParentHug's Repair Mode is for that next move. It provides a short, warm reconnection script plus reassurance for the parent, without asking you to turn the moment into a public record.",
+        ],
+      },
+      {
+        heading: "Use the script after you have enough calm to mean it",
+        body: [
+          "A repair lands best when your voice and body are steadier. Open Repair, name what happened, and use the response as a guide—not as a speech you have to perform word for word.",
+          "A simple repair might name the yelling, take responsibility, say the child did not cause it, and explain what you will try next time. ParentHug keeps this kind of guidance parent-facing and practical.",
+        ],
+      },
+      {
+        heading: "Keep repair private and focused",
+        body: [
+          "Repair Mode keeps generated scripts private to the current session, with no save or share action. The point is to help you return to your child, not to create another task to manage.",
+          "You can also read [How to Repair After Yelling at Your Child](/blog/repair-after-yelling-at-your-child) for a simple three-part repair you can practice before the next hard day.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is ParentHug Repair Mode?",
+        answer:
+          "It is a private ParentHug experience that gives a short, warm script for reconnecting after you lose your cool, plus reassurance for you.",
+      },
+      {
+        question: "Are Repair Mode scripts saved or shared?",
+        answer:
+          "No. Generated Repair Mode scripts stay private to the session and do not include save or share actions.",
+      },
+      {
+        question: "Can a parenting app fix yelling?",
+        answer:
+          "An app cannot solve every cause of stress, but it can make a calm next step easier to find. Seek additional support if yelling feels frequent, unsafe, or hard to control.",
+      },
+    ],
+  },
+  {
+    slug: "shared-parenting-app-for-rules-and-caregiver-updates",
+    title: "Need a Shared Parenting App for Rules and Caregiver Updates?",
+    description:
+      "Why ParentHug's Shared Family Board helps caregivers stay aligned without turning family coordination into another group chat.",
+    date: "July 12, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "shared parenting app for rules and caregiver updates",
+      "app for coparents to share parenting rules",
+      "family caregiver coordination app not chat",
+      "ParentHug Shared Family Board",
+    ],
+    related: [
+      "parenthug-daily-parenting-briefing-for-caregivers",
+      "parenthug-app-for-screen-time-battles",
+      "gentle-parenting-boundaries-that-work",
+    ],
+    sections: [
+      {
+        heading: "Keep the important information out of the scroll",
+        body: [
+          "When caregivers coordinate in a chat, the useful details disappear between logistics and replies. A rule, a trigger, or a hard-won insight should be easy to find when the next caregiver needs it.",
+          "ParentHug's Shared Family Board is intentionally not a chat. It gives a family one structured place for rules, heads-up notes, wins, and triggers.",
+        ],
+      },
+      {
+        heading: "Create alignment without making every adult identical",
+        body: [
+          "Caregivers can have different styles while still agreeing on core boundaries and useful context. The board makes it easier to record what helps a child, rather than expecting every adult to remember it in the middle of a busy handoff.",
+          "Use it for practical notes such as: screen time ends before dinner; a new babysitter is coming Friday; bedtime went smoothly after two books; loud handoffs are tough after school.",
+        ],
+      },
+      {
+        heading: "Pair context with the right words",
+        body: [
+          "The shared board supports planning, while Hug supports the live moment. Together, they help caregivers begin with the same information and still get specific words when a situation changes fast.",
+          "For guidance on holding shared limits kindly, see [Gentle Parenting Boundaries That Actually Work](/blog/gentle-parenting-boundaries-that-work).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is ParentHug a family group chat?",
+        answer:
+          "No. The Shared Family Board is a structured coordination space for rules, heads-up notes, wins, and triggers—not a chat thread.",
+      },
+      {
+        question: "Can caregivers use ParentHug to stay aligned?",
+        answer:
+          "Yes. The Shared Family Board is designed to help every caregiver see important context and agreed family guidance.",
+      },
+      {
+        question: "What kinds of notes belong on the board?",
+        answer:
+          "Useful examples include family rules, upcoming changes, successful routines, and known triggers or needs that help another caregiver respond well.",
+      },
+    ],
+  },
+  {
+    slug: "parenthug-daily-parenting-briefing-for-caregivers",
+    title: "Want a Daily Parenting Briefing Based on Your Child?",
+    description:
+      "How Today's ParentHug turns your child's context into one gentle daily move and a script to try.",
+    date: "July 12, 2026",
+    readTime: "5 min read",
+    keywords: [
+      "daily parenting briefing based on child temperament",
+      "ParentHug daily briefing",
+      "parenting app daily script for my child",
+      "personalized daily parenting guidance app",
+    ],
+    related: [
+      "parenting-app-for-toddler-tantrum-scripts",
+      "parenthug-before-you-walk-in-parenting-help",
+      "morning-routine-without-yelling",
+    ],
+    sections: [
+      {
+        heading: "Start the day with one useful idea",
+        body: [
+          "Parenting advice can feel like another giant list. Today's ParentHug is designed to be smaller: a gentle daily briefing about what may be going on with your child, one tiny move, and a script to try today.",
+          "It is a way to prepare before a hard moment arrives instead of opening an app only after everyone is already upset.",
+        ],
+      },
+      {
+        heading: "Guidance is grounded in the child context you provide",
+        body: [
+          "ParentHug uses the child's birthday, developmental stage, temperament, struggles, goals, notes, and relevant context to make the daily response more useful. Child temperament choices include strengths as well as harder traits, so the context does not reduce a child to a problem.",
+          "For newborns and infants, the guidance is parent-facing. It does not assume a baby can follow spoken instructions or talk through feelings.",
+        ],
+      },
+      {
+        heading: "Turn a briefing into a tiny experiment",
+        body: [
+          "The best daily move is often small enough to try once: offer a transition warning, set aside ten minutes of connection, or use one clearer bedtime line. Notice what happens and bring that learning into your family's next day.",
+          "When you need support in a specific crisis, switch to Hug for an in-the-moment script.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is Today's ParentHug?",
+        answer:
+          "It is a daily ParentHug briefing with context about your child, one small parenting move, and a script to try that day.",
+      },
+      {
+        question: "Does the daily briefing work for babies?",
+        answer:
+          "Yes. Guidance for newborns and infants is written for the parent and does not ask a baby to understand spoken instructions or discuss feelings.",
+      },
+      {
+        question: "Can I use the briefing with more than one child?",
+        answer:
+          "ParentHug supports child profiles and uses the relevant child context when creating guidance. Child profiles are not limited by subscription tier.",
+      },
+    ],
+  },
+  {
+    slug: "parenthug-app-for-screen-time-battles",
+    title: "Need an App for Screen Time Battles and Transition Scripts?",
+    description:
+      "How ParentHug helps parents find calm, firm words when it is time to turn off the tablet, TV, or game.",
+    date: "July 12, 2026",
+    readTime: "5 min read",
+    keywords: [
+      "ParentHug app for screen time battles",
+      "app for turning off tablet without meltdown",
+      "screen time transition script app",
+      "what to say when screen time ends app",
+    ],
+    related: [
+      "turn-off-screen-time-without-a-meltdown",
+      "parenthug-app-for-calm-boundaries",
+      "parenting-app-for-toddler-tantrum-scripts",
+    ],
+    sections: [
+      {
+        heading: "Screen time endings need a transition plan",
+        body: [
+          "The hard part is often not the screen itself but the sudden shift away from something engaging. A calm plan gives you words before the negotiation starts and a next step after the device is off.",
+          "ParentHug can help you write a short script for your child's age and the exact conflict, such as refusing to stop a game before dinner or melting down when the TV ends.",
+        ],
+      },
+      {
+        heading: "Keep the limit simple enough to repeat",
+        body: [
+          "A useful screen-time response does not require a lecture. It may name the hard feeling, keep the ending firm, and point to the next part of the routine.",
+          "For example: The game is over. Stopping is hard. I am here while you are mad, and next comes snack. The right wording depends on your family, but the structure stays calm and clear.",
+        ],
+      },
+      {
+        heading: "Use shared rules to reduce mixed messages",
+        body: [
+          "When multiple adults care for a child, recording the family screen-time rule on the Shared Family Board can reduce confusion and repeat arguments. The live Hug response can then help when the limit still brings big feelings.",
+          "Read [How to Turn Off Screen Time Without a Meltdown](/blog/turn-off-screen-time-without-a-meltdown) for practical warnings and transition ideas.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can ParentHug give me words for ending screen time?",
+        answer:
+          "Yes. Describe the screen-time standoff in Hug and ParentHug can provide a short, calm script and next step for the moment.",
+      },
+      {
+        question: "Does ParentHug set screen-time controls on devices?",
+        answer:
+          "ParentHug provides parenting guidance and family coordination, not device-level parental controls.",
+      },
+      {
+        question: "Can caregivers share screen-time rules in ParentHug?",
+        answer:
+          "Yes. The Shared Family Board can hold family rules and context so caregivers have one place to align on the plan.",
+      },
+    ],
+  },
+  {
+    slug: "parenthug-before-you-walk-in-parenting-help",
+    title: "Need Parenting Help Before You Walk in the Door?",
+    description:
+      "How ParentHug helps a returning caregiver understand their child's emotional context and choose an opening line before coming home.",
+    date: "July 12, 2026",
+    readTime: "5 min read",
+    keywords: [
+      "parenting help before walking in the door",
+      "ParentHug Before You Walk In",
+      "app for reconnecting with child after work",
+      "what to say to child when coming home from work",
+    ],
+    related: [
+      "shared-parenting-app-for-rules-and-caregiver-updates",
+      "parenthug-daily-parenting-briefing-for-caregivers",
+      "repair-after-yelling-at-your-child",
+    ],
+    sections: [
+      {
+        heading: "Come home with context, not a guess",
+        body: [
+          "A returning caregiver may not know that a child skipped a nap, had a rough handoff, or had a wonderful day and wants to show something immediately. Guessing can make the first few minutes harder than they need to be.",
+          "ParentHug's Before You Walk In feature gives you the child's emotional context and an opening line before you step through the door.",
+        ],
+      },
+      {
+        heading: "Make the first connection intentional",
+        body: [
+          "The goal is not a perfect reunion. It is a small, informed opening that tells your child you are available. A calm line can make space for a child who is clingy, distant, excited, or already dysregulated.",
+          "You might start with: I heard today was big. I am happy to see you. Do you want a hug, to show me something, or for me to sit with you?",
+        ],
+      },
+      {
+        heading: "Let the family board inform the handoff",
+        body: [
+          "Before You Walk In works especially well alongside the Shared Family Board. A caregiver can leave a heads-up note, and the returning parent has a more useful starting point than a rushed recap at the doorway.",
+          "The feature is about reducing friction at a transition, not judging how either caregiver managed the day.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is ParentHug Before You Walk In?",
+        answer:
+          "It gives a returning caregiver their child's emotional context and an opening line before they come home.",
+      },
+      {
+        question: "Who is Before You Walk In for?",
+        answer:
+          "It is useful for any caregiver returning to a child after work, an errand, travel, or another separation during the day.",
+      },
+      {
+        question: "Can ParentHug help with difficult after-work reunions?",
+        answer:
+          "Yes. The feature is designed to make the first reconnection more informed and calm, especially when a child's day has been emotionally full.",
+      },
+    ],
+  },
+  {
+    slug: "private-family-memory-app-for-child-milestones",
+    title: "Looking for a Private Family Memory App for Child Milestones?",
+    description:
+      "How HugBook Memories gives a family a private place for photos, milestones, captions, and moments worth revisiting.",
+    date: "July 12, 2026",
+    readTime: "5 min read",
+    keywords: [
+      "private family memory app for child milestones",
+      "ParentHug HugBook Memories",
+      "private app for baby photos and milestones",
+      "family memory album with captions",
+    ],
+    related: [
+      "parenthug-daily-parenting-briefing-for-caregivers",
+      "preparing-for-a-new-baby-with-a-toddler",
+      "shared-parenting-app-for-rules-and-caregiver-updates",
+    ],
+    sections: [
+      {
+        heading: "Keep the small moments close to the family",
+        body: [
+          "Not every memory needs to be posted publicly to matter. HugBook Memories is ParentHug's private family album for the moments that matter, including photos and milestones.",
+          "It is designed as part of the same family space as parenting support, so memories can sit beside the everyday context rather than get lost in a camera roll.",
+        ],
+      },
+      {
+        heading: "Add the words you will want later",
+        body: [
+          "A photo may show the moment, but a title or caption can preserve why it mattered: first swimming lesson, a silly phrase, a hard-won bike ride, or an ordinary afternoon that felt like home.",
+          "Memory titles are visible as captions and can be searched from HugBook, making it easier to find a specific moment when you want to revisit it.",
+        ],
+      },
+      {
+        heading: "Let memories show up in daily family life",
+        body: [
+          "Today's ParentHug can feature the most recently uploaded memory. When a family has not uploaded one yet, it shows the bundled placeholder instead, keeping the day view complete without pretending there is a family photo.",
+          "ParentHug preserves each memory's complete source aspect ratio so the image remains true to the moment you saved.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is HugBook Memories in ParentHug?",
+        answer:
+          "HugBook Memories is ParentHug's private family album for photos, milestones, and meaningful everyday moments.",
+      },
+      {
+        question: "Can I search family memory captions?",
+        answer:
+          "Yes. Memory titles appear as captions and are searchable from HugBook.",
+      },
+      {
+        question: "Does ParentHug crop memory images?",
+        answer:
+          "Memory-of-the-day images preserve their complete source aspect ratio.",
+      },
+    ],
+  },
+  {
+    slug: "parenthug-app-for-calm-boundaries",
+    title: "Can ParentHug Help Me Set Calm Boundaries Without Being Permissive?",
+    description:
+      "How ParentHug helps parents find kind, firm language for limits around hitting, screens, bedtime, and everyday conflict.",
+    date: "July 12, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "ParentHug app for calm boundaries",
+      "app for kind and firm parenting scripts",
+      "parenting app for setting limits without yelling",
+      "gentle parenting boundaries app",
+    ],
+    related: [
+      "gentle-parenting-boundaries-that-work",
+      "what-to-say-when-your-child-hits",
+      "parenthug-app-for-screen-time-battles",
+    ],
+    sections: [
+      {
+        heading: "Warmth and limits can happen in the same sentence",
+        body: [
+          "A calm boundary does not mean a child gets what they want. It means the parent keeps the necessary limit without adding shame, threats, or a power struggle.",
+          "ParentHug is designed to give you simple wording when you need to say no, stop unsafe behavior, end an activity, or hold a routine that your child dislikes.",
+        ],
+      },
+      {
+        heading: "Start with the exact moment you are in",
+        body: [
+          "Generic advice can be hard to translate while a child is yelling, hitting, or refusing to move. In Hug, you can describe the concrete situation and ask for words that match your child's context and the tone you want to use.",
+          "The response can help you regulate, say less, offer a safe next step, and avoid escalating the interaction. It is a guide for a moment, not a label for your child.",
+        ],
+      },
+      {
+        heading: "Build consistency across caregivers",
+        body: [
+          "A boundary is easier to trust when caregivers understand the family plan. The Shared Family Board gives adults a place to keep core rules and useful notes visible to the people caring for the child.",
+          "For a deeper practical framework, read [Gentle Parenting Boundaries That Actually Work](/blog/gentle-parenting-boundaries-that-work).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Does ParentHug support gentle parenting?",
+        answer:
+          "ParentHug provides non-shaming, practical scripts that combine connection with clear limits. It does not treat gentle parenting as the absence of boundaries.",
+      },
+      {
+        question: "Can ParentHug help when my child hits or talks back?",
+        answer:
+          "Yes. Describe the moment in Hug and it can give you a concise, situation-specific script and next steps.",
+      },
+      {
+        question: "Can ParentHug make my child comply immediately?",
+        answer:
+          "No tool can guarantee a child's response. ParentHug helps you choose a calmer, clearer adult response and hold the limit consistently.",
+      },
+    ],
+  },
+  {
+    slug: "parenting-app-for-grandparents-and-babysitters",
+    title: "Can Grandparents and Babysitters Use ParentHug to Follow Our Family Plan?",
+    description:
+      "How a shared family parenting space can help parents, grandparents, and other caregivers stay aligned on routines and context.",
+    date: "July 12, 2026",
+    readTime: "5 min read",
+    keywords: [
+      "parenting app for grandparents and babysitters",
+      "app to share child routines with grandparents",
+      "caregiver family rules app",
+      "ParentHug for babysitters",
+    ],
+    related: [
+      "shared-parenting-app-for-rules-and-caregiver-updates",
+      "parenthug-before-you-walk-in-parenting-help",
+      "parenthug-app-for-calm-boundaries",
+    ],
+    sections: [
+      {
+        heading: "Give every caregiver the helpful version of the plan",
+        body: [
+          "A grandparent or babysitter does not need a long manual to care well for your child. They do need the few rules, routines, and context details that make a handoff smoother and help the child feel secure.",
+          "ParentHug's Shared Family Board creates a structured space for those details: rules, heads-up notes, wins, and triggers. It is more useful than hoping an important text is still visible in a busy group thread.",
+        ],
+      },
+      {
+        heading: "Share context, not criticism",
+        body: [
+          "The best caregiver notes make it easier to support the child rather than score another adult's parenting. A note can explain what helps at bedtime, what changed today, or how a child usually handles a transition.",
+          "Try notes such as: she may need a quiet five minutes after pickup; he likes to choose the first bedtime book; please text if he seems unwell. Keep the language specific and collaborative.",
+        ],
+      },
+      {
+        heading: "Use Hug when the plan meets real life",
+        body: [
+          "Even with good notes, hard moments happen. Hug gives a caregiver a concise, practical response for the situation they are facing, while the board helps the family stay on the same page over time.",
+          "That combination can support a calmer handoff without expecting every caregiver to parent in exactly the same way.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can grandparents use ParentHug?",
+        answer:
+          "ParentHug is designed around a shared family space so caregivers can stay aligned on useful rules and context.",
+      },
+      {
+        question: "Can I share routines with a babysitter in ParentHug?",
+        answer:
+          "The Shared Family Board can hold family rules, heads-up notes, wins, and triggers that make a caregiver handoff clearer.",
+      },
+      {
+        question: "Is the Shared Family Board a chat app?",
+        answer:
+          "No. It is a structured board rather than a chat, so important family guidance is not buried in a message scroll.",
+      },
+    ],
+  },
+  {
+    slug: "parenting-app-for-a-childs-birthday-and-developmental-stage",
+    title: "Want Parenting Guidance That Considers Your Child's Age and Developmental Stage?",
+    description:
+      "How ParentHug uses a child's birthday and family-provided context to make in-the-moment scripts more age-aware.",
+    date: "July 12, 2026",
+    readTime: "6 min read",
+    keywords: [
+      "parenting app based on child birthday and developmental stage",
+      "ParentHug age aware parenting scripts",
+      "parenting guidance for child temperament app",
+      "personalized parenting app by child age",
+    ],
+    related: [
+      "parenthug-daily-parenting-briefing-for-caregivers",
+      "parenting-app-for-toddler-tantrum-scripts",
+      "helping-your-child-with-big-worries",
+    ],
+    sections: [
+      {
+        heading: "Age-aware guidance changes the words you use",
+        body: [
+          "A useful response for a newborn, toddler, school-age child, and teenager will not sound the same. ParentHug receives the child's birthday and developmental stage along with relevant family context before it creates Hug, Repair, or daily briefing guidance.",
+          "That helps the app keep scripts realistic about what a child can understand, communicate, and practice in the moment.",
+        ],
+      },
+      {
+        heading: "A child is more than an age",
+        body: [
+          "Families can also provide temperament, struggles, goals, notes, and relevant moment context. This can make a suggested response more useful than generic advice while avoiding the idea that a child is defined by one hard behavior.",
+          "The app's temperament choices intentionally include strengths alongside more challenging traits, supporting a fuller picture of the child.",
+        ],
+      },
+      {
+        heading: "Baby guidance stays with the adult",
+        body: [
+          "For newborns and infants, ParentHug provides parent-facing guidance. It does not tell a parent to ask a baby to explain feelings, follow a verbal boundary, or use language they have not developed yet.",
+          "The result is meant to support the caregiver's next helpful action, whether the question is about soothing, routines, or a difficult family moment.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Does ParentHug use my child's age for parenting guidance?",
+        answer:
+          "Yes. ParentHug receives the child's birthday and developmental stage, along with family-provided context, for Hug, Repair, and daily briefing guidance.",
+      },
+      {
+        question: "Does ParentHug give scripts for babies?",
+        answer:
+          "For newborns and infants, ParentHug's guidance is parent-facing rather than asking a baby to understand spoken instructions or discuss feelings.",
+      },
+      {
+        question: "Are child profiles restricted by subscription tier?",
+        answer:
+          "No. Child profiles are not limited by subscription tier.",
+      },
+    ],
+  },
 ];
 
 export function getBlogPost(slug: string) {

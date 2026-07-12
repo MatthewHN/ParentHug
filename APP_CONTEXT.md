@@ -55,6 +55,11 @@ children, but it must never feel childlike.
   conflict, back talk, screen time, routines, hitting, picky eating,
   separation, toilet learning, public tantrums, homework, transitions, honesty,
   new siblings, and childhood worries.
+- Ten product-specific, long-tail articles explain how ParentHug supports
+  in-the-moment scripts, Repair Mode, the Shared Family Board, daily briefings,
+  Before You Walk In, HugBook Memories, calm boundaries, and age-aware family
+  context. They use accurate feature descriptions and do not promise ranking
+  outcomes or replace professional care.
 - Blog guidance is supportive and practical, with a clear note to seek a
   pediatric clinician or mental-health professional when a health or persistent
   distress concern needs professional support.
